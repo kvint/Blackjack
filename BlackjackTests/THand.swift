@@ -48,7 +48,7 @@ class THand: XCTestCase {
         self.checkScoreSum(ranks: [Rank.c2, Rank.c3], value: (hard: 5, soft: nil))
         self.checkScoreSum(ranks: [Rank.c2, Rank.c3, Rank.c2, Rank.c3, Rank.c2, Rank.c3], value: (hard: 15, soft: nil))
         self.checkScoreSum(ranks: [Rank.King, Rank.Jack], value: (hard: 20, soft: nil))
-        self.checkScoreSum(ranks: [Rank.King, Rank.Ace], value: (hard: 21, soft: nil))
+        self.checkScoreSum(ranks: [Rank.King, Rank.Ace], value: (hard: 21, soft: 11))
 
         self.checkScoreSum(ranks: [Rank.c2, Rank.c2, Rank.Ace], value: (hard: 15, soft: 5))
         self.checkScoreSum(ranks: [Rank.Ace, Rank.Ace], value: (hard: 12, soft: 2))
@@ -56,15 +56,15 @@ class THand: XCTestCase {
         self.checkScoreSum(ranks: [Rank.Ace, Rank.Ace, Rank.Ace], value: (hard: 13, soft: 3))
         self.checkScoreSum(ranks: [Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace], value: (hard: 16, soft: 6))
         self.checkScoreSum(ranks: [Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace], value: (hard: 19, soft: 9))
-        self.checkScoreSum(ranks: [Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace], value: (hard: 21, soft: nil))
+        self.checkScoreSum(ranks: [Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace, Rank.Ace], value: (hard: 21, soft: 11))
 //
-        self.checkScoreSum(ranks: [Rank.Ace, Rank.Ace, Rank.Jack], value: (hard: 12, soft: nil))
+        self.checkScoreSum(ranks: [Rank.Ace, Rank.Ace, Rank.Jack], value: (hard: 22, soft: 12))
         self.checkScoreSum(ranks: [Rank.Jack, Rank.c2, Rank.Ace], value: (hard: 13, soft: nil))
 //
         self.checkScoreSum(ranks: [Rank.c5, Rank.Ace], value: (hard: 16, soft: 6))
         self.checkScoreSum(ranks: [Rank.c2, Rank.c2, Rank.c2, Rank.c2, Rank.Ace], value: (hard: 19, soft: 9))
-        self.checkScoreSum(ranks: [Rank.c2, Rank.c4, Rank.c2, Rank.c2, Rank.Ace], value: (hard: 21, soft: nil))
-        self.checkScoreSum(ranks: [Rank.c2, Rank.c5, Rank.c2, Rank.c2, Rank.Ace], value: (hard: 12, soft: nil))
+        self.checkScoreSum(ranks: [Rank.c2, Rank.c4, Rank.c2, Rank.c2, Rank.Ace], value: (hard: 21, soft: 11))
+        self.checkScoreSum(ranks: [Rank.c2, Rank.c5, Rank.c2, Rank.c2, Rank.Ace], value: (hard: 22, soft: 12))
 
         self.checkScoreSum(ranks: [Rank.c2, Rank.c7, Rank.c3, Rank.Jack], value: (hard: 22, soft: nil))
     }

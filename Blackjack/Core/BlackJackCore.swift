@@ -201,11 +201,21 @@ class Hand: BJUserHand, Equatable {
         Hand.IDS += 1;
     }
 
+    func getFinalScore() -> Int {
+        let score = self.getScore()
+
+        guard score.soft else {
+            return score.hard
+        }
+        guard score.hard < BlackJackConstants.MAX_SCORE else {
+            return score.soft
+        }
+
+        return score.hard
+    }
     func getScore() -> (hard: Int, soft: Int?) {
         var score = 0
         var aces = 0
-
-        var softRank: Int? = nil
 
         for card in self.cards {
             if card.rank == Rank.Ace {
@@ -216,21 +226,14 @@ class Hand: BJUserHand, Equatable {
         }
 
         if aces > 0 {
-            softRank = score + aces
-            score += aces * 11
-
-            while aces > 0 && score > BlackJackConstants.MAX_SCORE {
-                score -= 10
-                aces -= 1
-            }
-            if score == BlackJackConstants.MAX_SCORE {
-                return (hard: score, soft: nil)
+            let soft = score + aces 
+            if score > 11 {
+                return (hard: soft, soft: nil)
+            } else {
+                return (hard: score + 10 + aces, soft: soft)
             }
         }
-        if softRank == score {
-            softRank = nil
-        }
-        return (hard: score, soft: softRank)
+        return (hard: score, soft: nil)
     }
 
     func bet(stake: Double) -> Void {
