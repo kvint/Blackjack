@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3415DCF17495F72D9307E478 /* THand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3415D16753F16B4958119346 /* THand.swift */; };
+		3415DD69C815C9148AA942DC /* TGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3415DB15F970C566F3CB4690 /* TGame.swift */; };
 		AF4C2BE9203C01E0008A5FA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2BE8203C01E0008A5FA9 /* AppDelegate.swift */; };
 		AF4C2BEB203C01E0008A5FA9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BEA203C01E0008A5FA9 /* GameScene.sks */; };
 		AF4C2BED203C01E0008A5FA9 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BEC203C01E0008A5FA9 /* Actions.sks */; };
@@ -15,7 +17,7 @@
 		AF4C2BF4203C01E0008A5FA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BF2203C01E0008A5FA9 /* Main.storyboard */; };
 		AF4C2BF6203C01E0008A5FA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BF5203C01E0008A5FA9 /* Assets.xcassets */; };
 		AF4C2BF9203C01E0008A5FA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BF7203C01E0008A5FA9 /* LaunchScreen.storyboard */; };
-		AF4C2C04203C01E0008A5FA9 /* BlackjackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2C03203C01E0008A5FA9 /* BlackjackTests.swift */; };
+		AF4C2C04203C01E0008A5FA9 /* TCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2C03203C01E0008A5FA9 /* TCards.swift */; };
 		AF4C2C0F203C01E0008A5FA9 /* BlackjackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2C0E203C01E0008A5FA9 /* BlackjackUITests.swift */; };
 		AF4C2C22203C029D008A5FA9 /* BlackJackConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2C1D203C029C008A5FA9 /* BlackJackConstants.swift */; };
 		AF4C2C23203C029D008A5FA9 /* BlackJackConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2C1D203C029C008A5FA9 /* BlackJackConstants.swift */; };
@@ -52,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3415D16753F16B4958119346 /* THand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THand.swift; sourceTree = "<group>"; };
+		3415DB15F970C566F3CB4690 /* TGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGame.swift; sourceTree = "<group>"; };
 		AF4C2BE5203C01E0008A5FA9 /* Blackjack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackjack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4C2BE8203C01E0008A5FA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF4C2BEA203C01E0008A5FA9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -63,7 +67,7 @@
 		AF4C2BF8203C01E0008A5FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF4C2BFA203C01E0008A5FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF4C2BFF203C01E0008A5FA9 /* BlackjackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackjackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF4C2C03203C01E0008A5FA9 /* BlackjackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackjackTests.swift; sourceTree = "<group>"; };
+		AF4C2C03203C01E0008A5FA9 /* TCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCards.swift; sourceTree = "<group>"; };
 		AF4C2C05203C01E0008A5FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF4C2C0A203C01E0008A5FA9 /* BlackjackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackjackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4C2C0E203C01E0008A5FA9 /* BlackjackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackjackUITests.swift; sourceTree = "<group>"; };
@@ -140,8 +144,10 @@
 		AF4C2C02203C01E0008A5FA9 /* BlackjackTests */ = {
 			isa = PBXGroup;
 			children = (
-				AF4C2C03203C01E0008A5FA9 /* BlackjackTests.swift */,
+				AF4C2C03203C01E0008A5FA9 /* TCards.swift */,
 				AF4C2C05203C01E0008A5FA9 /* Info.plist */,
+				3415DB15F970C566F3CB4690 /* TGame.swift */,
+				3415D16753F16B4958119346 /* THand.swift */,
 			);
 			path = BlackjackTests;
 			sourceTree = "<group>";
@@ -321,9 +327,11 @@
 				AF4C2C23203C029D008A5FA9 /* BlackJackConstants.swift in Sources */,
 				AF4C2C29203C029D008A5FA9 /* BlackJackCore.swift in Sources */,
 				AF4C2C2C203C029D008A5FA9 /* CardsCore.swift in Sources */,
-				AF4C2C04203C01E0008A5FA9 /* BlackjackTests.swift in Sources */,
+				AF4C2C04203C01E0008A5FA9 /* TCards.swift in Sources */,
 				AF4C2C2F203C029D008A5FA9 /* FisherShuffleExtension.swift in Sources */,
 				AF4C2C26203C029D008A5FA9 /* BJProtocols.swift in Sources */,
+				3415DD69C815C9148AA942DC /* TGame.swift in Sources */,
+				3415DCF17495F72D9307E478 /* THand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

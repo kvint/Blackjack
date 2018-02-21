@@ -1,3 +1,3 @@
 struct BlackJackConstants {
-    static let MAX_VALUE = 21
+    static let MAX_SCORE = 21
 }

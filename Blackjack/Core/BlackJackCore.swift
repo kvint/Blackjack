@@ -48,7 +48,7 @@ class Game: BJGame {
         guard var hand = self.model.activeHand else {
             return self.endRound()
         }
-        if hand.getScore().hard >= BlackJackConstants.MAX_VALUE {
+        if hand.getScore().hard >= BlackJackConstants.MAX_SCORE {
             hand.playing = false
         }
         if !hand.playing {
@@ -186,7 +186,7 @@ class GameModel: BJModel {
     }
 }
 
-class Hand: BJUserHand {
+class Hand: BJUserHand, Equatable {
 
     private static var IDS: Int = 0
 
@@ -200,9 +200,13 @@ class Hand: BJUserHand {
         self.id = Hand.IDS
         Hand.IDS += 1;
     }
+
     func getScore() -> (hard: Int, soft: Int?) {
         var score = 0
         var aces = 0
+
+        var softRank: Int? = nil
+
         for card in self.cards {
             if card.rank == Rank.Ace {
                 aces += 1
@@ -210,15 +214,23 @@ class Hand: BJUserHand {
                 score += Game.getCardScore(card: card, soft: false)
             }
         }
+
         if aces > 0 {
-            let hardScore: Int = score + aces + 10
-            if hardScore > BlackJackConstants.MAX_VALUE {
-                return (hard: hardScore, soft: score + aces)
-            } else {
-                score += aces;
+            softRank = score + aces
+            score += aces * 11
+
+            while aces > 0 && score > BlackJackConstants.MAX_SCORE {
+                score -= 10
+                aces -= 1
+            }
+            if score == BlackJackConstants.MAX_SCORE {
+                return (hard: score, soft: nil)
             }
         }
-        return (hard: score, soft: nil)
+        if softRank == score {
+            softRank = nil
+        }
+        return (hard: score, soft: softRank)
     }
 
     func bet(stake: Double) -> Void {
@@ -231,7 +243,7 @@ class Hand: BJUserHand {
         }
 
         let score = self.getScore().hard
-        guard score < BlackJackConstants.MAX_VALUE else {
+        guard score < BlackJackConstants.MAX_SCORE else {
             return []
         }
 
