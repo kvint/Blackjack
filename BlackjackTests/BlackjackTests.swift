@@ -21,9 +21,21 @@ class BlackjackTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testCardsUniq() {
+        let deck = Blackjack.CardDeck.getDeck()
+        let shuffledDeck = deck.shuffled()
+        
+        XCTAssert(deck.count == 52)
+        XCTAssert(deck.count == shuffledDeck.count)
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    func testHandUniq() {
+        for _ in 1...100 {
+            let hand1 = Hand()
+            let hand2 = Hand()
+            XCTAssert(hand1.id != hand2.id)
+        }
     }
     
     func testPerformanceExample() {
