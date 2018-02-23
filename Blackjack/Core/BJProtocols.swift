@@ -50,7 +50,7 @@ protocol BJUserHand: BJHand {
     var playing: Bool {get set}
 
     func bet(stake: Double)
-    func getActions() -> [BJAction]
+    func getActions() -> Set<BJAction>
 }
 
 protocol BJDealerHand: BJHand {

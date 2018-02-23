@@ -25,9 +25,9 @@ struct Card: CustomStringConvertible, Hashable {
 
     private(set) var hashValue: Int = 0
 
-    init(suit:Suit, rank:Rank) {
-        self.suit = suit;
+    init(_ rank:Rank, _ suit:Suit = Suit.Spades) {
         self.rank = rank;
+        self.suit = suit;
         self.hashValue = suit.hashValue | (rank.hashValue << 16)
     }
 
@@ -98,7 +98,7 @@ struct Card: CustomStringConvertible, Hashable {
 class CardDeck {
     static func getDeck() -> Set<Card> {
         var cards:Set<Card> = []
-        for r in [
+        for rank in [
             Rank.c2,
             Rank.c3,
             Rank.c4,
@@ -113,8 +113,8 @@ class CardDeck {
             Rank.King,
             Rank.Ace
         ] {
-            for i in [Suit.Spades, Suit.Hearts, Suit.Diamonds, Suit.Clubs] {
-                cards.insert(Card(suit:i, rank:r))
+            for suit in [Suit.Spades, Suit.Hearts, Suit.Diamonds, Suit.Clubs] {
+                cards.insert(Card(rank, suit))
             }
         }
         return cards;

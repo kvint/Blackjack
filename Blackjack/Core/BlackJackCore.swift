@@ -204,11 +204,11 @@ class Hand: BJUserHand, Equatable {
     func getFinalScore() -> Int {
         let score = self.getScore()
 
-        guard score.soft else {
+        guard let softScore = score.soft else {
             return score.hard
         }
         guard score.hard < BlackJackConstants.MAX_SCORE else {
-            return score.soft
+            return softScore
         }
 
         return score.hard
@@ -240,7 +240,7 @@ class Hand: BJUserHand, Equatable {
         self.stake += stake
     }
 
-    func getActions() -> [BJAction] {
+    func getActions() -> Set<BJAction> {
         guard self.cards.count > 1 else {
             return [] // TODO: throw exception?
         }
@@ -250,11 +250,11 @@ class Hand: BJUserHand, Equatable {
             return []
         }
 
-        var actions: [BJAction] = [BJAction.Stand, BJAction.Hit];
+        var actions: Set<BJAction> = [BJAction.Stand, BJAction.Hit];
 
         if self.cards.count == 2 {
 
-            actions.insert(BJAction.Double, at: 0)
+            actions.insert(BJAction.Double)
 
             let card1 = self.cards.first!
             let card2 = self.cards.last!
@@ -264,7 +264,7 @@ class Hand: BJUserHand, Equatable {
 
             // check for split
             if score1 == score2 {
-                actions.append(BJAction.Split)
+                actions.insert(BJAction.Split)
             } else {
                 let hasTen = score1 == 10 || score2 == 10
                 let hasAce = card1.rank == Rank.Ace || card2.rank == Rank.Ace
