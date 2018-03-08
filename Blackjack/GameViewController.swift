@@ -1,65 +1,86 @@
 //
 //  GameViewController.swift
-//  Blackjack
+//  3DTest
 //
-//  Created by Alexander Slavschik on 2/20/18.
+//  Created by Alexander Slavschik on 3/8/18.
 //  Copyright © 2018 Alexander Slavschik. All rights reserved.
 //
 
 import UIKit
-import SpriteKit
-import GameplayKit
+import QuartzCore
+import SceneKit
+import CardsBase
+
+let game = Game()
 
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addUILayer()
         
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
-        if let scene = GKScene(fileNamed: "GameScene") {
-            
-            // Get the SKScene from the loaded GKScene
-            if let sceneNode = scene.rootNode as! GameScene? {
-                
-                // Copy gameplay related content over to the scene
-                sceneNode.entities = scene.entities
-                sceneNode.graphs = scene.graphs
-                
-                // Set the scale mode to scale to fit the window
-                sceneNode.scaleMode = .aspectFill
-                
-                // Present the scene
-                if let view = self.view as! SKView? {
-                    view.presentScene(sceneNode)
-                    
-                    view.ignoresSiblingOrder = true
-                    
-                    view.showsFPS = true
-                    view.showsNodeCount = true
-                }
-            }
-        }
-    }
+        // create a new scene
+        let scene = SCNScene(named: "art.scnassets/Scene3D.scn")!
+        
+        // create and add a camera to the scene
+        let cameraNode = SCNNode()
+        let camera = SCNCamera()
+        cameraNode.camera = camera
+        scene.rootNode.addChildNode(cameraNode)
 
-    override var shouldAutorotate: Bool {
-        return true
-    }
+        // place the camera
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
+        // create and add a light to the scene
+        let lightNode = SCNNode()
+        lightNode.light = SCNLight()
+        lightNode.light!.type = .omni
+        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
+        scene.rootNode.addChildNode(lightNode)
+        
+        // create and add an ambient light to the scene
+        let ambientLightNode = SCNNode()
+        ambientLightNode.light = SCNLight()
+        ambientLightNode.light!.type = .ambient
+        ambientLightNode.light!.color = UIColor.darkGray
+        scene.rootNode.addChildNode(ambientLightNode)
+        
 
-    override var prefersStatusBarHidden: Bool {
-        return true
+        //scene.rootNode.addChildNode(CardView())
+        // retrieve the ship node
+        //let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+        
+        // animate the 3d object
+        //ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
+        
+        // retrieve the SCNView
+        let scnView = self.view as! SCNView
+        
+        // set the scene to the view
+        scnView.scene = scene
+        
+        // allows the user to manipulate the camera
+        scnView.allowsCameraControl = true
+        
+        // show statistics such as fps and timing information
+        scnView.showsStatistics = true
+        
+        // configure the view
+        scnView.backgroundColor = UIColor.black
+        
+    }
+    
+    func addUILayer() {
+        let controller = storyboard!.instantiateViewController(withIdentifier: "uiLayer")
+        addChildViewController(controller)
+        let parentViewFrame: CGRect = self.view.frame
+        let viewHeight = CGFloat(100)
+        let x = CGFloat(0)
+        let y = parentViewFrame.height - viewHeight
+        
+        controller.view.frame = CGRect(x: x, y: y, width: parentViewFrame.width, height:viewHeight)
+        view.addSubview(controller.view)
+        controller.didMove(toParentViewController: self)
     }
 }
