@@ -9,7 +9,12 @@
 import Foundation
 import SceneKit
 
-//class CameraController {
+class CameraController {
 //    unowned var camera: SCNCamera
-//}
+//    var targetNode: SCNNode
+//
+//    init(targetNode: SCNNode) {
+//        self.targetNode = targetNode
+//    }
+}
 

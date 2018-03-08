@@ -41,6 +41,41 @@ extension Card {
         case .c2: return "2"
         }
     }
+    var geometry: SCNGeometry {
+        get {
+            let realSize = CGSize(width: 272, height: 388)
+            let realRatio = realSize.height / realSize.width
+            let gameSize = CGFloat(1)
+            let geometry: SCNBox = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0)
+
+            let whiteMaterial = SCNMaterial()
+            whiteMaterial.diffuse.contents = UIColor.white
+
+            let faceMaterial = SCNMaterial()
+            faceMaterial.diffuse.contents = UIImage(named: self.imageNamed)
+
+            let shirtMaterial = SCNMaterial()
+            faceMaterial.diffuse.contents = UIImage(named: "shirt")
+
+            let materials = [
+                shirtMaterial,
+                whiteMaterial,
+                whiteMaterial,
+                faceMaterial,
+                whiteMaterial,
+                whiteMaterial,
+            ]
+
+            geometry.materials = materials
+            return geometry
+        }
+    }
+    var node: SCNNode {
+        get {
+            let n = SCNNode(geometry: self.geometry)
+            return n
+        }
+    }
     var imageNamed: String {
         get {
             return "\(self.suitName)_\(self.rankName)"
@@ -52,7 +87,10 @@ extension Card {
     
     func create3D() -> SCNNode {
         let node = Card.nodeTemplate.clone()
+        node.geometry = Card.nodeTemplate!.geometry!.copy() as! SCNGeometry
+        node.geometry!.materials = Card.nodeTemplate!.geometry!.materials
         node.geometry?.firstMaterial?.diffuse.contents = UIImage(named: self.imageNamed)
+        print("create card", self.imageNamed)
         return node
     }
     static var nodeTemplate: SCNNode!

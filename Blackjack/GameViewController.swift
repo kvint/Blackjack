@@ -20,38 +20,36 @@ class GameViewController: UIViewController {
         self.addUILayer()
         
         // create a new scene
+        
         let scene = SCNScene(named: "art.scnassets/Scene3D.scn")!
-        let cardTemplate = scene.rootNode.childNode(withName: "cardTemplate", recursively: false)
-        cardTemplate?.isHidden = false
-        Card.nodeTemplate = cardTemplate?.clone();
-        cardTemplate?.isHidden = true
+        self.createGeometry(scene.rootNode);
         
-        // create and add a camera to the scene
-        let cameraNode = SCNNode()
-        let camera = SCNCamera()
-        cameraNode.camera = camera
-        //scene.rootNode.addChildNode(cameraNode)
-
-        // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 3)
-        cameraNode.eulerAngles = SCNVector3Make(Float.pi/4, 0, 0)
-
-        // create and add a light to the scene
-        let lightNode = SCNNode()
-        lightNode.light = SCNLight()
-        lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-        //scene.rootNode.addChildNode(lightNode)
+//        let contentNode = scene.rootNode.childNode(withName: "tableCards", recursively: true)
+//        contentNode?.childNodes.forEach({ (node) in
+//            if (node.name == "dealer") {
+//                //createDealer()
+//            } else {
+//                let someCard = Card(Rank.random(), Suit.random()).create3D()
+//                node.enumerateChildNodes({ (handChildNode, _) in
+//                    handChildNode.removeFromParentNode()
+//                })
+//                node.addChildNode(someCard)
+//            }
+//        })
         
-        // create and add an ambient light to the scene
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = UIColor.darkGray
-        scene.rootNode.addChildNode(ambientLightNode)
+        //tableNode?.removeFromParentNode()
         
-        let someCard = Card(Rank.random(), Suit.random())
-        scene.rootNode.addChildNode(someCard.create3D())
+        
+        let zeroNode = SCNNode()
+        scene.rootNode.addChildNode(zeroNode)
+        
+//        print("Start")
+//        let moveUp = SCNAction.moveBy(x: 120, y: 60, z: 0, duration: 5)
+//        cameraNode.runAction(moveUp)
+//        print("Done")
+        
+        //let someCard = Card(Rank.random(), Suit.random())
+        //scene.rootNode.addChildNode(someCard.create3D())
         
         //scene.rootNode.addChildNode(CardView())
         // retrieve the ship node
@@ -88,5 +86,11 @@ class GameViewController: UIViewController {
         controller.view.frame = CGRect(x: x, y: y, width: parentViewFrame.width, height:viewHeight)
         view.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
+    }
+    func createGeometry(_ rootNode: SCNNode) {
+        let card = Card(Rank.random(), Suit.random())
+        let node = SCNNode(geometry: card.geometry)
+        node.eulerAngles = SCNVector3Make(0, Float.pi/2, 0)
+        rootNode.addChildNode(node)
     }
 }

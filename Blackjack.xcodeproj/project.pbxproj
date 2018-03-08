@@ -21,6 +21,7 @@
 		AFCFB6F6205079E2006C9B74 /* CardsBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AFCFB6EE205079C4006C9B74 /* CardsBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFCFB6FC20507F24006C9B74 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCFB6FB20507F24006C9B74 /* CardsView.swift */; };
 		AFCFB79E2050A108006C9B74 /* UILayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCFB79D2050A108006C9B74 /* UILayerViewController.swift */; };
+		AFE178772051404700AB32A2 /* TableViewNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE178762051404700AB32A2 /* TableViewNode.swift */; };
 		EA79E3222041CACC00BA6E64 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA79E3192041CACC00BA6E64 /* Core.framework */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +114,7 @@
 		AFCFB6E7205079C3006C9B74 /* CardsBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CardsBase.xcodeproj; path = CardsBase/CardsBase.xcodeproj; sourceTree = "<group>"; };
 		AFCFB6FB20507F24006C9B74 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		AFCFB79D2050A108006C9B74 /* UILayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILayerViewController.swift; sourceTree = "<group>"; };
+		AFE178762051404700AB32A2 /* TableViewNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNode.swift; sourceTree = "<group>"; };
 		EA79E3192041CACC00BA6E64 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA79E3212041CACC00BA6E64 /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -197,6 +199,7 @@
 				AFCFB79D2050A108006C9B74 /* UILayerViewController.swift */,
 				3415D0B376304BA9CCF97E06 /* HandNode.swift */,
 				AF5D28E2205108AB0049608B /* CameraController.swift */,
+				AFE178762051404700AB32A2 /* TableViewNode.swift */,
 			);
 			path = Blackjack;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				AF4C2BE9203C01E0008A5FA9 /* AppDelegate.swift in Sources */,
 				AFCFB79E2050A108006C9B74 /* UILayerViewController.swift in Sources */,
 				3415D21A424BF538C55E0670 /* HandNode.swift in Sources */,
+				AFE178772051404700AB32A2 /* TableViewNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
