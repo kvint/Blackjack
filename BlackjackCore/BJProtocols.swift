@@ -29,13 +29,16 @@ protocol BJGame {
 }
 
 protocol BJModel {
-    var maxHands: Int {get}
+    var deck: [Card] {get set}
     var dealer: BJDealerHand {get set}
     var activeHand: BJUserHand? {get set}
     var hands: [BJUserHand?] {get}
 
-    func getHand(at:Int) -> BJUserHand?
+    func createDeck() -> Void
+    func getHand(at: Int, create: Bool) -> BJUserHand?
     func getNextHand() -> BJUserHand?
+
+    func clear() -> Void
 }
 
 protocol BJHand {
@@ -43,13 +46,13 @@ protocol BJHand {
     var cards: [Card] {get set}
 
     func getScore() -> (hard: Int, soft: Int?)
+    func clear() -> Void
 }
 
 protocol BJUserHand: BJHand {
-    var stake: Double {get}
+    var stake: Double {get set}
     var playing: Bool {get set}
 
-    func bet(stake: Double)
     func getActions() -> Set<BJAction>
 }
 

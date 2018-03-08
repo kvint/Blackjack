@@ -21,23 +21,27 @@ class GameViewController: UIViewController {
         
         // create a new scene
         let scene = SCNScene(named: "art.scnassets/Scene3D.scn")!
+        let cardTemplate = scene.rootNode.childNode(withName: "cardTemplate", recursively: false)
+        cardTemplate?.isHidden = false
+        Card.nodeTemplate = cardTemplate?.clone();
+        cardTemplate?.isHidden = true
         
         // create and add a camera to the scene
         let cameraNode = SCNNode()
         let camera = SCNCamera()
         cameraNode.camera = camera
-        scene.rootNode.addChildNode(cameraNode)
+        //scene.rootNode.addChildNode(cameraNode)
 
         // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
-
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 3)
+        cameraNode.eulerAngles = SCNVector3Make(Float.pi/4, 0, 0)
 
         // create and add a light to the scene
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = .omni
         lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-        scene.rootNode.addChildNode(lightNode)
+        //scene.rootNode.addChildNode(lightNode)
         
         // create and add an ambient light to the scene
         let ambientLightNode = SCNNode()
@@ -46,7 +50,9 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.color = UIColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
         
-
+        let someCard = Card(Rank.random(), Suit.random())
+        scene.rootNode.addChildNode(someCard.create3D())
+        
         //scene.rootNode.addChildNode(CardView())
         // retrieve the ship node
         //let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!

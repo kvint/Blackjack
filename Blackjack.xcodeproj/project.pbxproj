@@ -16,6 +16,7 @@
 		AF4C2BF4203C01E0008A5FA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BF2203C01E0008A5FA9 /* Main.storyboard */; };
 		AF4C2BF9203C01E0008A5FA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BF7203C01E0008A5FA9 /* LaunchScreen.storyboard */; };
 		AF4C2C0F203C01E0008A5FA9 /* BlackjackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2C0E203C01E0008A5FA9 /* BlackjackUITests.swift */; };
+		AF5D28E3205108AB0049608B /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5D28E2205108AB0049608B /* CameraController.swift */; };
 		AFCFB6F5205079E2006C9B74 /* CardsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCFB6EE205079C4006C9B74 /* CardsBase.framework */; };
 		AFCFB6F6205079E2006C9B74 /* CardsBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AFCFB6EE205079C4006C9B74 /* CardsBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFCFB6FC20507F24006C9B74 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCFB6FB20507F24006C9B74 /* CardsView.swift */; };
@@ -96,7 +97,6 @@
 		3415D0B376304BA9CCF97E06 /* HandNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandNode.swift; sourceTree = "<group>"; };
 		AF4969602050EEB4007E10BA /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		AF4969622050EFF1007E10BA /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		AF4969642050F000007E10BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF4C2BE5203C01E0008A5FA9 /* Blackjack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackjack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4C2BE8203C01E0008A5FA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF4C2BEC203C01E0008A5FA9 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -109,6 +109,7 @@
 		AF4C2C0A203C01E0008A5FA9 /* BlackjackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackjackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4C2C0E203C01E0008A5FA9 /* BlackjackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackjackUITests.swift; sourceTree = "<group>"; };
 		AF4C2C10203C01E0008A5FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF5D28E2205108AB0049608B /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		AFCFB6E7205079C3006C9B74 /* CardsBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CardsBase.xcodeproj; path = CardsBase/CardsBase.xcodeproj; sourceTree = "<group>"; };
 		AFCFB6FB20507F24006C9B74 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		AFCFB79D2050A108006C9B74 /* UILayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILayerViewController.swift; sourceTree = "<group>"; };
@@ -184,7 +185,6 @@
 		AF4C2BE7203C01E0008A5FA9 /* Blackjack */ = {
 			isa = PBXGroup;
 			children = (
-				AF4969642050F000007E10BA /* Assets.xcassets */,
 				AF4969622050EFF1007E10BA /* art.scnassets */,
 				AF4C2BE8203C01E0008A5FA9 /* AppDelegate.swift */,
 				AF4C2BEC203C01E0008A5FA9 /* Actions.sks */,
@@ -196,6 +196,7 @@
 				AFCFB6FB20507F24006C9B74 /* CardsView.swift */,
 				AFCFB79D2050A108006C9B74 /* UILayerViewController.swift */,
 				3415D0B376304BA9CCF97E06 /* HandNode.swift */,
+				AF5D28E2205108AB0049608B /* CameraController.swift */,
 			);
 			path = Blackjack;
 			sourceTree = "<group>";
@@ -473,6 +474,7 @@
 			files = (
 				AF4969612050EEB4007E10BA /* GameViewController.swift in Sources */,
 				AF4C2BEF203C01E0008A5FA9 /* GameScene.swift in Sources */,
+				AF5D28E3205108AB0049608B /* CameraController.swift in Sources */,
 				AFCFB6FC20507F24006C9B74 /* CardsView.swift in Sources */,
 				AF4C2BE9203C01E0008A5FA9 /* AppDelegate.swift in Sources */,
 				AFCFB79E2050A108006C9B74 /* UILayerViewController.swift in Sources */,

@@ -8,7 +8,9 @@
 
 import Foundation
 import CardsBase
+import SceneKit
 import SpriteKit
+import UIKit
 
 extension Card {
     
@@ -47,4 +49,11 @@ extension Card {
     func createNode() -> SKSpriteNode {
         return SKSpriteNode(imageNamed: self.imageNamed)
     }
+    
+    func create3D() -> SCNNode {
+        let node = Card.nodeTemplate.clone()
+        node.geometry?.firstMaterial?.diffuse.contents = UIImage(named: self.imageNamed)
+        return node
+    }
+    static var nodeTemplate: SCNNode!
 }
