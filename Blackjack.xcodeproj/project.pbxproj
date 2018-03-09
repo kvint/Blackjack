@@ -12,11 +12,12 @@
 		AF4969632050EFF1007E10BA /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4969622050EFF1007E10BA /* art.scnassets */; };
 		AF4C2BE9203C01E0008A5FA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2BE8203C01E0008A5FA9 /* AppDelegate.swift */; };
 		AF4C2BED203C01E0008A5FA9 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BEC203C01E0008A5FA9 /* Actions.sks */; };
-		AF4C2BEF203C01E0008A5FA9 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2BEE203C01E0008A5FA9 /* GameScene.swift */; };
 		AF4C2BF4203C01E0008A5FA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BF2203C01E0008A5FA9 /* Main.storyboard */; };
 		AF4C2BF9203C01E0008A5FA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4C2BF7203C01E0008A5FA9 /* LaunchScreen.storyboard */; };
 		AF4C2C0F203C01E0008A5FA9 /* BlackjackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C2C0E203C01E0008A5FA9 /* BlackjackUITests.swift */; };
 		AF5D28E3205108AB0049608B /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5D28E2205108AB0049608B /* CameraController.swift */; };
+		AF7D40DA205293010013CC66 /* CardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7D40D7205293010013CC66 /* CardNode.swift */; };
+		AF7D40DD205297AC0013CC66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7D40DC205297AC0013CC66 /* Assets.xcassets */; };
 		AFCFB6F5205079E2006C9B74 /* CardsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCFB6EE205079C4006C9B74 /* CardsBase.framework */; };
 		AFCFB6F6205079E2006C9B74 /* CardsBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AFCFB6EE205079C4006C9B74 /* CardsBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFCFB6FC20507F24006C9B74 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCFB6FB20507F24006C9B74 /* CardsView.swift */; };
@@ -101,7 +102,6 @@
 		AF4C2BE5203C01E0008A5FA9 /* Blackjack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackjack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4C2BE8203C01E0008A5FA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF4C2BEC203C01E0008A5FA9 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		AF4C2BEE203C01E0008A5FA9 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		AF4C2BF3203C01E0008A5FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF4C2BF8203C01E0008A5FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF4C2BFA203C01E0008A5FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,6 +111,8 @@
 		AF4C2C0E203C01E0008A5FA9 /* BlackjackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackjackUITests.swift; sourceTree = "<group>"; };
 		AF4C2C10203C01E0008A5FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF5D28E2205108AB0049608B /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		AF7D40D7205293010013CC66 /* CardNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNode.swift; sourceTree = "<group>"; };
+		AF7D40DC205297AC0013CC66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFCFB6E7205079C3006C9B74 /* CardsBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CardsBase.xcodeproj; path = CardsBase/CardsBase.xcodeproj; sourceTree = "<group>"; };
 		AFCFB6FB20507F24006C9B74 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		AFCFB79D2050A108006C9B74 /* UILayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILayerViewController.swift; sourceTree = "<group>"; };
@@ -187,19 +189,18 @@
 		AF4C2BE7203C01E0008A5FA9 /* Blackjack */ = {
 			isa = PBXGroup;
 			children = (
+				AF7D40DC205297AC0013CC66 /* Assets.xcassets */,
+				AF7D40DB205293050013CC66 /* nodes */,
 				AF4969622050EFF1007E10BA /* art.scnassets */,
 				AF4C2BE8203C01E0008A5FA9 /* AppDelegate.swift */,
 				AF4C2BEC203C01E0008A5FA9 /* Actions.sks */,
-				AF4C2BEE203C01E0008A5FA9 /* GameScene.swift */,
 				AF4969602050EEB4007E10BA /* GameViewController.swift */,
 				AF4C2BF2203C01E0008A5FA9 /* Main.storyboard */,
 				AF4C2BF7203C01E0008A5FA9 /* LaunchScreen.storyboard */,
 				AF4C2BFA203C01E0008A5FA9 /* Info.plist */,
 				AFCFB6FB20507F24006C9B74 /* CardsView.swift */,
 				AFCFB79D2050A108006C9B74 /* UILayerViewController.swift */,
-				3415D0B376304BA9CCF97E06 /* HandNode.swift */,
 				AF5D28E2205108AB0049608B /* CameraController.swift */,
-				AFE178762051404700AB32A2 /* TableViewNode.swift */,
 			);
 			path = Blackjack;
 			sourceTree = "<group>";
@@ -219,6 +220,16 @@
 				AF4C2C10203C01E0008A5FA9 /* Info.plist */,
 			);
 			path = BlackjackUITests;
+			sourceTree = "<group>";
+		};
+		AF7D40DB205293050013CC66 /* nodes */ = {
+			isa = PBXGroup;
+			children = (
+				3415D0B376304BA9CCF97E06 /* HandNode.swift */,
+				AF7D40D7205293010013CC66 /* CardNode.swift */,
+				AFE178762051404700AB32A2 /* TableViewNode.swift */,
+			);
+			path = nodes;
 			sourceTree = "<group>";
 		};
 		AFCFB6E8205079C3006C9B74 /* Products */ = {
@@ -437,6 +448,7 @@
 				AF4969632050EFF1007E10BA /* art.scnassets in Resources */,
 				AF4C2BF9203C01E0008A5FA9 /* LaunchScreen.storyboard in Resources */,
 				AF4C2BED203C01E0008A5FA9 /* Actions.sks in Resources */,
+				AF7D40DD205297AC0013CC66 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,11 +488,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF4969612050EEB4007E10BA /* GameViewController.swift in Sources */,
-				AF4C2BEF203C01E0008A5FA9 /* GameScene.swift in Sources */,
 				AF5D28E3205108AB0049608B /* CameraController.swift in Sources */,
 				AFCFB6FC20507F24006C9B74 /* CardsView.swift in Sources */,
 				AF4C2BE9203C01E0008A5FA9 /* AppDelegate.swift in Sources */,
 				AFCFB79E2050A108006C9B74 /* UILayerViewController.swift in Sources */,
+				AF7D40DA205293010013CC66 /* CardNode.swift in Sources */,
 				3415D21A424BF538C55E0670 /* HandNode.swift in Sources */,
 				AFE178772051404700AB32A2 /* TableViewNode.swift in Sources */,
 			);

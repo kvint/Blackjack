@@ -17,25 +17,28 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.addUILayer()
+        //self.addUILayer()
         
         // create a new scene
-        
         let scene = SCNScene(named: "art.scnassets/Scene3D.scn")!
-        self.createGeometry(scene.rootNode);
         
-//        let contentNode = scene.rootNode.childNode(withName: "tableCards", recursively: true)
-//        contentNode?.childNodes.forEach({ (node) in
-//            if (node.name == "dealer") {
-//                //createDealer()
-//            } else {
-//                let someCard = Card(Rank.random(), Suit.random()).create3D()
-//                node.enumerateChildNodes({ (handChildNode, _) in
-//                    handChildNode.removeFromParentNode()
-//                })
-//                node.addChildNode(someCard)
-//            }
-//        })
+        let contentNode = scene.rootNode.childNode(withName: "tableCards", recursively: true)
+        contentNode?.childNodes.forEach({ (node) in
+            if (node.name == "dealer") {
+                let handNode = HandNode()
+                node.replaceChildNode(node.childNodes[0], with: handNode)
+                handNode.addCard(card: Card(Rank.random(), Suit.random()))
+            } else {
+                let handNode = HandNode()
+                node.replaceChildNode(node.childNodes[0], with: handNode)
+                handNode.addCard(card: Card(Rank.random(), Suit.random()))
+                handNode.addCard(card: Card(Rank.random(), Suit.random()))
+                handNode.addCard(card: Card(Rank.random(), Suit.random()))
+                handNode.addCard(card: Card(Rank.random(), Suit.random()))
+                
+                handNode.runAction(SCNAction.rotateBy(x: 0, y: 0.1, z: 0, duration: 0.5))
+            }
+        })
         
         //tableNode?.removeFromParentNode()
         
@@ -64,9 +67,6 @@ class GameViewController: UIViewController {
         // set the scene to the view
         scnView.scene = scene
         
-        // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
-        
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
         
@@ -86,11 +86,5 @@ class GameViewController: UIViewController {
         controller.view.frame = CGRect(x: x, y: y, width: parentViewFrame.width, height:viewHeight)
         view.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
-    }
-    func createGeometry(_ rootNode: SCNNode) {
-        let card = Card(Rank.random(), Suit.random())
-        let node = SCNNode(geometry: card.geometry)
-        node.eulerAngles = SCNVector3Make(0, Float.pi/2, 0)
-        rootNode.addChildNode(node)
     }
 }
