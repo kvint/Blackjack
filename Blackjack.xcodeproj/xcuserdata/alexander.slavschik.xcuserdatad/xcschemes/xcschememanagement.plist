@@ -12,6 +12,11 @@
 		<key>Tests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Blackjack (prototype).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
 	</dict>
