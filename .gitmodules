@@ -1,0 +1,3 @@
+[submodule "CardsBase"]
+	path = CardsBase
+	url = git@github.com:kvint/cards_base.git
