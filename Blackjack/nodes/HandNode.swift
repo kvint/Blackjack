@@ -13,10 +13,9 @@ class HandNode: SCNNode {
     
     func addCard(card: Card) {
         let card = CardNode()
-        card.scale = SCNVector3(x: 0.03, y: 0.03, z: 0.03)
-        card.position = SCNVector3Make(shiftX, 0, 0)
+        card.scale = SCNVector3(x: 0.03, y: -0.03, z: 0.03)
+        card.position = SCNVector3Make(shiftX, 0, shiftX * -0.04)
         card.setRandom()
-        card.renderingOrder = self.childNodes.count
         self.addChildNode(card)
         shiftX += 1
     }

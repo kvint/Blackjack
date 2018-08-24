@@ -12,6 +12,7 @@ import SceneKit
 import SpriteKit
 import UIKit
 
+// TODO: move to base with
 extension Card {
     
     var suitName: String {

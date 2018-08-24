@@ -23,54 +23,33 @@ class GameViewController: UIViewController {
         let scene = SCNScene(named: "art.scnassets/Scene3D.scn")!
         
         let contentNode = scene.rootNode.childNode(withName: "tableCards", recursively: true)
+        var a = 1
         contentNode?.childNodes.forEach({ (node) in
+            a += 100
+            let handNode = HandNode()
             if (node.name == "dealer") {
-                let handNode = HandNode()
                 node.replaceChildNode(node.childNodes[0], with: handNode)
+                handNode.addCard(card: Card(Rank.random(), Suit.random()))
+                handNode.addCard(card: Card(Rank.random(), Suit.random()))
                 handNode.addCard(card: Card(Rank.random(), Suit.random()))
             } else {
-                let handNode = HandNode()
                 node.replaceChildNode(node.childNodes[0], with: handNode)
                 handNode.addCard(card: Card(Rank.random(), Suit.random()))
                 handNode.addCard(card: Card(Rank.random(), Suit.random()))
                 handNode.addCard(card: Card(Rank.random(), Suit.random()))
                 handNode.addCard(card: Card(Rank.random(), Suit.random()))
-                
-                handNode.runAction(SCNAction.rotateBy(x: 0, y: 0.1, z: 0, duration: 0.5))
             }
-        })
-        
-        //tableNode?.removeFromParentNode()
-        
+            handNode.renderingOrder = a
+        })        
         
         let zeroNode = SCNNode()
         scene.rootNode.addChildNode(zeroNode)
         
-//        print("Start")
-//        let moveUp = SCNAction.moveBy(x: 120, y: 60, z: 0, duration: 5)
-//        cameraNode.runAction(moveUp)
-//        print("Done")
-        
-        //let someCard = Card(Rank.random(), Suit.random())
-        //scene.rootNode.addChildNode(someCard.create3D())
-        
-        //scene.rootNode.addChildNode(CardView())
-        // retrieve the ship node
-        //let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
-        
-        // animate the 3d object
-        //ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
-        
         // retrieve the SCNView
         let scnView = self.view as! SCNView
-        
-        // set the scene to the view
         scnView.scene = scene
-        
-        // show statistics such as fps and timing information
         scnView.showsStatistics = true
-        
-        // configure the view
+        //scnView.allowsCameraControl = true
         scnView.backgroundColor = UIColor.black
         
     }
