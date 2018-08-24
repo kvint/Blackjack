@@ -15,5 +15,5 @@ protocol CardsDelegate: class {
     func endGame() -> Void
     func dealCard(_ id: String, _ card: Card) -> Void
     func dealCardToDealer(card: Card) -> Void
-    
+    func betOnHand(handId: String) -> Void
 }

@@ -60,6 +60,7 @@ class GameViewController: UIViewController {
 
     private func addUIView() {
         let controller = storyboard?.instantiateViewController(withIdentifier: "uiLayer") as! UIGameViewController
+        gameActions.uiDelegate = controller;
         self.addChildViewController(controller)
         let selfViewFrame = self.view.frame;
         let childViewHeight = CGFloat(250);

@@ -12,7 +12,8 @@ import CardsBase
 class GameActionDelegate: GameDelegate {
     
     public weak var cardsDelegate: CardsDelegate? = nil
-    
+    public weak var uiDelegate: UIGameViewController? = nil
+
     private var _selectedHand: Int = 0;
     
     var selectedHand: Int {
@@ -36,12 +37,12 @@ class GameActionDelegate: GameDelegate {
     func bet(stake: Double) {
         do {
             try game.bet(index: _selectedHand, stake: stake)
-            print("bet \(game.model.getHand(id: String(_selectedHand))?.stake) to \(_selectedHand)")
+            print("bet \(String(describing: game.model.getHand(id: String(_selectedHand))?.stake)) to \(_selectedHand)")
         } catch {
             print("Failed to place a bet")
         }
     }
-    
+
     func deal() {
         print("Deal")
         try! game.deal()
@@ -117,5 +118,8 @@ class GameActionDelegate: GameDelegate {
     func didHandDone(_ hand: inout BJUserHand) {
         
     }
-    
+    func betOnHand(handId: String) -> Void {
+        self.cardsDelegate?.betOnHand(handId: handId)
+        self.uiDelegate?.displayActions()
+    }
 }

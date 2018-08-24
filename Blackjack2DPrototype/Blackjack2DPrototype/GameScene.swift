@@ -51,7 +51,13 @@ class CardStack: SKNode {
     
     var shiftX: CGFloat = 0.0
     var cards: [SKSpriteNode] = []
+    var id: Int = 0
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        let cardNode = SKSpriteNode(imageNamed: "shirt.png")
+        self.addChild(cardNode)
+    }
     func addCard(card: Card) {
         let cardNode = SKSpriteNode(imageNamed: card.imageNamed)
         self.addChild(cardNode)
@@ -66,6 +72,15 @@ class CardStack: SKNode {
 
 class GameScene: SKScene, CardsDelegate {
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        var id = 0;
+        self.enumerateChildNodes(withName: ".//hand_*") { (node, _) in
+            (node as? CardStack)?.id = id
+            id = id + 1
+        }
+    }
+    
     func endGame() {
         self.enumerateChildNodes(withName: ".//hand_*") { (node, _) in
             if let cardStack = node as? CardStack {
@@ -79,7 +94,6 @@ class GameScene: SKScene, CardsDelegate {
         })
     }
     
-    
     func showHand(_ id: String) {
         print("Show hand \(id)")
     }
@@ -87,10 +101,10 @@ class GameScene: SKScene, CardsDelegate {
     func dealCard(_ id: String, _ card: Card) {
         print("Deal card to hand \(id) -> \(card)")
         
-        guard let handNode = self.childNode(withName: "//hand_\(id)") else {
+        guard let handNode = self.getCardStack(id) else {
             fatalError("Hand node not found")
         }
-        (handNode as? CardStack)?.addCard(card: card)
+        handNode.addCard(card: card)
     }
     func dealCardToDealer(card: Card) -> Void {
         self.dealerNode?.addCard(card: card)
@@ -109,13 +123,29 @@ class GameScene: SKScene, CardsDelegate {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
+        let touchedNodes = self.nodes(at: pos)
+        touchedNodes.forEach { (node) in
+            if let cardStack = node as? CardStack {
+                NSLog("node \(cardStack.id)")
+                if game.live {
+                    NSLog("The game is playing")
+                } else {
+                    try? game.bet(handId: "\(cardStack.id)", stake: 10)
+                }
+            }
         }
+        
     }
-    
+    func getCardStack(_ id: String) -> CardStack? {
+        return self.childNode(withName: "//hand_\(id)") as? CardStack
+    }
+    func betOnHand(handId: String) {
+        guard let cardStack = self.getCardStack(handId) else {
+            return;
+        }
+        NSLog("betOnHand \(handId)")
+    }
+
     func touchMoved(toPoint pos : CGPoint) {
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
