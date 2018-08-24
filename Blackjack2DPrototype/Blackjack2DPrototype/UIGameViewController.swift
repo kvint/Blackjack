@@ -18,8 +18,6 @@ class UIGameViewController: UIViewController {
     @IBOutlet weak var doubleBtn: UIButton!
     @IBOutlet weak var hitBtn: UIButton!
     @IBOutlet weak var standBtn: UIButton!
-    @IBOutlet weak var removeBetBtn: UIButton!
-    @IBOutlet weak var addBetBtn: UIButton!
     @IBOutlet weak var splitBtn: UIButton!
     
     @IBAction func btnHandler(_ sender: UIButton) {
@@ -42,12 +40,6 @@ class UIGameViewController: UIViewController {
         case insuranceBtn:
             gameActions.insurance()
             break;
-        case removeBetBtn:
-            gameActions.bet(stake: -10)
-            break;
-        case addBetBtn:
-            gameActions.bet(stake: 10)
-            break;
         default:
             print("Unhandled button")
         }
@@ -64,8 +56,6 @@ class UIGameViewController: UIViewController {
             standBtn.isHidden = true
             splitBtn.isHidden = true
             insuranceBtn.isHidden = true
-            addBetBtn.isHidden = true
-            removeBetBtn.isHidden = true
         }
         
         for action in actions {
@@ -89,10 +79,6 @@ class UIGameViewController: UIViewController {
                     insuranceBtn.isHidden = false
                     break;
             }
-        }
-        if !game.live {
-            addBetBtn.isHidden = false
-            removeBetBtn.isHidden = false
         }
     }
     override func viewDidLoad() {

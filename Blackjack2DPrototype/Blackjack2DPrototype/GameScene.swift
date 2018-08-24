@@ -52,20 +52,25 @@ class CardStack: SKNode {
     var shiftX: CGFloat = 0.0
     var cards: [SKSpriteNode] = []
     var id: Int = 0
+    var spot: SKShapeNode = SKShapeNode(circleOfRadius: 170)
+    var cardsNode: SKNode = SKNode();
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        let cardNode = SKSpriteNode(imageNamed: "shirt.png")
-        self.addChild(cardNode)
+        self.spot.glowWidth = 1.0
+        self.spot.fillColor = SKColor.white
+        self.spot.alpha = 0.2
+        self.addChild(spot)
+        self.addChild(cardsNode)
     }
     func addCard(card: Card) {
         let cardNode = SKSpriteNode(imageNamed: card.imageNamed)
-        self.addChild(cardNode)
+        self.cardsNode.addChild(cardNode)
         cardNode.position.x = shiftX
         self.shiftX += 50
     }
     func clear() {
-        self.removeAllChildren()
+        self.cardsNode.removeAllChildren()
         shiftX = 0.0
     }
 }
