@@ -8,33 +8,103 @@
 
 import SpriteKit
 import GameplayKit
+import CardsBase
 
-class GameScene: SKScene {
+
+extension Card {
+    
+    var suitName: String {
+        get {
+            switch (self.suit) {
+            case .Spades: return "spades"
+            case .Hearts: return "hearts"
+            case .Clubs: return "clubs"
+            case .Diamonds: return "diamonds"
+            }
+        }
+    }
+    var rankName: String {
+        switch (self.rank) {
+        case .Ace: return "ace"
+        case .King: return "king"
+        case .Queen: return "queen"
+        case .Jack: return "jack"
+        case .c10: return "10"
+        case .c9: return "9"
+        case .c8: return "8"
+        case .c7: return "7"
+        case .c6: return "6"
+        case .c5: return "5"
+        case .c4: return "4"
+        case .c3: return "3"
+        case .c2: return "2"
+        }
+    }
+    var imageNamed: String {
+        get {
+            return "\(self.suitName)_\(self.rankName)"
+        }
+    }
+}
+
+class CardStack: SKNode {
+    
+    var shiftX: CGFloat = 0.0
+    var cards: [SKSpriteNode] = []
+    
+    func addCard(card: Card) {
+        let cardNode = SKSpriteNode(imageNamed: card.imageNamed)
+        self.addChild(cardNode)
+        cardNode.position.x = shiftX
+        self.shiftX += 50
+    }
+    func clear() {
+        self.removeAllChildren()
+        shiftX = 0.0
+    }
+}
+
+class GameScene: SKScene, CardsDelegate {
+    
+    func endGame() {
+        self.enumerateChildNodes(withName: ".//hand_*") { (node, _) in
+            if let cardStack = node as? CardStack {
+                cardStack.run(SKAction.fadeAlpha(by: 0, duration: 0.4), completion: {
+                    cardStack.clear()
+                })
+            }
+        }
+        self.dealerNode?.run(SKAction.fadeAlpha(by: 0, duration: 0.4), completion: {
+            self.dealerNode?.clear()
+        })
+    }
+    
+    
+    func showHand(_ id: String) {
+        print("Show hand \(id)")
+    }
+    
+    func dealCard(_ id: String, _ card: Card) {
+        print("Deal card to hand \(id) -> \(card)")
+        
+        guard let handNode = self.childNode(withName: "//hand_\(id)") else {
+            fatalError("Hand node not found")
+        }
+        (handNode as? CardStack)?.addCard(card: card)
+    }
+    func dealCardToDealer(card: Card) -> Void {
+        self.dealerNode?.addCard(card: card)
+    }
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    var dealerNode: CardStack!;
     
     override func didMove(to view: SKView) {
-        
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
+        guard let dealerNode = self.childNode(withName: "//dealerNode") else {
+            fatalError("Dealer node not found")
         }
-        
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
+        self.dealerNode = dealerNode as! CardStack
     }
     
     

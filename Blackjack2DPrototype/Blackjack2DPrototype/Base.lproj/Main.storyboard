@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A278a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,126 @@
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Blackjack2DPrototype" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="axm-Ho-AiW" appends="YES" id="MMw-D0-u1G"/>
+                            <outletCollection property="gestureRecognizers" destination="C4x-Vc-HDl" appends="YES" id="Jox-9X-lLN"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="axm-Ho-AiW" userLabel="Swipe Left">
+                    <connections>
+                        <action selector="swipeLeft:" destination="BV1-FR-VrT" id="Dwt-pT-HtY"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="C4x-Vc-HDl">
+                    <connections>
+                        <action selector="swipeRight:" destination="BV1-FR-VrT" id="wIO-Pc-hp6"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
+        </scene>
+        <!--UI View Controller-->
+        <scene sceneID="zUy-mJ-fpJ">
+            <objects>
+                <viewController storyboardIdentifier="uiLayer" id="uPO-Gt-BOx" userLabel="UI View Controller" customClass="UIGameViewController" customModule="Blackjack2DPrototype" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Eg-be-WFg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hs5-od-9ce">
+                                <rect key="frame" x="292" y="20" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" title="Insurance"/>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="ta0-sw-QYS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIg-FD-cYM">
+                                <rect key="frame" x="163" y="58" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <state key="normal" title="Double"/>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="nM3-4c-66E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8B-at-L3O">
+                                <rect key="frame" x="273" y="96" width="86" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" title="Stand"/>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="Zsg-Ph-sZj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUH-Zu-Pyw">
+                                <rect key="frame" x="172" y="96" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <state key="normal" title="Split"/>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="lSX-IQ-Qv2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcC-Bu-nvl">
+                                <rect key="frame" x="292" y="161" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add 10"/>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="JAq-tQ-StD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gka-Ng-sX3">
+                                <rect key="frame" x="28" y="161" width="75" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Remove 10"/>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="yHz-ns-NVL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0X-yx-NKn">
+                                <rect key="frame" x="16" y="96" width="98" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <state key="normal" title="Hit"/>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="7Z0-bR-MWe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rwK-WD-EWA">
+                                <rect key="frame" x="172" y="20" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Deal"/>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="Jdr-Yv-1h9"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Qsf-K0-aXw">
+                                <rect key="frame" x="177" y="166" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="RTf-NG-3OG"/>
+                    </view>
+                    <connections>
+                        <outlet property="addBetBtn" destination="JcC-Bu-nvl" id="2VV-pq-p5i"/>
+                        <outlet property="dealBtn" destination="rwK-WD-EWA" id="VJV-G8-ccU"/>
+                        <outlet property="doubleBtn" destination="tIg-FD-cYM" id="AYv-SG-gk0"/>
+                        <outlet property="hitBtn" destination="b0X-yx-NKn" id="Lzn-nd-YjY"/>
+                        <outlet property="insuranceBtn" destination="hs5-od-9ce" id="657-hn-zBM"/>
+                        <outlet property="removeBetBtn" destination="gka-Ng-sX3" id="EyT-On-Bb5"/>
+                        <outlet property="splitBtn" destination="nUH-Zu-Pyw" id="bUJ-Fq-LOL"/>
+                        <outlet property="standBtn" destination="Y8B-at-L3O" id="qUg-Oz-hco"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aD6-bJ-Cf8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1341.5999999999999" y="53.523238380809602"/>
         </scene>
     </scenes>
 </document>

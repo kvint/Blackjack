@@ -7,17 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA0B46EC2060417300B17CCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA0B46EB2060416100B17CCE /* Assets.xcassets */; };
+		EA5AB25B205CC4DD004408A5 /* CardsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */; };
 		EAC7C19D205C9E5600A2CB9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7C19C205C9E5600A2CB9E /* AppDelegate.swift */; };
 		EAC7C19F205C9E5600A2CB9E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EAC7C19E205C9E5600A2CB9E /* GameScene.sks */; };
 		EAC7C1A1205C9E5600A2CB9E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = EAC7C1A0205C9E5600A2CB9E /* Actions.sks */; };
 		EAC7C1A3205C9E5600A2CB9E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7C1A2205C9E5600A2CB9E /* GameScene.swift */; };
 		EAC7C1A5205C9E5600A2CB9E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7C1A4205C9E5600A2CB9E /* GameViewController.swift */; };
 		EAC7C1A8205C9E5600A2CB9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAC7C1A6205C9E5600A2CB9E /* Main.storyboard */; };
-		EAC7C1AA205C9E5600A2CB9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAC7C1A9205C9E5600A2CB9E /* Assets.xcassets */; };
 		EAC7C1AD205C9E5600A2CB9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAC7C1AB205C9E5600A2CB9E /* LaunchScreen.storyboard */; };
+		EAC7C1BD205C9E6A00A2CB9E /* CardsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC7C1BC205C9E6A00A2CB9E /* CardsBase.framework */; };
+		EAC7C1BE205C9E6A00A2CB9E /* CardsBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EAC7C1BC205C9E6A00A2CB9E /* CardsBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EAC7C1C1205C9F5400A2CB9E /* UIGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7C1C0205C9F5400A2CB9E /* UIGameViewController.swift */; };
+		EAC7C1C5205CA51D00A2CB9E /* GameActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7C1C4205CA51D00A2CB9E /* GameActionDelegate.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EAC7C1BF205C9E6B00A2CB9E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EAC7C1BE205C9E6A00A2CB9E /* CardsBase.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		EA0B46EB2060416100B17CCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Blackjack/Assets.xcassets; sourceTree = "<group>"; };
+		EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewDelegate.swift; sourceTree = "<group>"; };
 		EAC7C199205C9E5600A2CB9E /* Blackjack2DPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackjack2DPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAC7C19C205C9E5600A2CB9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAC7C19E205C9E5600A2CB9E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -25,9 +46,11 @@
 		EAC7C1A2205C9E5600A2CB9E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EAC7C1A4205C9E5600A2CB9E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		EAC7C1A7205C9E5600A2CB9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EAC7C1A9205C9E5600A2CB9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAC7C1AC205C9E5600A2CB9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAC7C1AE205C9E5600A2CB9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAC7C1BC205C9E6A00A2CB9E /* CardsBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CardsBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAC7C1C0205C9F5400A2CB9E /* UIGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGameViewController.swift; sourceTree = "<group>"; };
+		EAC7C1C4205CA51D00A2CB9E /* GameActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameActionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAC7C1BD205C9E6A00A2CB9E /* CardsBase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +68,7 @@
 		EAC7C190205C9E5600A2CB9E = {
 			isa = PBXGroup;
 			children = (
+				EAC7C1BC205C9E6A00A2CB9E /* CardsBase.framework */,
 				EAC7C19B205C9E5600A2CB9E /* Blackjack2DPrototype */,
 				EAC7C19A205C9E5600A2CB9E /* Products */,
 			);
@@ -66,9 +91,12 @@
 				EAC7C1A2205C9E5600A2CB9E /* GameScene.swift */,
 				EAC7C1A4205C9E5600A2CB9E /* GameViewController.swift */,
 				EAC7C1A6205C9E5600A2CB9E /* Main.storyboard */,
-				EAC7C1A9205C9E5600A2CB9E /* Assets.xcassets */,
+				EA0B46EB2060416100B17CCE /* Assets.xcassets */,
 				EAC7C1AB205C9E5600A2CB9E /* LaunchScreen.storyboard */,
 				EAC7C1AE205C9E5600A2CB9E /* Info.plist */,
+				EAC7C1C0205C9F5400A2CB9E /* UIGameViewController.swift */,
+				EAC7C1C4205CA51D00A2CB9E /* GameActionDelegate.swift */,
+				EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */,
 			);
 			path = Blackjack2DPrototype;
 			sourceTree = "<group>";
@@ -83,6 +111,7 @@
 				EAC7C195205C9E5600A2CB9E /* Sources */,
 				EAC7C196205C9E5600A2CB9E /* Frameworks */,
 				EAC7C197205C9E5600A2CB9E /* Resources */,
+				EAC7C1BF205C9E6B00A2CB9E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -134,9 +163,9 @@
 			files = (
 				EAC7C1A8205C9E5600A2CB9E /* Main.storyboard in Resources */,
 				EAC7C19F205C9E5600A2CB9E /* GameScene.sks in Resources */,
-				EAC7C1AA205C9E5600A2CB9E /* Assets.xcassets in Resources */,
 				EAC7C1AD205C9E5600A2CB9E /* LaunchScreen.storyboard in Resources */,
 				EAC7C1A1205C9E5600A2CB9E /* Actions.sks in Resources */,
+				EA0B46EC2060417300B17CCE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,9 +176,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAC7C1C5205CA51D00A2CB9E /* GameActionDelegate.swift in Sources */,
+				EAC7C1C1205C9F5400A2CB9E /* UIGameViewController.swift in Sources */,
 				EAC7C1A3205C9E5600A2CB9E /* GameScene.swift in Sources */,
 				EAC7C1A5205C9E5600A2CB9E /* GameViewController.swift in Sources */,
 				EAC7C19D205C9E5600A2CB9E /* AppDelegate.swift in Sources */,
+				EA5AB25B205CC4DD004408A5 /* CardsViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
