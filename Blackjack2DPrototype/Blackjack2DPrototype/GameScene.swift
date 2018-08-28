@@ -10,12 +10,44 @@ import SpriteKit
 import GameplayKit
 import CardsBase
 
+struct ActionItem: Hashable {
+    var node: SKNode
+    var action: SKAction
+}
+
+class ActionChain {
+    
+    var actions: Set<ActionItem> = []
+    
+    func add(node: SKNode, action: SKAction) {
+        let item = ActionItem(node: node, action: action)
+        self.actions.insert(item)
+        if self.actions.count == 1 {
+            self.runNext(item: item)
+        }
+    }
+    private func runNext(item: ActionItem) {
+        
+        item.node.run(item.action) {
+            self.actions.remove(item)
+            self.onChainCompleted()
+        }
+    }
+    func onChainCompleted() {
+        if let nextItem = self.actions.popFirst() {
+            self.runNext(item: nextItem)
+        }
+    }
+}
+
 func getCardSprite(_ card: Card) -> SKSpriteNode {
     return card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
 }
 class GameScene: SKScene, CardsDelegate {
-    var dealerNode: HandView!;
-    var deckNode: SKNode!;
+    
+    var actionChain: ActionChain = ActionChain()
+    var dealerNode: HandView!
+    var deckNode: SKNode!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -58,23 +90,22 @@ class GameScene: SKScene, CardsDelegate {
         cardNode.position = deckNode.position
         cardNode.xScale = deckNode.xScale
         cardNode.yScale = deckNode.yScale
+        self.addChild(cardNode)
         
         let moveToAction = SKAction.move(to: targetPos, duration: time)
         let rotate = SKAction.rotate(toAngle: 0, duration: time)
         let scale = SKAction.scale(to: targetScale, duration: time)
         
         moveToAction.timingMode = .easeInEaseOut
-        
-        let animation = SKAction.group([rotate, scale, moveToAction])
-        self.addChild(cardNode)
-        
         var handModel = game.model.getHand(id: id)!
         
-        cardNode.run(animation, completion: {
+        let dealCardAction = SKAction.sequence([SKAction.group([rotate, scale, moveToAction]), SKAction.run {
             cardNode.removeFromParent()
             handNode.cards.addNode(cardNode)
             handNode.updateScore(hand: &handModel)
-        });
+        }])
+        
+        self.actionChain.add(node: cardNode, action: dealCardAction)
     }
     func dealCardToDealer(card: Card) -> Void {
         // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
