@@ -16,7 +16,7 @@ class CardStack: SKNode {
     var cards: [SKSpriteNode] = []
     
     func add(card: Card) {
-        let cardNode = SKSpriteNode(imageNamed: card.imageNamed)
+        let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
         self.addChild(cardNode)
         cardNode.position.x = shiftX
         self.shiftX += 50
