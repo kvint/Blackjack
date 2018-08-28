@@ -15,20 +15,26 @@ class CardStack: SKNode {
     var shiftX: CGFloat = 0.0
     var cards: [SKSpriteNode] = []
     
+    var nextShift: CGFloat {
+        get {
+            return self.shiftX + self.step
+        }
+    }
+    
     func addNode(_ card: SKSpriteNode) {
         self.addChild(card)
         card.setScale(1)
-        card.position.x = shiftX
+        card.position.x = self.nextShift
         card.position.y = 0;
-        self.shiftX += self.step
+        self.shiftX = self.nextShift
     }
     
     func add(card: Card) {
         let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt") : SKSpriteNode(imageNamed: card.imageNamed)
 
         self.addChild(cardNode)
-        cardNode.position.x = shiftX
-        self.shiftX += self.step
+        cardNode.position.x = self.nextShift
+        self.shiftX = self.nextShift
     }
     func clear() {
         self.removeAllChildren()
@@ -58,8 +64,8 @@ class HandView: SKNode {
     var score: SKLabelNode = SKLabelNode(text: "")
     var cards: CardStack = CardStack()
     var chips: ChipStack = ChipStack()
-    var spotArea: SKShapeNode = SKShapeNode(circleOfRadius: 44)
-    var spotGlow: SKShapeNode = SKShapeNode(circleOfRadius: 44 * 2.5)
+    var spotArea: SKShapeNode = SKShapeNode(circleOfRadius: 65)
+    var spotGlow: SKShapeNode = SKShapeNode(circleOfRadius: 88)
     
     private var _selected: Bool = false
     
@@ -76,8 +82,8 @@ class HandView: SKNode {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         spotArea.strokeColor = .yellow
-        spotArea.glowWidth = 10
-        spotArea.alpha = 0.3
+        spotArea.glowWidth = 20
+        spotArea.alpha = 0.2
         spotGlow.fillColor = .yellow
         spotGlow.alpha = 0
         

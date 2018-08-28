@@ -90,17 +90,17 @@ class GameScene: SKScene, CardsDelegate {
         guard let handNode = self.getHandView(id) else {
             fatalError("Hand node not found")
         }
-        let time = 0.2
-        let cardNode = getCardSprite(card)
+        let time = 0.4
+        let cardNode = SKSpriteNode(imageNamed: "shirt")
         
-        let targetPos = self.convert(CGPoint(x: 0, y: 0), from: handNode)
+        let targetPos = self.convert(CGPoint(x: handNode.cards.nextShift, y: 0), from: handNode.cards)
         let targetScale = handNode.cards.xScale
         
         cardNode.zRotation = deckNode.zRotation
         cardNode.position = deckNode.position
         cardNode.xScale = deckNode.xScale
         cardNode.yScale = deckNode.yScale
-        self.insertChild(cardNode, at: 0)
+        self.addChild(cardNode)
         
         let moveToAction = SKAction.move(to: targetPos, duration: time)
         let rotate = SKAction.rotate(toAngle: 0, duration: time)
@@ -109,7 +109,11 @@ class GameScene: SKScene, CardsDelegate {
         moveToAction.timingMode = .easeInEaseOut
         var handModel = game.model.getHand(id: id)!
         
-        let dealCardAction = SKAction.sequence([SKAction.group([rotate, scale, moveToAction]), SKAction.run {
+        let waitAndSwap = SKAction.sequence([SKAction.wait(forDuration: time * 2/3), SKAction.run({
+            cardNode.texture = SKTexture(imageNamed: card.imageNamed)
+        })])
+        
+        let dealCardAction = SKAction.sequence([SKAction.group([rotate, scale, moveToAction, waitAndSwap]), SKAction.run {
             cardNode.removeFromParent()
             handNode.cards.addNode(cardNode)
             handNode.updateScore(hand: &handModel)
