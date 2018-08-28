@@ -10,6 +10,9 @@ import SpriteKit
 import GameplayKit
 import CardsBase
 
+func getCardSprite(_ card: Card) -> SKSpriteNode {
+    return card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
+}
 class GameScene: SKScene, CardsDelegate {
     var dealerNode: HandView!;
     
@@ -45,11 +48,24 @@ class GameScene: SKScene, CardsDelegate {
         guard let handNode = self.getHandView(id) else {
             fatalError("Hand node not found")
         }
+        let time = 0.2
+        let cardNode = getCardSprite(card)
+        cardNode.position = CGPoint(x: 0, y: 0)
+        let moveToAction = SKAction.move(to: handNode.position, duration: time)
+        let rotate = SKAction.rotate(toAngle: 0, duration: time)
+        moveToAction.timingMode = .easeInEaseOut
+        let animation = SKAction.group([rotate, moveToAction])
+        self.addChild(cardNode)
+        
         var handModel = game.model.getHand(id: id)!
-        handNode.updateScore(hand: &handModel)
-        handNode.cards.add(card: card)
+        
+        cardNode.run(animation, completion: {
+            handNode.cards.addChild(cardNode)
+            handNode.updateScore(hand: &handModel)
+        });
     }
     func dealCardToDealer(card: Card) -> Void {
+        // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
         self.dealerNode?.cards.add(card: card)
     }
     
