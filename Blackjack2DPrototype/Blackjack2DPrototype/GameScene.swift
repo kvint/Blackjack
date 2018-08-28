@@ -15,6 +15,7 @@ func getCardSprite(_ card: Card) -> SKSpriteNode {
 }
 class GameScene: SKScene, CardsDelegate {
     var dealerNode: HandView!;
+    var deckNode: SKNode!;
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -50,17 +51,28 @@ class GameScene: SKScene, CardsDelegate {
         }
         let time = 0.2
         let cardNode = getCardSprite(card)
-        cardNode.position = CGPoint(x: 0, y: 0)
-        let moveToAction = SKAction.move(to: handNode.position, duration: time)
+        
+        let targetPos = self.convert(CGPoint(x: 0, y: 0), from: handNode)
+        let targetScale = handNode.xScale
+        
+        cardNode.position = deckNode.position
+        cardNode.xScale = deckNode.xScale
+        cardNode.yScale = deckNode.yScale
+        
+        let moveToAction = SKAction.move(to: targetPos, duration: time)
         let rotate = SKAction.rotate(toAngle: 0, duration: time)
+        let scale = SKAction.scale(to: targetScale, duration: time)
+        
         moveToAction.timingMode = .easeInEaseOut
-        let animation = SKAction.group([rotate, moveToAction])
+        
+        let animation = SKAction.group([rotate, scale, moveToAction])
         self.addChild(cardNode)
         
         var handModel = game.model.getHand(id: id)!
         
         cardNode.run(animation, completion: {
-            handNode.cards.addChild(cardNode)
+            cardNode.removeFromParent()
+            handNode.cards.addNode(cardNode)
             handNode.updateScore(hand: &handModel)
         });
     }
@@ -73,7 +85,11 @@ class GameScene: SKScene, CardsDelegate {
         guard let dealerNode = self.childNode(withName: "//dealerNode") else {
             fatalError("Dealer node not found")
         }
+        guard let deckNode = self.childNode(withName: "//deckNode") else {
+            fatalError("Deck node not found")
+        }
         self.dealerNode = dealerNode as! HandView
+        self.deckNode = deckNode;
     }
     
     

@@ -15,9 +15,11 @@ class CardStack: SKNode {
     var shiftX: CGFloat = 0.0
     var cards: [SKSpriteNode] = []
     
-    func addNode(card: SKSpriteNode) {
+    func addNode(_ card: SKSpriteNode) {
         self.addChild(card)
+        card.setScale(1)
         card.position.x = shiftX
+        card.position.y = 0;
         self.shiftX += 50
     }
     
