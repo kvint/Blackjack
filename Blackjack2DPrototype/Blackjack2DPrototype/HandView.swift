@@ -11,7 +11,7 @@ import SpriteKit
 import CardsBase
 
 class CardStack: SKNode {
-    
+    private let step: CGFloat = 45
     var shiftX: CGFloat = 0.0
     var cards: [SKSpriteNode] = []
     
@@ -20,7 +20,7 @@ class CardStack: SKNode {
         card.setScale(1)
         card.position.x = shiftX
         card.position.y = 0;
-        self.shiftX += 20
+        self.shiftX += self.step
     }
     
     func add(card: Card) {
@@ -28,7 +28,7 @@ class CardStack: SKNode {
 
         self.addChild(cardNode)
         cardNode.position.x = shiftX
-        self.shiftX += 50
+        self.shiftX += self.step
     }
     func clear() {
         self.removeAllChildren()
@@ -84,6 +84,7 @@ class HandView: SKNode {
         self.chips.position.y = -125
         score.fontSize = 25
         score.position.y = 90
+        cards.setScale(0.7)
         self.addChild(spotArea)
         self.addChild(spotGlow)
         self.addChild(cards)

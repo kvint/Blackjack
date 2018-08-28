@@ -100,7 +100,7 @@ class GameScene: SKScene, CardsDelegate {
         cardNode.position = deckNode.position
         cardNode.xScale = deckNode.xScale
         cardNode.yScale = deckNode.yScale
-        self.addChild(cardNode)
+        self.insertChild(cardNode, at: 0)
         
         let moveToAction = SKAction.move(to: targetPos, duration: time)
         let rotate = SKAction.rotate(toAngle: 0, duration: time)
@@ -131,7 +131,6 @@ class GameScene: SKScene, CardsDelegate {
         }
         self.dealerNode = dealerNode as! HandView
         self.deckNode = deckNode;
-        self.deckNode.isHidden = true
     }
     
     
