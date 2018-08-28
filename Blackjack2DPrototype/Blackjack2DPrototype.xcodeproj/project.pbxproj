@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AFC27758213567FC0008503E /* HandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC27757213567FC0008503E /* HandView.swift */; };
 		EA0B46EC2060417300B17CCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA0B46EB2060416100B17CCE /* Assets.xcassets */; };
 		EA5AB25B205CC4DD004408A5 /* CardsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */; };
 		EAC7C19D205C9E5600A2CB9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7C19C205C9E5600A2CB9E /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AFC27757213567FC0008503E /* HandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandView.swift; sourceTree = "<group>"; };
 		EA0B46EB2060416100B17CCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Blackjack/Assets.xcassets; sourceTree = "<group>"; };
 		EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewDelegate.swift; sourceTree = "<group>"; };
 		EAC7C199205C9E5600A2CB9E /* Blackjack2DPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackjack2DPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +99,7 @@
 				EAC7C1C0205C9F5400A2CB9E /* UIGameViewController.swift */,
 				EAC7C1C4205CA51D00A2CB9E /* GameActionDelegate.swift */,
 				EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */,
+				AFC27757213567FC0008503E /* HandView.swift */,
 			);
 			path = Blackjack2DPrototype;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC27758213567FC0008503E /* HandView.swift in Sources */,
 				EAC7C1C5205CA51D00A2CB9E /* GameActionDelegate.swift in Sources */,
 				EAC7C1C1205C9F5400A2CB9E /* UIGameViewController.swift in Sources */,
 				EAC7C1A3205C9E5600A2CB9E /* GameScene.swift in Sources */,
