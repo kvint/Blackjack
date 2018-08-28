@@ -47,21 +47,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hs5-od-9ce">
-                                <rect key="frame" x="5" y="92" width="135" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <state key="normal" title="Insurance">
-                                    <color key="titleColor" red="0.95551327720207258" green="0.81002547457976448" blue="0.68312777808510461" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="ta0-sw-QYS"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIg-FD-cYM">
-                                <rect key="frame" x="143" y="92" width="99" height="51"/>
+                                <rect key="frame" x="116" y="10" width="123" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="Double">
                                     <color key="titleColor" red="0.95551327720207258" green="0.81002547457976448" blue="0.68312777808510461" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -70,9 +59,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvd-fA-lm0">
-                                <rect key="frame" x="161" y="14" width="63" height="51"/>
+                                <rect key="frame" x="133" y="30" width="108" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="56"/>
                                 <state key="normal" title="Deal">
                                     <color key="titleColor" red="0.95551327720207258" green="0.81002547457976448" blue="0.68312777808510461" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -81,9 +70,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8B-at-L3O">
-                                <rect key="frame" x="273" y="25" width="86" height="30"/>
+                                <rect key="frame" x="257" y="61" width="102" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="Stand">
                                     <color key="titleColor" red="0.95551327720207258" green="0.81002547457976448" blue="0.68312777808510461" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -92,9 +81,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUH-Zu-Pyw">
-                                <rect key="frame" x="285" y="92" width="62" height="51"/>
+                                <rect key="frame" x="149" y="78" width="76" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="Split">
                                     <color key="titleColor" red="0.95551327720207258" green="0.81002547457976448" blue="0.68312777808510461" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -102,19 +91,26 @@
                                     <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="lSX-IQ-Qv2"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Qsf-K0-aXw">
-                                <rect key="frame" x="177" y="166" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0X-yx-NKn">
-                                <rect key="frame" x="16" y="25" width="98" height="30"/>
+                                <rect key="frame" x="16" y="61" width="98" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="Hit">
                                     <color key="titleColor" red="0.95551327720207258" green="0.81002547457976448" blue="0.68312777808510461" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="7Z0-bR-MWe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hs5-od-9ce">
+                                <rect key="frame" x="16" y="146" width="167" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title="Insurance">
+                                    <color key="titleColor" red="0.95551327720207258" green="0.81002547457976448" blue="0.68312777808510461" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="ta0-sw-QYS"/>
                                 </connections>
                             </button>
                         </subviews>

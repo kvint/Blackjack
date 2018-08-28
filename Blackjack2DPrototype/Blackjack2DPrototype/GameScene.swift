@@ -10,95 +10,76 @@ import SpriteKit
 import GameplayKit
 import CardsBase
 
+struct ActionItem: Hashable {
+    var node: SKNode
+    var action: SKAction
+}
 
-extension Card {
+class ActionChain {
     
-    var suitName: String {
-        get {
-            switch (self.suit) {
-            case .Spades: return "spades"
-            case .Hearts: return "hearts"
-            case .Clubs: return "clubs"
-            case .Diamonds: return "diamonds"
-            }
+    var actions: Set<ActionItem> = []
+    
+    func add(node: SKNode, action: SKAction) {
+        let item = ActionItem(node: node, action: action)
+        self.actions.insert(item)
+        if self.actions.count == 1 {
+            self.runNext(item: item)
         }
     }
-    var rankName: String {
-        switch (self.rank) {
-        case .Ace: return "ace"
-        case .King: return "king"
-        case .Queen: return "queen"
-        case .Jack: return "jack"
-        case .c10: return "10"
-        case .c9: return "9"
-        case .c8: return "8"
-        case .c7: return "7"
-        case .c6: return "6"
-        case .c5: return "5"
-        case .c4: return "4"
-        case .c3: return "3"
-        case .c2: return "2"
+    private func runNext(item: ActionItem) {
+        
+        item.node.run(item.action) {
+            self.actions.remove(item)
+            self.onChainCompleted()
         }
     }
-    var imageNamed: String {
-        get {
-            return "\(self.suitName)_\(self.rankName)"
+    func onChainCompleted() {
+        if let nextItem = self.actions.popFirst() {
+            self.runNext(item: nextItem)
         }
     }
 }
 
-class CardStack: SKNode {
-    
-    var shiftX: CGFloat = 0.0
-    var cards: [SKSpriteNode] = []
-    var id: Int = 0
-    var spot: SKShapeNode = SKShapeNode(circleOfRadius: 170)
-    var cardsNode: SKNode = SKNode();
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.spot.glowWidth = 1.0
-        self.spot.fillColor = SKColor.white
-        self.spot.alpha = 0.2
-        self.addChild(spot)
-        self.addChild(cardsNode)
-    }
-    func addCard(card: Card) {
-        let cardNode = SKSpriteNode(imageNamed: card.imageNamed)
-        self.cardsNode.addChild(cardNode)
-        cardNode.position.x = shiftX
-        self.shiftX += 50
-    }
-    func clear() {
-        self.cardsNode.removeAllChildren()
-        shiftX = 0.0
-    }
+func getCardSprite(_ card: Card) -> SKSpriteNode {
+    return card.hidden ? SKSpriteNode(imageNamed: "shirt") : SKSpriteNode(imageNamed: card.imageNamed)
 }
-
 class GameScene: SKScene, CardsDelegate {
+    
+    var actionChain: ActionChain = ActionChain()
+    var dealerNode: HandView!
+    var activeHandNode: HandView?
+    var deckNode: SKNode!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         var id = 0;
         self.enumerateChildNodes(withName: ".//hand_*") { (node, _) in
-            (node as? CardStack)?.id = id
+            (node as? HandView)?.id = id
             id = id + 1
         }
     }
     
     func endGame() {
         self.enumerateChildNodes(withName: ".//hand_*") { (node, _) in
-            if let cardStack = node as? CardStack {
-                cardStack.run(SKAction.fadeAlpha(by: 0, duration: 0.4), completion: {
-                    cardStack.clear()
-                })
+            if let handView = node as? HandView {
+                handView.run(SKAction.fadeAlpha(by: 0, duration: 0.4)) {
+                    handView.clear()
+                };
             }
         }
         self.dealerNode?.run(SKAction.fadeAlpha(by: 0, duration: 0.4), completion: {
             self.dealerNode?.clear()
         })
     }
-    
+    func didHandChange(_ hand: inout BJHand) {
+        if let ah = self.activeHandNode {
+            ah.selected = false
+        }
+        if let newHand = self.getHandView(hand.id) {
+            self.activeHandNode = newHand;
+            newHand.selected = true
+        }
+    }
     func showHand(_ id: String) {
         print("Show hand \(id)")
     }
@@ -106,72 +87,88 @@ class GameScene: SKScene, CardsDelegate {
     func dealCard(_ id: String, _ card: Card) {
         print("Deal card to hand \(id) -> \(card)")
         
-        guard let handNode = self.getCardStack(id) else {
+        guard let handNode = self.getHandView(id) else {
             fatalError("Hand node not found")
         }
-        handNode.addCard(card: card)
+        let time = 0.2
+        let cardNode = getCardSprite(card)
+        
+        let targetPos = self.convert(CGPoint(x: 0, y: 0), from: handNode)
+        let targetScale = handNode.cards.xScale
+        
+        cardNode.zRotation = deckNode.zRotation
+        cardNode.position = deckNode.position
+        cardNode.xScale = deckNode.xScale
+        cardNode.yScale = deckNode.yScale
+        self.addChild(cardNode)
+        
+        let moveToAction = SKAction.move(to: targetPos, duration: time)
+        let rotate = SKAction.rotate(toAngle: 0, duration: time)
+        let scale = SKAction.scale(to: targetScale, duration: time)
+        
+        moveToAction.timingMode = .easeInEaseOut
+        var handModel = game.model.getHand(id: id)!
+        
+        let dealCardAction = SKAction.sequence([SKAction.group([rotate, scale, moveToAction]), SKAction.run {
+            cardNode.removeFromParent()
+            handNode.cards.addNode(cardNode)
+            handNode.updateScore(hand: &handModel)
+        }])
+        
+        self.actionChain.add(node: cardNode, action: dealCardAction)
     }
     func dealCardToDealer(card: Card) -> Void {
-        self.dealerNode?.addCard(card: card)
+        // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
+        self.dealerNode?.cards.add(card: card)
     }
-    
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
-    var dealerNode: CardStack!;
     
     override func didMove(to view: SKView) {
         guard let dealerNode = self.childNode(withName: "//dealerNode") else {
             fatalError("Dealer node not found")
         }
-        self.dealerNode = dealerNode as! CardStack
+        guard let deckNode = self.childNode(withName: "//deckNode") else {
+            fatalError("Deck node not found")
+        }
+        self.dealerNode = dealerNode as! HandView
+        self.deckNode = deckNode;
+        self.deckNode.isHidden = true
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
         let touchedNodes = self.nodes(at: pos)
         touchedNodes.forEach { (node) in
-            if let cardStack = node as? CardStack {
-                NSLog("node \(cardStack.id)")
+            if let handView = node as? HandView {
+                NSLog("node \(handView.id)")
                 if game.live {
                     NSLog("The game is playing")
                 } else {
-                    try? game.bet(handId: "\(cardStack.id)", stake: 10)
+                    try? game.bet(handId: "\(handView.id)", stake: 10)
                 }
             }
         }
         
     }
-    func getCardStack(_ id: String) -> CardStack? {
-        return self.childNode(withName: "//hand_\(id)") as? CardStack
+    func getHandView(_ id: String) -> HandView? {
+        return self.childNode(withName: "//hand_\(id)") as? HandView
     }
     func betOnHand(handId: String) {
-        guard let cardStack = self.getCardStack(handId) else {
+        guard let handView = self.getHandView(handId) else {
             return;
         }
-        NSLog("betOnHand \(handId)")
+        var handModel = game.model.getHand(id: handId)!
+        handView.updateBet(hand: &handModel)
     }
 
     func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
+
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
+
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {        
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     

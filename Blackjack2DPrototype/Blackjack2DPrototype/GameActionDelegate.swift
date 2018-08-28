@@ -89,6 +89,7 @@ class GameActionDelegate: GameDelegate {
     
     func didHandChange(_ hand: inout BJHand) {
         print("didHandChange to \(hand.id)")
+        self.cardsDelegate?.didHandChange(&hand)
     }
     
     func roundStarted() {
