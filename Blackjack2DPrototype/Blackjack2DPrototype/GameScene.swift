@@ -91,8 +91,10 @@ class GameScene: SKScene, CardsDelegate {
             fatalError("Hand node not found")
         }
         let time = 0.4
+        
         let cardNode = SKSpriteNode(imageNamed: "shirt")
         
+        handNode.cards.stack.allocate()
         let targetPos = self.convert(CGPoint(x: handNode.cards.nextShift, y: 0), from: handNode.cards)
         let targetScale = handNode.cards.xScale
         

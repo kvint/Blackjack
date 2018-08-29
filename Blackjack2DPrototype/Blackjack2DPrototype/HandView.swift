@@ -9,23 +9,57 @@
 import UIKit
 import SpriteKit
 import CardsBase
-
+class Stack {
+    private var allocated: Int = 0;
+    private var count: Int = 0;
+    
+    func add() {
+        if (self.allocated < 1) {
+            self.allocate();
+        }
+        self.count += 1;
+        self.allocated -= 1;
+        self.update();
+    }
+    func allocate() {
+        self.allocated += 1;
+        self.update();
+    }
+    func pop() {
+        self.count -= 1;
+        self.update();
+    }
+    func reset() {
+        self.allocated = 0;
+        self.count = 0;
+    }
+    var length: Int {
+        get {
+            return self.count + self.allocated;
+        }
+    }
+    func update() {
+        
+    }
+}
 class CardStack: SKNode {
     private let step: CGFloat = 45
     var shiftX: CGFloat = 0.0
     var cards: [SKSpriteNode] = []
+    var stack: Stack = Stack()
     
     var nextShift: CGFloat {
         get {
-            return self.shiftX + self.step
+            return CGFloat(self.stack.length - 1) * self.step
         }
     }
     
     func addNode(_ card: SKSpriteNode) {
         self.addChild(card)
         card.setScale(1)
-        card.position.x = self.nextShift
+        card.position.x = self.shiftX
         card.position.y = 0;
+        self.stack.add()
         self.shiftX = self.nextShift
     }
     
@@ -33,10 +67,12 @@ class CardStack: SKNode {
         let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt") : SKSpriteNode(imageNamed: card.imageNamed)
 
         self.addChild(cardNode)
-        cardNode.position.x = self.nextShift
+        cardNode.position.x = self.shiftX
+        self.stack.add()
         self.shiftX = self.nextShift
     }
     func clear() {
+        self.stack.reset()
         self.removeAllChildren()
         shiftX = 0.0
     }
