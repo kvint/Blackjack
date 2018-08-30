@@ -13,15 +13,24 @@ import CardsBase
 struct ActionItem: Hashable {
     var node: SKNode
     var action: SKAction
+    
+    var hashValue: Int {
+        return action.hashValue
+    }
+    
+    static func == (lhs: ActionItem, rhs: ActionItem) -> Bool {
+        return lhs.hashValue == rhs.hashValue// && lhs.petName == rhs.petName
+    }
 }
 
 class ActionChain {
+    let serialQueue = DispatchQueue(label: "serialQueue")
     
-    var actions: Set<ActionItem> = []
+    var actions: [ActionItem] = []
     
     func add(node: SKNode, action: SKAction) {
         let item = ActionItem(node: node, action: action)
-        self.actions.insert(item)
+        self.actions.append(item)
         if self.actions.count == 1 {
             self.runNext(item: item)
         }
@@ -29,12 +38,14 @@ class ActionChain {
     private func runNext(item: ActionItem) {
         
         item.node.run(item.action) {
-            self.actions.remove(item)
+            if let itemIndex = self.actions.index(of: item) {
+                self.actions.remove(at: itemIndex)
+            }
             self.onChainCompleted()
         }
     }
     func onChainCompleted() {
-        if let nextItem = self.actions.popFirst() {
+        if let nextItem = self.actions.first {
             self.runNext(item: nextItem)
         }
     }
@@ -98,7 +109,7 @@ class GameScene: SKScene, CardsDelegate {
         
         self.actionChain.add(node: cardNode, action: SKAction.run {
             cardNode.isHidden = false
-            let time = 0.35
+            let time = 5.0
             
             handNode.cards.stack.allocate()
             print("cardnode_start: \(card) \(handNode.cards.nextShift) \(handNode.id)")
@@ -111,7 +122,6 @@ class GameScene: SKScene, CardsDelegate {
             cardNode.xScale = self.deckNode.xScale
             cardNode.yScale = self.deckNode.yScale
             
-            print("cardnode_target_pos: \(targetPos) ------> \(cardNode.position)")
             let moveToAction = SKAction.move(to: targetPos, duration: time)
             let rotate = SKAction.rotate(toAngle: 0, duration: time)
             let scale = SKAction.scale(to: targetScale, duration: time)
