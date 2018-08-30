@@ -24,7 +24,6 @@ struct ActionItem: Hashable {
 }
 
 class ActionChain {
-    let serialQueue = DispatchQueue(label: "serialQueue")
     
     var actions: [ActionItem] = []
     
@@ -78,9 +77,9 @@ class GameScene: SKScene, CardsDelegate {
                 };
             }
         }
-        self.dealerNode?.run(SKAction.fadeAlpha(by: 0, duration: 0.4), completion: {
-            self.dealerNode?.clear()
-        })
+        self.actionChain.add(node: self.dealerNode, action: SKAction.sequence([SKAction.fadeAlpha(by: 0, duration: 0.4), SKAction.run {
+            self.dealerNode.clear()
+        }]));
     }
     func didHandChange(_ hand: inout BJHand) {
         if let ah = self.activeHandNode {
@@ -101,21 +100,25 @@ class GameScene: SKScene, CardsDelegate {
         guard let handNode = self.getHandView(id) else {
             fatalError("Hand node not found")
         }
-        var handModel = game.model.getHand(id: id)!
-        let cardNode = SKSpriteNode(imageNamed: "shirt")
+        // var handModel = game.model.getHand(id: id)
+        self.dealCardAnimation(node: handNode, from: "shirt", to: card.imageNamed)
+    }
+    func dealCardAnimation(node: HandView, from: String, to: String) -> Void {
         
+//        let hModel = &model
+        let cardNode = SKSpriteNode(imageNamed: from)
         self.addChild(cardNode)
         cardNode.isHidden = true
         
+        
         self.actionChain.add(node: cardNode, action: SKAction.run {
             cardNode.isHidden = false
-            let time = 5.0
+            let time = 0.3
             
-            handNode.cards.stack.allocate()
-            print("cardnode_start: \(card) \(handNode.cards.nextShift) \(handNode.id)")
-            let targetPos = self.convert(CGPoint(x: handNode.cards.nextShift, y: 0), from: handNode.cards)
+            node.cards.stack.allocate()
             
-            let targetScale = handNode.cards.xScale
+            let targetPos = self.convert(CGPoint(x: node.cards.nextShift, y: 0), from: node.cards)
+            let targetScale = node.cards.xScale
             
             cardNode.zRotation = self.deckNode.zRotation
             cardNode.position = self.deckNode.position
@@ -124,21 +127,21 @@ class GameScene: SKScene, CardsDelegate {
             
             let moveToAction = SKAction.move(to: targetPos, duration: time)
             let rotate = SKAction.rotate(toAngle: 0, duration: time)
+            rotate.timingMode = .easeOut
             let scale = SKAction.scale(to: targetScale, duration: time)
             
             moveToAction.timingMode = .easeInEaseOut
             
             let waitAndSwap = SKAction.sequence([SKAction.wait(forDuration: time * 2/3), SKAction.run({
-                cardNode.texture = SKTexture(imageNamed: card.imageNamed)
+                cardNode.texture = SKTexture(imageNamed: to)
             })])
             
             let dealCardAction = SKAction.sequence([SKAction.group([rotate, scale, moveToAction, waitAndSwap]), SKAction.run {
                 cardNode.removeFromParent()
-                handNode.cards.addNode(cardNode)
-                let pos = handNode.cards.convert(cardNode.position, from: self)
+                node.cards.addNode(cardNode)
+                let pos = node.cards.convert(cardNode.position, from: self)
                 cardNode.position = pos;
-                print("cardnode_end: \(card) \(handNode.cards.shiftX)  \(handNode.id)")
-                handNode.updateScore(hand: &handModel)
+//                node.updateScore(hand: &hModel)
             }])
             
             self.actionChain.add(node: cardNode, action: dealCardAction)
@@ -146,7 +149,7 @@ class GameScene: SKScene, CardsDelegate {
     }
     func dealCardToDealer(card: Card) -> Void {
         // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
-        self.dealerNode?.cards.add(card: card)
+        self.dealCardAnimation(node: self.dealerNode, from: "shirt", to: card.hidden ? "shirt" : card.imageNamed)
     }
     
     override func didMove(to view: SKView) {
