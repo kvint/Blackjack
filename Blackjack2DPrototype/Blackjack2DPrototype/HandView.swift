@@ -11,12 +11,12 @@ import SpriteKit
 import CardsBase
 class Stack {
     private var allocated: Int = 0;
-    private var count: Int = 0;
+    var count: Int = 0;
     
     func add() {
-        if (self.allocated < 1) {
-            self.allocate();
-        }
+//        if (self.allocated < 1) {
+//            self.allocate();
+//        }
         self.count += 1;
         self.allocated -= 1;
         self.update();
@@ -44,7 +44,6 @@ class Stack {
 }
 class CardStack: SKNode {
     private let step: CGFloat = 45
-    var shiftX: CGFloat = 0.0
     var cards: [SKSpriteNode] = []
     var stack: Stack = Stack()
     
@@ -53,28 +52,28 @@ class CardStack: SKNode {
             return CGFloat(self.stack.length - 1) * self.step
         }
     }
+    var shiftX: CGFloat {
+        get {
+            return CGFloat(self.stack.count - 1) * self.step
+        }
+    }
     
     func addNode(_ card: SKSpriteNode) {
         self.addChild(card)
         card.setScale(1)
-        card.position.x = self.shiftX
-        card.position.y = 0;
         self.stack.add()
-        self.shiftX = self.nextShift
     }
     
     func add(card: Card) {
         let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt") : SKSpriteNode(imageNamed: card.imageNamed)
 
         self.addChild(cardNode)
-        cardNode.position.x = self.shiftX
         self.stack.add()
-        self.shiftX = self.nextShift
+        cardNode.position.x = self.shiftX
     }
     func clear() {
         self.stack.reset()
         self.removeAllChildren()
-        shiftX = 0.0
     }
 }
 
