@@ -10,98 +10,6 @@ import SpriteKit
 import GameplayKit
 import CardsBase
 
-class DealCardOperation: Operation {
-    
-    var card: Card
-    var deck: SKNode
-    var hand: HandView
-    var scene: SKScene
-    var _finished = false // Our read-write mirror of the super's read-only finished property
-    var _executing = false
-    
-    required init(scene: SKScene, hand: HandView, theCard: Card, theDeck: SKNode) {
-        self.card = theCard
-        self.deck = theDeck
-        self.hand = hand
-        self.scene = scene
-        super.init()
-    }
-    override var isAsynchronous: Bool {
-        return true
-    }
-    override var isConcurrent: Bool {
-        return true
-    }
-    /// Override read-only superclass property as read-write.
-    override var isExecuting: Bool {
-        get { return _executing }
-        set {
-            willChangeValue(forKey: "isExecuting")
-            _executing = newValue
-            didChangeValue(forKey: "isExecuting")
-        }
-    }
-    
-    /// Override read-only superclass property as read-write.
-    override var isFinished: Bool {
-        get { return _finished }
-        set {
-            willChangeValue(forKey: "isFinished")
-            _finished = newValue
-            didChangeValue(forKey: "isFinished")
-        }
-    }
-    override func start() {
-        if isCancelled {
-            isFinished = true
-            return
-        }
-        isFinished = false
-        isExecuting = true
-        
-        self.main()
-    }
-    override func main() {
-        
-        let cardNode = SKSpriteNode(imageNamed: "shirt")
-        self.scene.addChild(cardNode)
-        cardNode.isHidden = true
-
-        cardNode.isHidden = false
-        let time = 0.3
-
-        self.hand.cards.stack.allocate()
-
-        let targetPos = self.scene.convert(CGPoint(x: self.hand.cards.nextShift, y: 0), from: self.hand.cards)
-        let targetScale = self.hand.cards.xScale
-
-        cardNode.zRotation = self.deck.zRotation
-        cardNode.position = self.deck.position
-        cardNode.xScale = self.deck.xScale
-        cardNode.yScale = self.deck.yScale
-
-        let moveToAction = SKAction.move(to: targetPos, duration: time)
-        let rotate = SKAction.rotate(toAngle: 0, duration: time)
-        rotate.timingMode = .easeOut
-        let scale = SKAction.scale(to: targetScale, duration: time)
-
-        moveToAction.timingMode = .easeInEaseOut
-        
-//        if self.card.hidden {
-            let waitAndSwap = SKAction.sequence([SKAction.wait(forDuration: time * 2/3), SKAction.run({
-                cardNode.texture = SKTexture(imageNamed: self.card.hidden ? "shirt" : self.card.imageNamed)
-            })])
-//        }
-        cardNode.run(SKAction.sequence([SKAction.group([rotate, scale, moveToAction, waitAndSwap]), SKAction.run {
-            cardNode.removeFromParent()
-            self.hand.cards.addNode(cardNode)
-            let pos = self.hand.cards.convert(cardNode.position, from: self.scene)
-            cardNode.position = pos
-            self.isFinished = true
-        }]))
-    }
-}
-
 func getCardSprite(_ card: Card) -> SKSpriteNode {
     return card.hidden ? SKSpriteNode(imageNamed: "shirt") : SKSpriteNode(imageNamed: card.imageNamed)
 }
@@ -124,15 +32,16 @@ class GameScene: SKScene, CardsDelegate {
     
     func endGame() {
         
-        self.dealingQueue.addOperation {
-            self.enumerateChildNodes(withName: ".//hand_*") { (node, _) in
-                if let handView = node as? HandView {
+        self.enumerateChildNodes(withName: ".//hand_*") { (node, _) in
+            if let handView = node as? HandView {
+                self.dealingQueue.addOperation {
                     handView.run(SKAction.fadeAlpha(by: 0, duration: 0.4)) {
                         handView.clear()
                     };
                 }
             }
-            
+        }
+        self.dealingQueue.addOperation {
             self.dealerNode.run(SKAction.sequence([SKAction.fadeAlpha(by: 0, duration: 0.4), SKAction.run {
                 self.dealerNode.clear()
             }]));
@@ -158,7 +67,7 @@ class GameScene: SKScene, CardsDelegate {
             fatalError("Hand node not found")
         }
         
-        let op = DealCardOperation(scene: self, hand: handNode, theCard: card, theDeck: self.deckNode)
+        let op = DealCardAnimation(scene: self, hand: handNode, theCard: card, theDeck: self.deckNode)
         
         self.dealingQueue.addOperation(op)
         self.dealingQueue.addOperation {
@@ -173,7 +82,7 @@ class GameScene: SKScene, CardsDelegate {
     func dealCardToDealer(card: Card) -> Void {
         // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
 //        self.dealCardAnimation(node: self.dealerNode, from: "shirt", to: card.hidden ? "shirt" : card.imageNamed)
-        let op = DealCardOperation(scene: self, hand: self.dealerNode, theCard: card, theDeck: self.deckNode)
+        let op = DealCardAnimation(scene: self, hand: self.dealerNode, theCard: card, theDeck: self.deckNode)
         self.dealingQueue.addOperation(op)
     }
     
