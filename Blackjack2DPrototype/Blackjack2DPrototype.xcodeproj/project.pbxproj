@@ -23,6 +23,7 @@
 		EAC7C1C5205CA51D00A2CB9E /* GameActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7C1C4205CA51D00A2CB9E /* GameActionDelegate.swift */; };
 		EAEB0E12213C62D70016760F /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E11213C62D70016760F /* AsyncOperation.swift */; };
 		EAEB0E15213C63120016760F /* DealCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E14213C63120016760F /* DealCardAnimation.swift */; };
+		EAEB0E19213DBDE20016760F /* DiscardCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +58,7 @@
 		EAC7C1C4205CA51D00A2CB9E /* GameActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameActionDelegate.swift; sourceTree = "<group>"; };
 		EAEB0E11213C62D70016760F /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		EAEB0E14213C63120016760F /* DealCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealCardAnimation.swift; sourceTree = "<group>"; };
+		EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscardCardAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		EAEB0E13213C62EF0016760F /* actions */ = {
 			isa = PBXGroup;
 			children = (
+				EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */,
 				EAEB0E11213C62D70016760F /* AsyncOperation.swift */,
 				EAEB0E14213C63120016760F /* DealCardAnimation.swift */,
 			);
@@ -196,6 +199,7 @@
 				AFC27758213567FC0008503E /* HandView.swift in Sources */,
 				EAC7C1C5205CA51D00A2CB9E /* GameActionDelegate.swift in Sources */,
 				EAC7C1C1205C9F5400A2CB9E /* UIGameViewController.swift in Sources */,
+				EAEB0E19213DBDE20016760F /* DiscardCardAnimation.swift in Sources */,
 				EAC7C1A3205C9E5600A2CB9E /* GameScene.swift in Sources */,
 				EAC7C1A5205C9E5600A2CB9E /* GameViewController.swift in Sources */,
 				EAEB0E15213C63120016760F /* DealCardAnimation.swift in Sources */,

@@ -15,9 +15,9 @@ class DealCardAnimation: AsyncOperation {
     var card: Card
     var deck: SKNode
     var hand: HandView
-    var scene: SKScene
+    var scene: SKNode
     
-    required init(scene: SKScene, hand: HandView, theCard: Card, theDeck: SKNode) {
+    required init(scene: SKNode, hand: HandView, theCard: Card, theDeck: SKNode) {
         self.card = theCard
         self.deck = theDeck
         self.hand = hand

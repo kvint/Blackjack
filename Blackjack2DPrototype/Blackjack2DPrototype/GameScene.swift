@@ -19,6 +19,8 @@ class GameScene: SKScene, CardsDelegate {
     var dealerNode: HandView!
     var activeHandNode: HandView?
     var deckNode: SKNode!
+    var discardDeckNode: SKNode!
+    var topNode: SKNode!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,20 +33,23 @@ class GameScene: SKScene, CardsDelegate {
     }
     
     func endGame() {
-        
         self.enumerateChildNodes(withName: ".//hand_*") { (node, _) in
             if let handView = node as? HandView {
-                self.dealingQueue.addOperation {
-                    handView.run(SKAction.fadeAlpha(by: 0, duration: 0.4)) {
-                        handView.clear()
-                    };
-                }
+                self.discard(hand: handView)
             }
         }
+        self.discard(hand: self.dealerNode)
+        
+    }
+    func discard(hand: HandView) {
         self.dealingQueue.addOperation {
-            self.dealerNode.run(SKAction.sequence([SKAction.fadeAlpha(by: 0, duration: 0.4), SKAction.run {
-                self.dealerNode.clear()
-            }]));
+            for cardNode in hand.cards.cards.reversed() {
+                let op = DiscardCardAnimation(scene: self.topNode, theCard: cardNode, theDeck: self.discardDeckNode)
+                self.dealingQueue.addOperation(op)
+            }
+            self.dealingQueue.addOperation {
+                hand.clear();
+            }
         }
     }
     func didHandChange(_ hand: inout BJHand) {
@@ -67,7 +72,7 @@ class GameScene: SKScene, CardsDelegate {
             fatalError("Hand node not found")
         }
         
-        let op = DealCardAnimation(scene: self, hand: handNode, theCard: card, theDeck: self.deckNode)
+        let op = DealCardAnimation(scene: topNode, hand: handNode, theCard: card, theDeck: self.deckNode)
         
         self.dealingQueue.addOperation(op)
         self.dealingQueue.addOperation {
@@ -82,17 +87,25 @@ class GameScene: SKScene, CardsDelegate {
     func dealCardToDealer(card: Card) -> Void {
         // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
 //        self.dealCardAnimation(node: self.dealerNode, from: "shirt", to: card.hidden ? "shirt" : card.imageNamed)
-        let op = DealCardAnimation(scene: self, hand: self.dealerNode, theCard: card, theDeck: self.deckNode)
+        let op = DealCardAnimation(scene: topNode, hand: self.dealerNode, theCard: card, theDeck: self.deckNode)
         self.dealingQueue.addOperation(op)
     }
     
     override func didMove(to view: SKView) {
-        guard let dealerNode = self.childNode(withName: "//dealerNode") else {
+        guard let dealerNode = self.childNode(withName: "//dealer") else {
             fatalError("Dealer node not found")
         }
-        guard let deckNode = self.childNode(withName: "//deckNode") else {
+        guard let deckNode = self.childNode(withName: "//dealingDeck") else {
             fatalError("Deck node not found")
         }
+        guard let discardNode = self.childNode(withName: "//discardedDeck") else {
+            fatalError("Deck node not found")
+        }
+        guard let topNode = self.childNode(withName: "//topNode") else {
+            fatalError("Top node not found")
+        }
+        self.topNode = topNode
+        self.discardDeckNode = discardNode
         self.dealerNode = dealerNode as! HandView
         self.deckNode = deckNode;
     }
@@ -114,6 +127,7 @@ class GameScene: SKScene, CardsDelegate {
         
     }
     func getHandView(_ id: String) -> HandView? {
+        print("enumerate hands")
         return self.childNode(withName: "//hand_\(id)") as? HandView
     }
     func betOnHand(handId: String) {

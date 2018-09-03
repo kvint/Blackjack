@@ -62,16 +62,11 @@ class CardStack: SKNode {
         self.addChild(card)
         card.setScale(1)
         self.stack.add()
+        self.cards.append(card)
     }
     
-    func add(card: Card) {
-        let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt") : SKSpriteNode(imageNamed: card.imageNamed)
-
-        self.addChild(cardNode)
-        self.stack.add()
-        cardNode.position.x = self.shiftX
-    }
     func clear() {
+        self.cards = []
         self.stack.reset()
         self.removeAllChildren()
     }
