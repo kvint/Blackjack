@@ -24,6 +24,7 @@
 		EAEB0E12213C62D70016760F /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E11213C62D70016760F /* AsyncOperation.swift */; };
 		EAEB0E15213C63120016760F /* DealCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E14213C63120016760F /* DealCardAnimation.swift */; };
 		EAEB0E19213DBDE20016760F /* DiscardCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */; };
+		EAEB0E1B213DDB260016760F /* RevealCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E1A213DDB260016760F /* RevealCardAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,6 +60,7 @@
 		EAEB0E11213C62D70016760F /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		EAEB0E14213C63120016760F /* DealCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealCardAnimation.swift; sourceTree = "<group>"; };
 		EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscardCardAnimation.swift; sourceTree = "<group>"; };
+		EAEB0E1A213DDB260016760F /* RevealCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealCardAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */,
 				EAEB0E11213C62D70016760F /* AsyncOperation.swift */,
 				EAEB0E14213C63120016760F /* DealCardAnimation.swift */,
+				EAEB0E1A213DDB260016760F /* RevealCardAnimation.swift */,
 			);
 			name = actions;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				EAEB0E15213C63120016760F /* DealCardAnimation.swift in Sources */,
 				EAC7C19D205C9E5600A2CB9E /* AppDelegate.swift in Sources */,
 				EAEB0E12213C62D70016760F /* AsyncOperation.swift in Sources */,
+				EAEB0E1B213DDB260016760F /* RevealCardAnimation.swift in Sources */,
 				EA5AB25B205CC4DD004408A5 /* CardsViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

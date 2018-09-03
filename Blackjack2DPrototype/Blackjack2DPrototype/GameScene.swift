@@ -61,6 +61,10 @@ class GameScene: SKScene, CardsDelegate {
             newHand.selected = true
         }
     }
+    func revealDealerCard(_ card: Card) {
+        let op = RevealCardAnimation(handNode: self.dealerNode, card: card)
+        self.dealingQueue.addOperation(op)
+    }
     func showHand(_ id: String) {
         print("Show hand \(id)")
     }
@@ -133,6 +137,9 @@ class GameScene: SKScene, CardsDelegate {
     func betOnHand(handId: String) {
         guard let handView = self.getHandView(handId) else {
             return;
+        }
+        self.dealingQueue.addOperation {
+            
         }
         var handModel = game.model.getHand(id: handId)!
         handView.updateBet(hand: &handModel)

@@ -86,7 +86,9 @@ class GameActionDelegate: GameDelegate {
             print("Insurance failed")
         }
     }
-    
+    func revealDelaerCard(_ card: Card) {
+        self.cardsDelegate?.revealDealerCard(card);
+    }
     func didHandChange(_ hand: inout BJHand) {
         print("didHandChange to \(hand.id)")
         self.cardsDelegate?.didHandChange(&hand)
