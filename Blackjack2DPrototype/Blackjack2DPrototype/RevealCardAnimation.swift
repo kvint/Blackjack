@@ -10,14 +10,14 @@ import Foundation
 import CardsBase
 import SpriteKit
 
-class RevealCardAnimation: AsyncOperation {
+class RevealFirstCardAnimation: AsyncOperation {
     
     var hand: HandView
     var card: Card
     
-    required init(handNode: HandView, card: Card) {
-        self.hand = handNode
-        self.card = card
+    required init(theCard: Card, hand: HandView) {
+        self.hand = hand
+        self.card = theCard
         super.init()
     }
     

@@ -14,12 +14,12 @@ class DiscardCardAnimation: AsyncOperation {
     
     var card: SKSpriteNode
     var deck: SKNode
-    var scene: SKNode
+    var topNode: SKNode
     
-    required init(scene: SKNode, theCard: SKSpriteNode, theDeck: SKNode) {
+    required init(theCard: SKSpriteNode, to: SKNode, flyOn: SKNode) {
         self.card = theCard
-        self.deck = theDeck
-        self.scene = scene
+        self.deck = to
+        self.topNode = flyOn
         super.init()
     }
     
@@ -27,14 +27,14 @@ class DiscardCardAnimation: AsyncOperation {
         
         let time = 0.3
         
-        let fromPos = self.scene.convert(self.card.position, from: self.card.parent!)
-        let targetPos = self.scene.convert(self.deck.position, from: self.scene)
+        let fromPos = self.topNode.convert(self.card.position, from: self.card.parent!)
+        let targetPos = self.topNode.convert(self.deck.position, from: self.topNode)
         card.xScale = card.parent!.xScale
         card.yScale = card.parent!.yScale
         card.position = fromPos
         
         card.removeFromParent()
-        self.scene.addChild(card)
+        self.topNode.addChild(card)
         
         let moveToAction = SKAction.move(to: targetPos, duration: time)
         let rotate = SKAction.rotate(toAngle: self.deck.zRotation, duration: time)

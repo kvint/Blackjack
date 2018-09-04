@@ -15,13 +15,13 @@ class DealCardAnimation: AsyncOperation {
     var card: Card
     var deck: SKNode
     var hand: HandView
-    var scene: SKNode
+    var topNode: SKNode
     
-    required init(scene: SKNode, hand: HandView, theCard: Card, theDeck: SKNode) {
+    required init(theCard: Card, from: SKNode, to: HandView, flyOn: SKNode) {
         self.card = theCard
-        self.deck = theDeck
-        self.hand = hand
-        self.scene = scene
+        self.deck = from
+        self.hand = to
+        self.topNode = flyOn
         super.init()
     }
     
@@ -29,15 +29,12 @@ class DealCardAnimation: AsyncOperation {
         
         let cardNode = SKSpriteNode(imageNamed: "shirt")
         
-        self.scene.addChild(cardNode)
-        cardNode.isHidden = true
-        
-        cardNode.isHidden = false
+        self.topNode.addChild(cardNode)
         let time = 0.3
         
         self.hand.cards.stack.allocate()
         
-        let targetPos = self.scene.convert(CGPoint(x: self.hand.cards.nextShift, y: 0), from: self.hand.cards)
+        let targetPos = self.topNode.convert(CGPoint(x: self.hand.cards.nextShift, y: 0), from: self.hand.cards)
         let targetScale = self.hand.cards.xScale
         
         cardNode.zRotation = self.deck.zRotation
@@ -62,7 +59,7 @@ class DealCardAnimation: AsyncOperation {
         cardNode.run(SKAction.sequence([SKAction.group(animationGroup), SKAction.run {
             cardNode.removeFromParent()
             self.hand.cards.addNode(cardNode)
-            let pos = self.hand.cards.convert(cardNode.position, from: self.scene)
+            let pos = self.hand.cards.convert(cardNode.position, from: self.topNode)
             cardNode.position = pos
             self.isFinished = true
         }]))

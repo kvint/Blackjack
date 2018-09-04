@@ -44,7 +44,7 @@ class GameScene: SKScene, CardsDelegate {
     func discard(hand: HandView) {
         self.dealingQueue.addOperation {
             for cardNode in hand.cards.cards.reversed() {
-                let op = DiscardCardAnimation(scene: self.topNode, theCard: cardNode, theDeck: self.discardDeckNode)
+                let op = DiscardCardAnimation(theCard: cardNode, to: self.discardDeckNode, flyOn: self.topNode)
                 self.dealingQueue.addOperation(op)
             }
             self.dealingQueue.addOperation {
@@ -62,7 +62,7 @@ class GameScene: SKScene, CardsDelegate {
         }
     }
     func revealDealerCard(_ card: Card) {
-        let op = RevealCardAnimation(handNode: self.dealerNode, card: card)
+        let op = RevealFirstCardAnimation(theCard: card, hand: self.dealerNode)
         self.dealingQueue.addOperation(op)
     }
     func showHand(_ id: String) {
@@ -76,7 +76,7 @@ class GameScene: SKScene, CardsDelegate {
             fatalError("Hand node not found")
         }
         
-        let op = DealCardAnimation(scene: topNode, hand: handNode, theCard: card, theDeck: self.deckNode)
+        let op = DealCardAnimation(theCard: card, from: self.deckNode, to: handNode, flyOn: topNode)
         
         self.dealingQueue.addOperation(op)
         self.dealingQueue.addOperation {
@@ -91,7 +91,7 @@ class GameScene: SKScene, CardsDelegate {
     func dealCardToDealer(card: Card) -> Void {
         // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
 //        self.dealCardAnimation(node: self.dealerNode, from: "shirt", to: card.hidden ? "shirt" : card.imageNamed)
-        let op = DealCardAnimation(scene: topNode, hand: self.dealerNode, theCard: card, theDeck: self.deckNode)
+        let op = DealCardAnimation(theCard: card, from: self.deckNode, to: self.dealerNode, flyOn: topNode)
         self.dealingQueue.addOperation(op)
     }
     
