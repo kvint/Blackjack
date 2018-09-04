@@ -10,7 +10,7 @@ import Foundation
 import CardsBase
 
 class GameActionDelegate: GameDelegate {
-    
+
     public weak var cardsDelegate: CardsDelegate? = nil
     public weak var uiDelegate: UIGameViewController? = nil
 
@@ -86,7 +86,7 @@ class GameActionDelegate: GameDelegate {
             print("Insurance failed")
         }
     }
-    func revealDelaerCard(_ card: Card) {
+    func revealDealerCard(_ card: Card) {
         self.cardsDelegate?.revealDealerCard(card);
     }
     func didHandChange(_ hand: inout BJHand) {

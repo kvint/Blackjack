@@ -90,12 +90,12 @@ class ChipStack: SKNode {
 
 class HandView: SKNode {
     
-    var id: Int = 0
     var score: SKLabelNode = SKLabelNode(text: "")
     var cards: CardStack = CardStack()
     var chips: ChipStack = ChipStack()
     var spotArea: SKShapeNode = SKShapeNode(circleOfRadius: 65)
     var spotGlow: SKShapeNode = SKShapeNode(circleOfRadius: 88)
+    var model: BJUserHand?
     
     private var _selected: Bool = false
     
