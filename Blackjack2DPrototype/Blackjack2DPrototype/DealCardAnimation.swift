@@ -26,8 +26,9 @@ class DealCardAnimation: AsyncOperation {
     }
     
     override func execute() {
-        
-        let cardNode = SKSpriteNode(imageNamed: "shirt")
+        let wasHiddenInitially = self.card.hidden
+        self.card.hidden = true
+        let cardNode = CardNode(card)
         
         self.topNode.addChild(cardNode)
         let time = 0.3
@@ -42,17 +43,19 @@ class DealCardAnimation: AsyncOperation {
         cardNode.xScale = self.deck.xScale
         cardNode.yScale = self.deck.yScale
         
+        let angle = CGFloat.pi / 180 * CGFloat(drand48() * 2)
         let moveToAction = SKAction.move(to: targetPos, duration: time)
-        let rotate = SKAction.rotate(toAngle: 0, duration: time)
+        let rotate = SKAction.rotate(toAngle: angle, duration: time)
         rotate.timingMode = .easeOut
         let scale = SKAction.scale(to: targetScale, duration: time)
         
         moveToAction.timingMode = .easeInEaseOut
         
         var animationGroup = [rotate, scale, moveToAction]
-        if !self.card.hidden {
+        
+        if !wasHiddenInitially {
             let waitAndSwap = SKAction.sequence([SKAction.wait(forDuration: time * 2/3), SKAction.run({
-                cardNode.texture = SKTexture(imageNamed: self.card.hidden ? "shirt" : self.card.imageNamed)
+                cardNode.flip()
             })])
             animationGroup.append(waitAndSwap)
         }

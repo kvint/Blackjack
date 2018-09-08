@@ -9,6 +9,60 @@
 import UIKit
 import SpriteKit
 import CardsBase
+
+class CardNode: SKNode
+{
+    var cardVO: Card!
+    var card: SKSpriteNode = SKSpriteNode()
+    var faceTexture: SKTexture!
+    var shirtTexture: SKTexture = SKTexture(imageNamed: "shirt")
+    
+    required init(_ card: Card) {
+        super.init()
+        self.cardVO = card
+        self.faceTexture = SKTexture(imageNamed: card.imageNamed)
+        
+        let cropNode = SKCropNode()
+        let textureSize = self.faceTexture.size()
+        let rect = CGRect(x: -textureSize.width/2, y: -textureSize.height/2, width: textureSize.width, height: textureSize.height)
+        let mask = SKShapeNode(rect: rect, cornerRadius: 17)
+        
+        mask.isAntialiased = true
+        mask.lineCap = .round
+        mask.fillColor = .black
+        cropNode.addChild(self.card)
+        cropNode.maskNode = mask
+        
+        let shadowNode = SKShapeNode(rect: rect, cornerRadius: 17)
+        shadowNode.fillColor = .black
+        shadowNode.alpha = 0.2
+        let effectNode = SKEffectNode()
+        effectNode.addChild(shadowNode)
+        effectNode.shouldRasterize = true
+        effectNode.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius": 30])
+        self.insertChild(effectNode, at: 0)
+    
+        self.addChild(cropNode)
+        self.updateTexture();
+    }
+    private func updateTexture() {
+        self.card.texture = cardVO.hidden ? shirtTexture : faceTexture
+        self.card.size = self.card.texture!.size()
+    }
+    func flip() {
+        cardVO.hidden = !cardVO.hidden
+        self.updateTexture()
+    }
+    var size: CGSize {
+        get {
+            return self.card.size;
+        }
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
 class Stack {
     private var allocated: Int = 0;
     var count: Int = 0;
@@ -44,7 +98,7 @@ class Stack {
 }
 class CardStack: SKNode {
     private let step: CGFloat = 45
-    var cards: [SKSpriteNode] = []
+    var cards: [CardNode] = []
     var stack: Stack = Stack()
     
     var nextShift: CGFloat {
@@ -58,7 +112,7 @@ class CardStack: SKNode {
         }
     }
     
-    func addNode(_ card: SKSpriteNode) {
+    func addNode(_ card: CardNode) {
         self.addChild(card)
         card.setScale(1)
         self.stack.add()

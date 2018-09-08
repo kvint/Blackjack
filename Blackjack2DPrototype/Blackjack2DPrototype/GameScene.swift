@@ -11,8 +11,8 @@ import SpriteKit
 import GameplayKit
 import CardsBase
 
-func getCardSprite(_ card: Card) -> SKSpriteNode {
-    return card.hidden ? SKSpriteNode(imageNamed: "shirt") : SKSpriteNode(imageNamed: card.imageNamed)
+func getCardSprite(_ card: Card) -> SKNode {
+    return CardNode(card)
 }
 class GameScene: SKScene, CardsDelegate {
     
@@ -43,6 +43,7 @@ class GameScene: SKScene, CardsDelegate {
                 }
             }
         }
+        
     }
     
     func endGame() {

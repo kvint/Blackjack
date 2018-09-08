@@ -32,7 +32,7 @@ class RevealFirstCardAnimation: AsyncOperation {
         moveBackAction.timingMode = .easeIn
         
         cardNode.run(SKAction.sequence([moveToAction, SKAction.run {
-            cardNode.texture = SKTexture(imageNamed: self.card.imageNamed)
+            cardNode.flip()
             }, SKAction.wait(forDuration: time * 1/2), moveBackAction, SKAction.run {
             self.isFinished = true
         }]))
