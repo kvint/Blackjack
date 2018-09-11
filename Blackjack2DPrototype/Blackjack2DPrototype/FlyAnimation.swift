@@ -39,7 +39,14 @@ class FlyAnimation: AsyncOperation {
         let rotateAction = SKAction.rotate(toAngle: CGFloat(drand48() * Double.pi), duration: time)
         rotateAction.timingMode = .easeInEaseOut
 
-        self.node.run(SKAction.group([moveToAction, rotateAction])) {
+        let scaleUp = SKAction.scale(to: 1.5, duration: time / 2)
+        scaleUp.timingMode = .easeOut
+        let scaleDown = SKAction.scale(to: 1, duration: time / 2)
+        scaleDown.timingMode = .easeIn
+        let scaleAction = SKAction.sequence([scaleUp, scaleDown])
+        
+        self.node.run(SKAction.group([moveToAction, rotateAction, scaleAction])) {
+            self.node.move(toParent: self.toNode)
             self.isFinished = true
         }
     }

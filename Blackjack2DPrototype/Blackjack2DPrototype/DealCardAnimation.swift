@@ -31,7 +31,7 @@ class DealCardAnimation: AsyncOperation {
         let cardNode = CardNode(card)
         
         self.topNode.addChild(cardNode)
-        let time = 0.3
+        let time = 0.4
         
         self.hand.cards.stack.allocate()
         
@@ -47,11 +47,10 @@ class DealCardAnimation: AsyncOperation {
         let moveToAction = SKAction.move(to: targetPos, duration: time)
         let rotate = SKAction.rotate(toAngle: angle, duration: time)
         rotate.timingMode = .easeOut
-        let scale = SKAction.scale(to: targetScale, duration: time)
         
         moveToAction.timingMode = .easeInEaseOut
         
-        var animationGroup = [rotate, scale, moveToAction]
+        var animationGroup = [rotate, moveToAction]
         
         if !wasHiddenInitially {
             let waitAndSwap = SKAction.sequence([SKAction.wait(forDuration: time * 2/3), SKAction.run({
@@ -59,6 +58,16 @@ class DealCardAnimation: AsyncOperation {
             })])
             animationGroup.append(waitAndSwap)
         }
+        
+        let initialScale = cardNode.xScale
+        let scaleUp = SKAction.scale(to: initialScale * 1.7, duration: time * 2/6)
+        scaleUp.timingMode = .easeOut
+        let scaleDown = SKAction.scale(to: targetScale, duration: time * 3/4)
+        scaleDown.timingMode = .easeIn
+        let scaleAction = SKAction.sequence([scaleUp, scaleDown])
+        
+        animationGroup.append(scaleAction)
+        
         cardNode.run(SKAction.sequence([SKAction.group(animationGroup), SKAction.run {
             cardNode.removeFromParent()
             self.hand.cards.addNode(cardNode)

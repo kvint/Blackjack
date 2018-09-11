@@ -39,7 +39,7 @@ class GameActionDelegate: GameDelegate {
     }
     
     func onPayout(hand: inout BJUserHand) {
-        
+        self.cardsDelegate?.onPayout(hand: &hand)
     }
     
     func onBlackjack(atHand: inout BJUserHand) {

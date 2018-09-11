@@ -49,20 +49,34 @@ class GameScene: SKScene, CardsDelegate {
     func endGame() {
         self.enumerateChildNodes(withName: ".//hand") { (node, _) in
             if let handView = node as? HandView {
-                if let win = handView.model?.win {
-                    if win > 0 {
-                        if handView.chips.children.count > 0 {
-                            // TODO: refactor, remove conditional
-                            let chip = handView.chips.children[0]
-                            self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode, flyOn: self.topNode))
-                        }
-                    }
-                }
+//                if let win = handView.model?.win {
+//                    if win > 0 {
+//                        if handView.chips.children.count > 0 {
+//                            // TODO: refactor, remove conditional
+//                            let chip = handView.chips.children[0]
+//                            self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode, flyOn: self.topNode))
+//                        }
+//                    }
+//                }
                 self.discard(hand: handView)
             }
         }
         self.discard(hand: self.dealerNode)
         
+    }
+    func onPayout(hand: inout BJUserHand) {
+        guard let handView = self.getHandView(hand.id) else {
+            fatalError("handView not found")
+        }
+        if hand.win > 0 {
+            handView.chips.children.forEach { (chip) in
+                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode, flyOn: self.topNode))
+            }
+        } else {
+            handView.chips.children.forEach { (chip) in
+                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode, flyOn: self.topNode))
+            }
+        }
     }
     func onBust(atHand: inout BJUserHand) {
         if let handView = self.getHandView(atHand.id) {
