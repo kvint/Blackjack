@@ -70,15 +70,8 @@ class GameScene: SKScene, CardsDelegate {
         }
     }
     func discard(hand: HandView) {
-        self.animationQueue.addOperation {
-            for cardNode in hand.cards.cards.reversed() {
-                let op = DiscardCardAnimation(theCard: cardNode, to: self.discardDeckNode, flyOn: self.topNode)
-                self.animationQueue.addOperation(op)
-            }
-            self.animationQueue.addOperation {
-                hand.clear();
-            }
-        }
+        let op = DiscardCardsAnimation(hand: hand, deck: self.discardDeckNode, topNode: self.topNode)
+        self.animationQueue.addOperation(op)
     }
     func didHandChange(_ hand: inout BJHand) {
         if let ah = self.activeHandNode {
@@ -90,10 +83,8 @@ class GameScene: SKScene, CardsDelegate {
         }
     }
     func revealDealerCard(_ card: Card) {
-        self.animationQueue.addOperation {
-            let op = RevealFirstCardAnimation(theCard: card, hand: self.dealerNode)
-            self.animationQueue.addOperation(op)
-        }
+        let op = RevealFirstCardAnimation(theCard: card, hand: self.dealerNode)
+        self.animationQueue.addOperation(op)
     }
     func showHand(_ id: String) {
         print("Show hand \(id)")
@@ -105,28 +96,25 @@ class GameScene: SKScene, CardsDelegate {
         guard let handNode = self.getHandView(id) else {
             fatalError("Hand node not found")
         }
-        self.animationQueue.addOperation {
-            
-            let op = DealCardAnimation(theCard: card, from: self.deckNode, to: handNode, flyOn: self.topNode)
-            
-            self.animationQueue.addOperation(op)
-            self.animationQueue.addOperation {
-                guard let handModel = game.model.getHand(id: id) else {
-                    return
-                }
-                var hModel = handModel
-                handNode.updateScore(hand: &hModel)
-            }
-        }
         
+        let deal = DealCardAnimation(theCard: card, from: self.deckNode, to: handNode, flyOn: self.topNode)
+        
+        let completion = BlockOperation {
+            guard let handModel = game.model.getHand(id: id) else {
+                return
+            }
+            var hModel = handModel
+            handNode.updateScore(hand: &hModel)
+        }
+        completion.addDependency(deal)
+        self.animationQueue.addOperation(deal)
     }
     func dealCardToDealer(card: Card) -> Void {
         // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
 //        self.dealCardAnimation(node: self.dealerNode, from: "shirt", to: card.hidden ? "shirt" : card.imageNamed)
-        self.animationQueue.addOperation {
-            let op = DealCardAnimation(theCard: card, from: self.deckNode, to: self.dealerNode, flyOn: self.topNode)
-            self.animationQueue.addOperation(op)
-        }
+        
+        let op = DealCardAnimation(theCard: card, from: self.deckNode, to: self.dealerNode, flyOn: self.topNode)
+        self.animationQueue.addOperation(op)
     }
     
     override func didMove(to view: SKView) {

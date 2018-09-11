@@ -10,6 +10,7 @@
 		AFC27758213567FC0008503E /* HandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC27757213567FC0008503E /* HandView.swift */; };
 		EA16B4862135C62500DEC213 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA16B4852135C62500DEC213 /* Assets.xcassets */; };
 		EA2203EE213EFC7F00294AD1 /* FlyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */; };
+		EA3AD33621485D2F0004C4FC /* DiscardCardsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3AD33521485D2F0004C4FC /* DiscardCardsAnimation.swift */; };
 		EA5AB25B205CC4DD004408A5 /* CardsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */; };
 		EAC7C19D205C9E5600A2CB9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7C19C205C9E5600A2CB9E /* AppDelegate.swift */; };
 		EAC7C19F205C9E5600A2CB9E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EAC7C19E205C9E5600A2CB9E /* GameScene.sks */; };
@@ -46,6 +47,7 @@
 		AFC27757213567FC0008503E /* HandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandView.swift; sourceTree = "<group>"; };
 		EA16B4852135C62500DEC213 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyAnimation.swift; sourceTree = "<group>"; };
+		EA3AD33521485D2F0004C4FC /* DiscardCardsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardCardsAnimation.swift; sourceTree = "<group>"; };
 		EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewDelegate.swift; sourceTree = "<group>"; };
 		EAC7C199205C9E5600A2CB9E /* Blackjack2DPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackjack2DPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAC7C19C205C9E5600A2CB9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				EAEB0E14213C63120016760F /* DealCardAnimation.swift */,
 				EAEB0E1A213DDB260016760F /* RevealCardAnimation.swift */,
 				EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */,
+				EA3AD33521485D2F0004C4FC /* DiscardCardsAnimation.swift */,
 			);
 			name = actions;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				EAC7C19D205C9E5600A2CB9E /* AppDelegate.swift in Sources */,
 				EAEB0E12213C62D70016760F /* AsyncOperation.swift in Sources */,
 				EA2203EE213EFC7F00294AD1 /* FlyAnimation.swift in Sources */,
+				EA3AD33621485D2F0004C4FC /* DiscardCardsAnimation.swift in Sources */,
 				EAEB0E1B213DDB260016760F /* RevealCardAnimation.swift in Sources */,
 				EA5AB25B205CC4DD004408A5 /* CardsViewDelegate.swift in Sources */,
 			);
