@@ -10,6 +10,46 @@ import Foundation
 import CardsBase
 
 class GameActionDelegate: GameDelegate {
+    func onChanged(toHand: inout BJHand) {
+        print("didHandChange to \(toHand.id)")
+        self.cardsDelegate?.didHandChange(&toHand)
+    }
+    
+    func onUpdate(hand: inout BJHand) {
+        
+    }
+    
+    func onDealCard(toHand: inout BJHand, card: Card) {
+        print("deal \(card) to \(toHand.id)")
+        
+        if toHand is BJDealerHand {
+            self.cardsDelegate?.dealCardToDealer(card: card)
+        } else {
+            self.cardsDelegate?.dealCard(toHand.id, card)
+        }
+    }
+    
+    func onDone(hand: inout BJUserHand) {
+        
+    }
+    
+    func onBet(toHand: inout BJUserHand) {
+        self.cardsDelegate?.betOnHand(handId: toHand.id)
+        self.uiDelegate?.displayActions()
+    }
+    
+    func onPayout(hand: inout BJUserHand) {
+        
+    }
+    
+    func onBlackjack(atHand: inout BJUserHand) {
+        
+    }
+    
+    func onBust(atHand: inout BJUserHand) {
+        self.cardsDelegate?.onBust(atHand: &atHand)
+    }
+    
 
     public weak var cardsDelegate: CardsDelegate? = nil
     public weak var uiDelegate: UIGameViewController? = nil
@@ -89,10 +129,6 @@ class GameActionDelegate: GameDelegate {
     func revealDealerCard(_ card: Card) {
         self.cardsDelegate?.revealDealerCard(card);
     }
-    func didHandChange(_ hand: inout BJHand) {
-        print("didHandChange to \(hand.id)")
-        self.cardsDelegate?.didHandChange(&hand)
-    }
     
     func roundStarted() {
         print("round started")
@@ -104,25 +140,4 @@ class GameActionDelegate: GameDelegate {
         game.model.clear()
     }
     
-    func didHandUpdate(_ hand: inout BJHand) {
-        
-    }
-    
-    func didDealCard(_ card: Card, _ hand: inout BJHand) {
-        print("deal \(card) to \(hand.id)")
-        
-        if hand is BJDealerHand {
-            self.cardsDelegate?.dealCardToDealer(card: card)
-        } else {
-            self.cardsDelegate?.dealCard(hand.id, card)
-        }
-    }
-    
-    func didHandDone(_ hand: inout BJUserHand) {
-        
-    }
-    func betOnHand(handId: String) -> Void {
-        self.cardsDelegate?.betOnHand(handId: handId)
-        self.uiDelegate?.displayActions()
-    }
 }
