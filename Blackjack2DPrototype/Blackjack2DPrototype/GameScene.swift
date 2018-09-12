@@ -118,7 +118,8 @@ class GameScene: SKScene, CardsDelegate {
         print("Deal card to hand \(id) -> \(card)")
         
         let handNode = self.getHandView(id)
-        let deal = DealCardAnimation(theCard: card, to: handNode, time: 0.4, completeAfter: globals.backend.live ? nil : 0.2)
+        let completeTime = globals.backend.state == .Betting ? 0.2 : nil
+        let deal = DealCardAnimation(theCard: card, to: handNode, time: 0.4, completeAfter: completeTime)
         
         let completion = BlockOperation {
             guard let handModel = globals.backend.model.getHand(id: id) else {
@@ -131,7 +132,8 @@ class GameScene: SKScene, CardsDelegate {
         self.animationQueue.addOperation(deal)
     }
     func dealCardToDealer(card: Card) -> Void {
-        let op = DealCardAnimation(theCard: card, to: self.dealerNode, time: 0.4, completeAfter: globals.backend.live ? nil : 0.2)
+        let completeTime = globals.backend.state == .Betting ? 0.2 : nil
+        let op = DealCardAnimation(theCard: card, to: self.dealerNode, time: 0.4, completeAfter: completeTime)
         self.animationQueue.addOperation(op)
     }
     
@@ -142,7 +144,7 @@ class GameScene: SKScene, CardsDelegate {
             if let handModelID = (node as? HandView)?.model?.id {
                 
                 print("bet on hand -> \(handModelID)")
-                if globals.backend.live {
+                if globals.backend.state != .Betting {
                     print("The game is playing")
                 } else {
                     try? globals.backend.bet(handId: "\(handModelID)", stake: 10)
