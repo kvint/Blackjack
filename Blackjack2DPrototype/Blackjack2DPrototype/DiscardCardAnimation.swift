@@ -14,12 +14,10 @@ class DiscardCardAnimation: AsyncOperation {
     
     var card: CardNode
     var deck: SKNode
-    var topNode: SKNode
     
-    required init(theCard: CardNode, to: SKNode, flyOn: SKNode) {
+    required init(theCard: CardNode, to: SKNode) {
         self.card = theCard
         self.deck = to
-        self.topNode = flyOn
         super.init()
     }
     func getScale(from: SKNode) -> (xScale: CGFloat, yScale: CGFloat){
@@ -39,12 +37,12 @@ class DiscardCardAnimation: AsyncOperation {
         
         let time = 0.3
         
-        let targetPos = self.topNode.convert(self.deck.position, from: self.topNode)
+        let targetPos = globals.view.topNode.convert(self.deck.position, from: globals.view.topNode)
         let dscale = self.getScale(from: card)
         card.xScale = dscale.xScale
         card.yScale = dscale.yScale
         
-        card.move(toParent: self.topNode)
+        card.move(toParent: globals.view.topNode)
         
         let moveToAction = SKAction.move(to: targetPos, duration: time)
         let rotate = SKAction.rotate(toAngle: self.deck.zRotation, duration: time)

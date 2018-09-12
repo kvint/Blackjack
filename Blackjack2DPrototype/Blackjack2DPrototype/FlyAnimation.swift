@@ -11,12 +11,10 @@ import SpriteKit
 
 class FlyAnimation: AsyncOperation {
 
-    var topNode: SKNode
     var node: SKNode
     var toNode: SKNode
 
-    required init(node: SKNode, to: SKNode, flyOn: SKNode) {
-        self.topNode = flyOn
+    required init(node: SKNode, to: SKNode) {
         self.node = node
         self.toNode = to
         super.init()
@@ -27,12 +25,12 @@ class FlyAnimation: AsyncOperation {
 
         if let nodeParent = self.node.parent {
             // convert
-            self.node.position = self.topNode.convert(self.node.position, from: nodeParent)
+            self.node.position = globals.view.topNode.convert(self.node.position, from: nodeParent)
             self.node.removeFromParent();
         }
-        self.topNode.addChild(self.node)
+        globals.view.topNode.addChild(self.node)
 
-        let targetPos = self.topNode.convert(CGPoint(x: 0, y: 0), from: self.toNode)
+        let targetPos = globals.view.topNode.convert(CGPoint(x: 0, y: 0), from: self.toNode)
         let moveToAction = SKAction.move(to: targetPos, duration: time)
         moveToAction.timingMode = .easeOut
 

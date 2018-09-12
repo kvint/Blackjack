@@ -70,11 +70,11 @@ class GameScene: SKScene, CardsDelegate {
         }
         if hand.win > 0 {
             handView.chips.children.forEach { (chip) in
-                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode, flyOn: self.topNode))
+                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
             }
         } else {
             handView.chips.children.forEach { (chip) in
-                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode, flyOn: self.topNode))
+                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode))
             }
         }
     }
@@ -84,7 +84,7 @@ class GameScene: SKScene, CardsDelegate {
         }
     }
     func discard(hand: HandView) {
-        let op = DiscardCardsAnimation(hand: hand, deck: self.discardDeckNode, topNode: self.topNode)
+        let op = DiscardCardsAnimation(hand: hand, deck: self.discardDeckNode)
         self.animationQueue.addOperation(op)
     }
     func didHandChange(_ hand: inout BJHand) {
@@ -111,7 +111,7 @@ class GameScene: SKScene, CardsDelegate {
             fatalError("Hand node not found")
         }
         
-        let deal = DealCardAnimation(theCard: card, from: self.deckNode, to: handNode, flyOn: self.topNode)
+        let deal = DealCardAnimation(theCard: card, from: self.deckNode, to: handNode)
         
         let completion = BlockOperation {
             guard let handModel = globals.backend.model.getHand(id: id) else {
@@ -127,7 +127,7 @@ class GameScene: SKScene, CardsDelegate {
         // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
 //        self.dealCardAnimation(node: self.dealerNode, from: "shirt", to: card.hidden ? "shirt" : card.imageNamed)
         
-        let op = DealCardAnimation(theCard: card, from: self.deckNode, to: self.dealerNode, flyOn: self.topNode)
+        let op = DealCardAnimation(theCard: card, from: self.deckNode, to: self.dealerNode)
         self.animationQueue.addOperation(op)
     }
     
@@ -191,7 +191,7 @@ class GameScene: SKScene, CardsDelegate {
         chip.setScale(0.8)
         chipsNode.addChild(chip)
 
-        let animation = FlyAnimation(node: chip, to: handView.chips, flyOn: topNode)
+        let animation = FlyAnimation(node: chip, to: handView.chips)
         animation.execute()
 //        self.animationQueue.addOperation(animation)
 //        self.animationQueue.addOperation {

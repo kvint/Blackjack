@@ -15,13 +15,11 @@ class DealCardAnimation: AsyncOperation {
     var card: Card
     var deck: SKNode
     var hand: HandView
-    var topNode: SKNode
     
-    required init(theCard: Card, from: SKNode, to: HandView, flyOn: SKNode) {
+    required init(theCard: Card, from: SKNode, to: HandView) {
         self.card = theCard
         self.deck = from
         self.hand = to
-        self.topNode = flyOn
         super.init()
     }
     
@@ -30,12 +28,12 @@ class DealCardAnimation: AsyncOperation {
         self.card.hidden = true
         let cardNode = CardNode(card)
         
-        self.topNode.addChild(cardNode)
+        globals.view.topNode.addChild(cardNode)
         let time = 0.4
         
         self.hand.cards.stack.allocate()
         
-        let targetPos = self.topNode.convert(CGPoint(x: self.hand.cards.nextShift, y: 0), from: self.hand.cards)
+        let targetPos = globals.view.topNode.convert(CGPoint(x: self.hand.cards.nextShift, y: 0), from: self.hand.cards)
         let targetScale = self.hand.cards.xScale
         
         cardNode.zRotation = self.deck.zRotation
@@ -71,7 +69,7 @@ class DealCardAnimation: AsyncOperation {
         cardNode.run(SKAction.sequence([SKAction.group(animationGroup), SKAction.run {
             cardNode.removeFromParent()
             self.hand.cards.addNode(cardNode)
-            let pos = self.hand.cards.convert(cardNode.position, from: self.topNode)
+            let pos = self.hand.cards.convert(cardNode.position, from: globals.view.topNode)
             cardNode.position = pos
             self.isFinished = true
         }]))
