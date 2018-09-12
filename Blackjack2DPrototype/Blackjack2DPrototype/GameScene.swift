@@ -80,9 +80,7 @@ class GameScene: SKScene, CardsDelegate {
         
     }
     func onPayout(hand: inout BJUserHand) {
-        guard let handView = self.getHandView(hand.id) else {
-            fatalError("handView not found")
-        }
+        let handView = self.getHandView(hand.id)
         if hand.win > 0 {
             handView.chips.children.forEach { (chip) in
                 self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
@@ -94,9 +92,7 @@ class GameScene: SKScene, CardsDelegate {
         }
     }
     func onBust(atHand: inout BJUserHand) {
-        if let handView = self.getHandView(atHand.id) {
-            discard(hand: handView)
-        }
+        discard(hand: self.getHandView(atHand.id))
     }
     func discard(hand: HandView) {
         let op = DiscardCardsAnimation(hand: hand)
@@ -106,10 +102,9 @@ class GameScene: SKScene, CardsDelegate {
         if let ah = self.activeHandNode {
             ah.selected = false
         }
-        if let newHand = self.getHandView(hand.id) {
-            self.activeHandNode = newHand;
-            newHand.selected = true
-        }
+        
+        self.activeHandNode = self.getHandView(hand.id)
+        self.activeHandNode?.selected = true
     }
     func revealDealerCard(_ card: Card) {
         let op = RevealFirstCardAnimation(theCard: card, hand: self.dealerNode)
@@ -122,11 +117,8 @@ class GameScene: SKScene, CardsDelegate {
     func dealCard(_ id: String, _ card: Card) {
         print("Deal card to hand \(id) -> \(card)")
         
-        guard let handNode = self.getHandView(id) else {
-            fatalError("Hand node not found")
-        }
-        
-        let deal = DealCardAnimation(theCard: card, to: handNode)
+        let handNode = self.getHandView(id)
+        let deal = DealCardAnimation(theCard: card, to: handNode, time: 0.4, completeAfter: globals.backend.live ? nil : 0.2)
         
         let completion = BlockOperation {
             guard let handModel = globals.backend.model.getHand(id: id) else {
@@ -139,7 +131,7 @@ class GameScene: SKScene, CardsDelegate {
         self.animationQueue.addOperation(deal)
     }
     func dealCardToDealer(card: Card) -> Void {
-        let op = DealCardAnimation(theCard: card, to: self.dealerNode)
+        let op = DealCardAnimation(theCard: card, to: self.dealerNode, time: 0.4, completeAfter: globals.backend.live ? nil : 0.2)
         self.animationQueue.addOperation(op)
     }
     
@@ -159,16 +151,18 @@ class GameScene: SKScene, CardsDelegate {
         }
         
     }
-    func getHandView(_ id: String) -> HandView? {
-        return self.handNodes.value(forKey: id) as? HandView
+    func getHandView(_ id: String) -> HandView {
+        if id == "dealer" {
+            return self.dealerNode
+        }
+        guard let hand = self.handNodes.value(forKey: id) as? HandView else {
+            fatalError("Hand node not found")
+        }
+        return hand
     }
     func betOnHand(handId: String) {
-        guard let handView = self.getHandView(handId) else {
-            return;
-        }
-
+        let handView = self.getHandView(handId)
         let chip = SKSpriteNode(imageNamed: "chip")
-
         chip.setScale(0.8)
         chipsNode.addChild(chip)
 

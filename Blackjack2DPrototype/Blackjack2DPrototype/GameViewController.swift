@@ -60,8 +60,6 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addUIView();
-        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -80,7 +78,9 @@ class GameViewController: UIViewController {
     }
     func initTheGame(scene: GameScene) {
         globals = (backend: Game(), view: scene, ua: GameActionDelegate())
+        globals.backend.delegate = globals.ua
         globals.ua.cardsDelegate = scene
+        self.addUIView();
     }
     override var shouldAutorotate: Bool {
         return false

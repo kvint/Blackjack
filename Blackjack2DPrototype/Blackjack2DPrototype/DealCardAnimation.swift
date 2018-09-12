@@ -15,11 +15,19 @@ class DealCardAnimation: AsyncOperation {
     var card: Card
     var deck: SKNode
     var hand: HandView
+    var time: Double!
+    var actionTime: Double!
     
-    required init(theCard: Card, to: HandView) {
+    required init(theCard: Card, to: HandView, time: Double = 0.4, completeAfter: Double? = nil) {
         self.card = theCard
         self.deck = globals.view.deckNode
         self.hand = to
+        self.time = time
+        if completeAfter != nil {
+           self.actionTime = completeAfter
+        } else {
+           self.actionTime = self.time
+        }
         super.init()
     }
     
@@ -29,7 +37,6 @@ class DealCardAnimation: AsyncOperation {
         let cardNode = CardNode(card)
         
         globals.view.topNode.addChild(cardNode)
-        let time = 0.4
         
         self.hand.cards.stack.allocate()
         
@@ -42,8 +49,8 @@ class DealCardAnimation: AsyncOperation {
         cardNode.yScale = self.deck.yScale
         
         let angle = CGFloat.pi / 180 * CGFloat(drand48() * 2)
-        let moveToAction = SKAction.move(to: targetPos, duration: time)
-        let rotate = SKAction.rotate(toAngle: angle, duration: time)
+        let moveToAction = SKAction.move(to: targetPos, duration: self.time)
+        let rotate = SKAction.rotate(toAngle: angle, duration: self.time)
         rotate.timingMode = .easeOut
         
         moveToAction.timingMode = .easeInEaseOut
@@ -51,16 +58,16 @@ class DealCardAnimation: AsyncOperation {
         var animationGroup = [rotate, moveToAction]
         
         if !wasHiddenInitially {
-            let waitAndSwap = SKAction.sequence([SKAction.wait(forDuration: time * 2/3), SKAction.run({
+            let waitAndSwap = SKAction.sequence([SKAction.wait(forDuration: self.time * 2/3), SKAction.run({
                 cardNode.flip()
             })])
             animationGroup.append(waitAndSwap)
         }
         
         let initialScale = cardNode.xScale
-        let scaleUp = SKAction.scale(to: initialScale * 1.7, duration: time * 2/6)
+        let scaleUp = SKAction.scale(to: initialScale * 1.7, duration: self.time * 2/6)
         scaleUp.timingMode = .easeOut
-        let scaleDown = SKAction.scale(to: targetScale, duration: time * 3/4)
+        let scaleDown = SKAction.scale(to: targetScale, duration: self.time * 3/4)
         scaleDown.timingMode = .easeIn
         let scaleAction = SKAction.sequence([scaleUp, scaleDown])
         
@@ -71,7 +78,10 @@ class DealCardAnimation: AsyncOperation {
             self.hand.cards.addNode(cardNode)
             let pos = self.hand.cards.convert(cardNode.position, from: globals.view.topNode)
             cardNode.position = pos
-            self.isFinished = true
         }]))
+        
+        cardNode.run(SKAction.wait(forDuration: self.actionTime)) {
+            self.isFinished = true
+        }
     }
 }
