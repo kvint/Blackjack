@@ -33,9 +33,9 @@ class GameScene: SKScene, CardsDelegate {
         self.enumerateChildNodes(withName: ".//hand") { (node, _) in
             if let handId = node.userData?["hand_id"] {
                 let handStr = "\(handId)"
-                var model: BJUserHand? = game.model.getHand(id: handStr)
+                var model: BJUserHand? = globals.backend.model.getHand(id: handStr)
                 if model == nil {
-                    model = game.model.createHand(id: handStr)
+                    model = globals.backend.model.createHand(id: handStr)
                 }
                 if let handView = node as? HandView {
                     handView.model = model
@@ -114,7 +114,7 @@ class GameScene: SKScene, CardsDelegate {
         let deal = DealCardAnimation(theCard: card, from: self.deckNode, to: handNode, flyOn: self.topNode)
         
         let completion = BlockOperation {
-            guard let handModel = game.model.getHand(id: id) else {
+            guard let handModel = globals.backend.model.getHand(id: id) else {
                 return
             }
             var hModel = handModel
@@ -167,10 +167,10 @@ class GameScene: SKScene, CardsDelegate {
             if let handModelID = (node as? HandView)?.model?.id {
                 
                 print("bet on hand -> \(handModelID)")
-                if game.live {
+                if globals.backend.live {
                     print("The game is playing")
                 } else {
-                    try? game.bet(handId: "\(handModelID)", stake: 10)
+                    try? globals.backend.bet(handId: "\(handModelID)", stake: 10)
                 }
             }
         }

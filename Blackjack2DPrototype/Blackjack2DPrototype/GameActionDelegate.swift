@@ -66,7 +66,7 @@ class GameActionDelegate: GameDelegate {
             }
             _selectedHand = index
             
-            let hand = game.model.getHand(id: String(_selectedHand))
+            let hand = globals.backend.model.getHand(id: String(_selectedHand))
             if hand != nil {
                 cardsDelegate?.showHand(hand!.id)
             }
@@ -76,8 +76,8 @@ class GameActionDelegate: GameDelegate {
     
     func bet(stake: Double) {
         do {
-            try game.bet(index: _selectedHand, stake: stake)
-            print("bet \(String(describing: game.model.getHand(id: String(_selectedHand))?.stake)) to \(_selectedHand)")
+            try globals.backend.bet(index: _selectedHand, stake: stake)
+            print("bet \(String(describing: globals.backend.model.getHand(id: String(_selectedHand))?.stake)) to \(_selectedHand)")
         } catch {
             print("Failed to place a bet")
         }
@@ -85,12 +85,12 @@ class GameActionDelegate: GameDelegate {
 
     func deal() {
         print("Deal")
-        try! game.deal()
+        try! globals.backend.deal()
     }
     func double() {
         print("Double")
         do {
-            try game.double();
+            try globals.backend.double();
         } catch {
             print("Double failed")
         }
@@ -98,7 +98,7 @@ class GameActionDelegate: GameDelegate {
     func hit() {
         print("Hit")
         do {
-            try game.hit()
+            try globals.backend.hit()
         } catch {
             print("Hit failed")
         }
@@ -106,7 +106,7 @@ class GameActionDelegate: GameDelegate {
     func stand() {
         print("Stand")
         do {
-            try game.stand()
+            try globals.backend.stand()
         } catch {
             print("Stand failed")
         }
@@ -114,14 +114,14 @@ class GameActionDelegate: GameDelegate {
     func split() {
         print("Split")
         do {
-            try game.split()
+            try globals.backend.split()
         } catch {
             print("Split failed")
         }
     }
     func insurance() {
         do {
-            try game.insurance()
+            try globals.backend.insurance()
         } catch {
             print("Insurance failed")
         }
@@ -137,7 +137,7 @@ class GameActionDelegate: GameDelegate {
     func roundEnded() {
         print("==== round ended ====")
         self.cardsDelegate?.endGame();
-        game.model.clear()
+        globals.backend.model.clear()
     }
     
 }

@@ -23,22 +23,22 @@ class UIGameViewController: UIViewController {
     @IBAction func btnHandler(_ sender: UIButton) {
         switch sender {
         case dealBtn:
-            gameActions.deal()
+            globals.ua.deal()
             break;
         case doubleBtn:
-            gameActions.double()
+            globals.ua.double()
             break;
         case hitBtn:
-            gameActions.hit()
+            globals.ua.hit()
             break;
         case standBtn:
-            gameActions.stand()
+            globals.ua.stand()
             break;
         case splitBtn:
-            gameActions.split()
+            globals.ua.split()
             break;
         case insuranceBtn:
-            gameActions.insurance()
+            globals.ua.insurance()
             break;
         default:
             print("Unhandled button")
@@ -47,7 +47,7 @@ class UIGameViewController: UIViewController {
     }
     
     func displayActions() {
-        let actions = game.getActions();
+        let actions = globals.backend.getActions();
         
         do {
             doubleBtn.isHidden = true

@@ -11,8 +11,7 @@ import SpriteKit
 import GameplayKit
 import CardsBase
 
-var game = Game()
-var gameActions = GameActionDelegate()
+var globals: (backend: Game, view: GameScene, ua: GameActionDelegate)!
 
 extension Card {
     
@@ -53,21 +52,20 @@ extension Card {
 class GameViewController: UIViewController {
 
     @IBAction func swipeLeft(_ sender: Any) {
-        gameActions.selectedHand = gameActions.selectedHand - 1
+        globals.ua.selectedHand = globals.ua.selectedHand - 1
     }
     @IBAction func swipeRight(_ sender: Any) {
-        gameActions.selectedHand = gameActions.selectedHand + 1
+        globals.ua.selectedHand = globals.ua.selectedHand + 1
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        game.delegate = gameActions;
         
         self.addUIView();
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
-                gameActions.cardsDelegate = scene as! GameScene
+                self.initTheGame(scene: scene as! GameScene)
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 // Present the scene
@@ -80,22 +78,21 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
     }
-
+    func initTheGame(scene: GameScene) {
+        globals = (backend: Game(), view: scene, ua: GameActionDelegate())
+        globals.ua.cardsDelegate = scene
+    }
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
+        return .portrait
     }
 
     private func addUIView() {
         let controller = storyboard?.instantiateViewController(withIdentifier: "uiLayer") as! UIGameViewController
-        gameActions.uiDelegate = controller;
+        globals.ua.uiDelegate = controller;
         self.addChildViewController(controller)
         let selfViewFrame = self.view.frame;
         let childViewHeight = CGFloat(160);
