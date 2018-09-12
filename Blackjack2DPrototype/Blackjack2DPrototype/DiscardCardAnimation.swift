@@ -15,9 +15,9 @@ class DiscardCardAnimation: AsyncOperation {
     var card: CardNode
     var deck: SKNode
     
-    required init(theCard: CardNode, to: SKNode) {
+    required init(theCard: CardNode) {
         self.card = theCard
-        self.deck = to
+        self.deck = globals.view.discardDeckNode
         super.init()
     }
     func getScale(from: SKNode) -> (xScale: CGFloat, yScale: CGFloat){

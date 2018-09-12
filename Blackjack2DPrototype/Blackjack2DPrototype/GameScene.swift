@@ -26,10 +26,35 @@ class GameScene: SKScene, CardsDelegate {
     var topNode: SKNode!
     var handNodes: NSMutableDictionary = NSMutableDictionary()
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override func didMove(to view: SKView) {
         
         self.animationQueue.maxConcurrentOperationCount = 1
+        
+        guard let dealerNode = self.childNode(withName: "//dealer") else {
+            fatalError("Dealer node not found")
+        }
+        guard let deckNode = self.childNode(withName: "//dealingDeck") else {
+            fatalError("Deck node not found")
+        }
+        guard let discardNode = self.childNode(withName: "//discardedDeck") else {
+            fatalError("Deck node not found")
+        }
+        guard let topNode = self.childNode(withName: "//topNode") else {
+            fatalError("Top node not found")
+        }
+        guard let chipsNode = self.childNode(withName: "//chipsNode") else {
+            fatalError("Chips node not found")
+        }
+        guard let dealerChipsNode = self.childNode(withName: "//dealerChipsNode") else {
+            fatalError("dealerChipsNode node not found")
+        }
+        self.topNode = topNode
+        self.discardDeckNode = discardNode
+        self.dealerNode = dealerNode as! HandView
+        self.deckNode = deckNode
+        self.chipsNode = chipsNode
+        self.dealerChipsNode = dealerChipsNode
+        
         self.enumerateChildNodes(withName: ".//hand") { (node, _) in
             if let handId = node.userData?["hand_id"] {
                 let handStr = "\(handId)"
@@ -43,21 +68,11 @@ class GameScene: SKScene, CardsDelegate {
                 }
             }
         }
-        
     }
     
     func endGame() {
-        self.enumerateChildNodes(withName: ".//hand") { (node, _) in
-            if let handView = node as? HandView {
-//                if let win = handView.model?.win {
-//                    if win > 0 {
-//                        if handView.chips.children.count > 0 {
-//                            // TODO: refactor, remove conditional
-//                            let chip = handView.chips.children[0]
-//                            self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode, flyOn: self.topNode))
-//                        }
-//                    }
-//                }
+        self.handNodes.enumerateKeysAndObjects { (key, obj, p) in
+            if let handView = obj as? HandView {
                 self.discard(hand: handView)
             }
         }
@@ -84,7 +99,7 @@ class GameScene: SKScene, CardsDelegate {
         }
     }
     func discard(hand: HandView) {
-        let op = DiscardCardsAnimation(hand: hand, deck: self.discardDeckNode)
+        let op = DiscardCardsAnimation(hand: hand)
         self.animationQueue.addOperation(op)
     }
     func didHandChange(_ hand: inout BJHand) {
@@ -111,7 +126,7 @@ class GameScene: SKScene, CardsDelegate {
             fatalError("Hand node not found")
         }
         
-        let deal = DealCardAnimation(theCard: card, from: self.deckNode, to: handNode)
+        let deal = DealCardAnimation(theCard: card, to: handNode)
         
         let completion = BlockOperation {
             guard let handModel = globals.backend.model.getHand(id: id) else {
@@ -124,41 +139,9 @@ class GameScene: SKScene, CardsDelegate {
         self.animationQueue.addOperation(deal)
     }
     func dealCardToDealer(card: Card) -> Void {
-        // let cardNode = card.hidden ? SKSpriteNode(imageNamed: "shirt.png") : SKSpriteNode(imageNamed: card.imageNamed)
-//        self.dealCardAnimation(node: self.dealerNode, from: "shirt", to: card.hidden ? "shirt" : card.imageNamed)
-        
-        let op = DealCardAnimation(theCard: card, from: self.deckNode, to: self.dealerNode)
+        let op = DealCardAnimation(theCard: card, to: self.dealerNode)
         self.animationQueue.addOperation(op)
     }
-    
-    override func didMove(to view: SKView) {
-        guard let dealerNode = self.childNode(withName: "//dealer") else {
-            fatalError("Dealer node not found")
-        }
-        guard let deckNode = self.childNode(withName: "//dealingDeck") else {
-            fatalError("Deck node not found")
-        }
-        guard let discardNode = self.childNode(withName: "//discardedDeck") else {
-            fatalError("Deck node not found")
-        }
-        guard let topNode = self.childNode(withName: "//topNode") else {
-            fatalError("Top node not found")
-        }
-        guard let chipsNode = self.childNode(withName: "//chipsNode") else {
-            fatalError("Chips node not found")
-        }
-        guard let dealerChipsNode = self.childNode(withName: "//dealerChipsNode") else {
-            fatalError("dealerChipsNode node not found")
-        }
-        
-        self.topNode = topNode
-        self.discardDeckNode = discardNode
-        self.dealerNode = dealerNode as! HandView
-        self.deckNode = deckNode
-        self.chipsNode = chipsNode
-        self.dealerChipsNode = dealerChipsNode
-    }
-    
     
     func touchDown(atPoint pos : CGPoint) {
         
@@ -178,8 +161,6 @@ class GameScene: SKScene, CardsDelegate {
     }
     func getHandView(_ id: String) -> HandView? {
         return self.handNodes.value(forKey: id) as? HandView
-//        print("enumerate hands")
-//        return self.childNode(withName: "//hand\(id)") as? HandView
     }
     func betOnHand(handId: String) {
         guard let handView = self.getHandView(handId) else {
@@ -193,10 +174,6 @@ class GameScene: SKScene, CardsDelegate {
 
         let animation = FlyAnimation(node: chip, to: handView.chips)
         animation.execute()
-//        self.animationQueue.addOperation(animation)
-//        self.animationQueue.addOperation {
-//            handView.updateBet(hand: &handModel)
-//        }
     }
 
     func touchMoved(toPoint pos : CGPoint) {
