@@ -60,10 +60,11 @@ class DiscardCardAnimation: AsyncOperation {
         animationGroup.append(waitAndSwap)
     
         card.run(SKAction.sequence([SKAction.group(animationGroup), SKAction.run {
-            self.card.move(toParent: self.deck)
-            self.card.setScale(1)
-            self.card.zRotation = 0
-            self.card.position = CGPoint(x: 0, y:0)
+            self.card.removeFromParent()
+//            self.card.move(toParent: self.deck)
+//            self.card.setScale(1)
+//            self.card.zRotation = 0
+//            self.card.position = CGPoint(x: 0, y:0)
             self.isFinished = true
         }]))
     }

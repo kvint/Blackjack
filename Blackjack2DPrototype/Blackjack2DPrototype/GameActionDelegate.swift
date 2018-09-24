@@ -38,6 +38,9 @@ class GameActionDelegate: GameDelegate {
         if (hand.gotBusted()) {
             self.cardsDelegate?.onBust(atHand: &hand)
         }
+        if hand.payedOut {
+            self.cardsDelegate?.onPayout(hand: &hand)
+        }
         self.uiDelegate?.displayActions()
     }
     
