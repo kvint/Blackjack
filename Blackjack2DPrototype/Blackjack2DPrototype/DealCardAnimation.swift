@@ -73,15 +73,21 @@ class DealCardAnimation: AsyncOperation {
         
         animationGroup.append(scaleAction)
         
-        cardNode.run(SKAction.sequence([SKAction.group(animationGroup), SKAction.run {
+        let anim = SKAction.sequence([SKAction.group(animationGroup), SKAction.run {
             cardNode.removeFromParent()
             self.hand.cards.addNode(cardNode)
             let pos = self.hand.cards.convert(cardNode.position, from: globals.view.topNode)
             cardNode.position = pos
-        }]))
-        
-        cardNode.run(SKAction.wait(forDuration: self.actionTime)) {
+        }])
+    
+        let completionAction = SKAction.run {
             self.isFinished = true
+        }
+        if self.time == self.actionTime {
+            cardNode.run(SKAction.sequence([anim, completionAction]))
+        } else {
+            cardNode.run(SKAction.sequence([SKAction.wait(forDuration: self.actionTime), completionAction]))
+            cardNode.run(anim)
         }
     }
 }

@@ -50,7 +50,7 @@ class GameScene: SKScene, CardsDelegate {
         }
         self.topNode = topNode
         self.discardDeckNode = discardNode
-        self.dealerNode = dealerNode as! HandView
+        self.dealerNode = dealerNode as? HandView
         self.deckNode = deckNode
         self.chipsNode = chipsNode
         self.dealerChipsNode = dealerChipsNode
@@ -118,7 +118,11 @@ class GameScene: SKScene, CardsDelegate {
         print("Deal card to hand \(id) -> \(card)")
         
         let handNode = self.getHandView(id)
-        let completeTime = globals.backend.state == .Betting ? 0.2 : nil
+        var completeTime: Double? = nil
+        if globals.backend.state == .Betting  {
+            completeTime = 0.1
+        }
+        
         let deal = DealCardAnimation(theCard: card, to: handNode, time: 0.4, completeAfter: completeTime)
         
         let completion = BlockOperation {
@@ -136,35 +140,6 @@ class GameScene: SKScene, CardsDelegate {
         let op = DealCardAnimation(theCard: card, to: self.dealerNode, time: 0.4, completeAfter: completeTime)
         self.animationQueue.addOperation(op)
     }
-    
-    override func didMove(to view: SKView) {
-        guard let dealerNode = self.childNode(withName: "//dealer") else {
-            fatalError("Dealer node not found")
-        }
-        guard let deckNode = self.childNode(withName: "//dealingDeck") else {
-            fatalError("Deck node not found")
-        }
-        guard let discardNode = self.childNode(withName: "//discardedDeck") else {
-            fatalError("Deck node not found")
-        }
-        guard let topNode = self.childNode(withName: "//topNode") else {
-            fatalError("Top node not found")
-        }
-        guard let chipsNode = self.childNode(withName: "//chipsNode") else {
-            fatalError("Chips node not found")
-        }
-        guard let dealerChipsNode = self.childNode(withName: "//dealerChipsNode") else {
-            fatalError("dealerChipsNode node not found")
-        }
-        
-        self.topNode = topNode
-        self.discardDeckNode = discardNode
-        self.dealerNode = dealerNode as? HandView
-        self.deckNode = deckNode
-        self.chipsNode = chipsNode
-        self.dealerChipsNode = dealerChipsNode
-    }
-    
     
     func touchDown(atPoint pos : CGPoint) {
         
