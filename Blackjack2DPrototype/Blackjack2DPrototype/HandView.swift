@@ -39,7 +39,7 @@ class CardNode: SKNode
         let effectNode = SKEffectNode()
         effectNode.addChild(shadowNode)
         effectNode.shouldRasterize = true
-        effectNode.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius": 30])
+        effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius": 30])
         self.insertChild(effectNode, at: 0)
     
         self.addChild(cropNode)

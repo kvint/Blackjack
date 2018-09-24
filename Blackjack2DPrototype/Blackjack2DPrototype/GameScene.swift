@@ -153,7 +153,7 @@ class GameScene: SKScene, CardsDelegate {
         
         self.topNode = topNode
         self.discardDeckNode = discardNode
-        self.dealerNode = dealerNode as! HandView
+        self.dealerNode = dealerNode as? HandView
         self.deckNode = deckNode
         self.chipsNode = chipsNode
         self.dealerChipsNode = dealerChipsNode
@@ -167,11 +167,11 @@ class GameScene: SKScene, CardsDelegate {
             if let handModelID = (node as? HandView)?.model?.id {
                 
                 print("bet on hand -> \(handModelID)")
-                if game.live {
-                    print("The game is playing")
-                } else {
+//                if game.live {
+//                    print("The game is playing")
+//                } else {
                     try? game.bet(handId: "\(handModelID)", stake: 10)
-                }
+//                }
             }
         }
         

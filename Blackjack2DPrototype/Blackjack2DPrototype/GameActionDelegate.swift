@@ -10,16 +10,16 @@ import Foundation
 import CardsBase
 
 class GameActionDelegate: GameDelegate {
-    func onChanged(toHand: inout BJHand) {
-        print("didHandChange to \(toHand.id)")
-        self.cardsDelegate?.didHandChange(&toHand)
+    func focusChanged(to: inout BJHand) {
+        print("didHandChange to \(to.id)")
+        self.cardsDelegate?.didHandChange(&to)
     }
     
-    func onUpdate(hand: inout BJHand) {
+    func updated(hand: inout BJHand) {
         
     }
     
-    func onDealCard(toHand: inout BJHand, card: Card) {
+    func cardDealt(toHand: inout BJHand, card: Card) {
         print("deal \(card) to \(toHand.id)")
         
         if toHand is BJDealerHand {
@@ -29,12 +29,12 @@ class GameActionDelegate: GameDelegate {
         }
     }
     
-    func onDone(hand: inout BJUserHand) {
-        
+    func onBet(onHand: inout BJUserHand, regularBet: Bool) {
+        self.cardsDelegate?.betOnHand(handId: onHand.id)
     }
     
-    func onBet(toHand: inout BJUserHand) {
-        self.cardsDelegate?.betOnHand(handId: toHand.id)
+    func onDone(hand: inout BJUserHand) {
+        self.cardsDelegate?.betOnHand(handId: hand.id)
         self.uiDelegate?.displayActions()
     }
     
