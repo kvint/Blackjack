@@ -93,13 +93,11 @@ class GameViewController: UIViewController {
     private func addUIView() {
         let controller = storyboard?.instantiateViewController(withIdentifier: "uiLayer") as! UIGameViewController
         globals.ua.uiDelegate = controller;
-        self.addChildViewController(controller)
-        let selfViewFrame = self.view.frame;
-        let childViewHeight = CGFloat(160);
+        self.addChild(controller)
         controller.view.frame = CGRect(origin: CGPoint(x: 0, y: selfViewFrame.height - childViewHeight), size: CGSize(width: selfViewFrame.width, height: childViewHeight))
         self.view.frame = CGRect(origin: CGPoint(x: selfViewFrame.minX, y: selfViewFrame.minY), size: CGSize(width: selfViewFrame.width, height: selfViewFrame.height - childViewHeight));
         self.view.addSubview(controller.view)
-        controller.didMove(toParentViewController: self)
+        controller.didMove(toParent: self)
     }
 
     override func didReceiveMemoryWarning() {
