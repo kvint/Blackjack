@@ -71,9 +71,11 @@ class GameScene: SKScene, CardsDelegate {
     }
     
     func endGame() {
-        self.handNodes.enumerateKeysAndObjects { (key, obj, p) in
-            if let handView = obj as? HandView {
-                self.discard(hand: handView)
+        globals.backend.model.hands.forEach {
+            if let handId = $0?.id {
+                if let handView = self.handNodes[handId] as? HandView {
+                    self.discard(hand: handView)
+                }
             }
         }
         self.discard(hand: self.dealerNode)
