@@ -94,9 +94,12 @@ class GameScene: SKScene, CardsDelegate {
                 self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode))
             }
         }
+        if hand.gotBusted() {
+            discard(hand: handView)
+        }
     }
     func onBust(atHand: inout BJUserHand) {
-        discard(hand: self.getHandView(atHand.id))
+        //
     }
     func discard(hand: HandView) {
         let op = DiscardCardsAnimation(hand: hand)
