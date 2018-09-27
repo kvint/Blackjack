@@ -69,15 +69,17 @@ class GameScene: SKScene, CardsDelegate {
             }
         }
     }
-    
-    func endGame() {
+    func eachHand(_ closure :(_: HandView) -> Void) {
         globals.backend.model.hands.forEach {
             if let handId = $0?.id {
                 if let handView = self.handNodes[handId] as? HandView {
-                    self.discard(hand: handView)
+                    closure(handView)
                 }
             }
         }
+    }
+    func endGame() {
+        self.eachHand { self.discard(hand: $0) }
         self.discard(hand: self.dealerNode)
         
     }
