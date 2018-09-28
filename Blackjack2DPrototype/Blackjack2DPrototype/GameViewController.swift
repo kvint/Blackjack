@@ -14,17 +14,6 @@ import CardsBase
 extension Notification.Name {
     static let openCheats = Notification.Name("OpenCheats")
 }
-struct Cheat: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case label
-//        case cheatingCards
-//        case dealerCheatCards
-    }
-    
-    let label: String
-//    let cheatingCards: [Dictionary<String, String>]?
-//    let dealerCheatCards: [Dictionary<String, String>]?
-}
 
 extension Card {
     

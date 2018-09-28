@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CardsBase
 
 class CheatDetailController: UITableViewController {
     
@@ -41,6 +42,16 @@ class CheatDetailController: UITableViewController {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let concreteCheat = self.selectedCheat[indexPath.item]
+        if let cCards = concreteCheat.cheatingCards {
+            let cheatingCards = cCards.map { cheatCard in Card(fromCheat: cheatCard)}
+            print(cheatingCards)
+        }
+        if let dCards = concreteCheat.dealerCheatCards {
+            let dealerCheatCards = dCards.map { cheatCard in Card(fromCheat: cheatCard)}
+            print(dealerCheatCards)
+        }
+        
         self.dismiss(animated: true, completion: nil)
     }
     /*
