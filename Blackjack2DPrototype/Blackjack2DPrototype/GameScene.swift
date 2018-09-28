@@ -86,6 +86,16 @@ class GameScene: SKScene, CardsDelegate {
     func onPayout(hand: inout BJUserHand) {
         let handView = self.getHandView(hand.id)
         if hand.win > 0 {
+            let chip = SKSpriteNode(imageNamed: "chip")
+            self.dealerChipsNode.addChild(chip)
+            self.animationQueue.addOperation(FlyAnimation(node: chip, to: handView.chips))
+            var winningChipNodes = handView.chips.children
+            winningChipNodes.append(chip)
+            winningChipNodes.forEach { (chip) in
+                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
+            }
+        } else if hand.win == 0 {
+            // push
             handView.chips.children.forEach { (chip) in
                 self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
             }
