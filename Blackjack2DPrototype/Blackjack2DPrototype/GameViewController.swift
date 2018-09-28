@@ -13,6 +13,10 @@ import CardsBase
 
 var globals: (backend: Game, view: GameScene, ua: GameActionDelegate)!
 
+extension Notification.Name {
+    static let openCheats = Notification.Name("OpenCheats")
+}
+
 extension Card {
     
     var suitName: String {
@@ -59,7 +63,7 @@ class GameViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(onCheatsOpenRequested(_:)), name: .openCheats, object: nil)
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -74,6 +78,13 @@ class GameViewController: UIViewController {
             
             view.showsFPS = true
             view.showsNodeCount = true
+        }
+    }
+    @objc func onCheatsOpenRequested(_ notification: Notification) {
+        if let controller = storyboard?.instantiateViewController(withIdentifier: "cheats") {
+            self.present(controller, animated: true) {
+                
+            }
         }
     }
     func initTheGame(scene: GameScene) {

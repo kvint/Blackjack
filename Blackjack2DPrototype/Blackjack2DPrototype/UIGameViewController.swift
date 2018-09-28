@@ -20,6 +20,8 @@ class UIGameViewController: UIViewController {
     @IBOutlet weak var standBtn: UIButton!
     @IBOutlet weak var splitBtn: UIButton!
     
+    @IBOutlet weak var cheatBtn: UIButton!
+    
     @IBAction func btnHandler(_ sender: UIButton) {
         switch sender {
         case dealBtn:
@@ -39,6 +41,9 @@ class UIGameViewController: UIViewController {
             break;
         case insuranceBtn:
             globals.ua.insurance()
+            break;
+        case cheatBtn:
+            NotificationCenter.default.post(Notification(name: .openCheats))
             break;
         default:
             print("Unhandled button")

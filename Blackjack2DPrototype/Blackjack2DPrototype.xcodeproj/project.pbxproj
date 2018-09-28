@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF172CD2215E187200BB0F94 /* CheatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF172CD1215E187200BB0F94 /* CheatsViewController.swift */; };
 		AFC27758213567FC0008503E /* HandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC27757213567FC0008503E /* HandView.swift */; };
 		EA16B4862135C62500DEC213 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA16B4852135C62500DEC213 /* Assets.xcassets */; };
 		EA2203EE213EFC7F00294AD1 /* FlyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AF172CD1215E187200BB0F94 /* CheatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatsViewController.swift; sourceTree = "<group>"; };
 		AFC27757213567FC0008503E /* HandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandView.swift; sourceTree = "<group>"; };
 		EA16B4852135C62500DEC213 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyAnimation.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				EAC7C1C4205CA51D00A2CB9E /* GameActionDelegate.swift */,
 				EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */,
 				AFC27757213567FC0008503E /* HandView.swift */,
+				AF172CD1215E187200BB0F94 /* CheatsViewController.swift */,
 			);
 			path = Blackjack2DPrototype;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				EAC7C19D205C9E5600A2CB9E /* AppDelegate.swift in Sources */,
 				EAEB0E12213C62D70016760F /* AsyncOperation.swift in Sources */,
 				EA2203EE213EFC7F00294AD1 /* FlyAnimation.swift in Sources */,
+				AF172CD2215E187200BB0F94 /* CheatsViewController.swift in Sources */,
 				EA3AD33621485D2F0004C4FC /* DiscardCardsAnimation.swift in Sources */,
 				EAEB0E1B213DDB260016760F /* RevealCardAnimation.swift in Sources */,
 				EA5AB25B205CC4DD004408A5 /* CardsViewDelegate.swift in Sources */,

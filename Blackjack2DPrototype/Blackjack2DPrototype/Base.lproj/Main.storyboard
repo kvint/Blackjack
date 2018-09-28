@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -113,11 +113,22 @@
                                     <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="ta0-sw-QYS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdu-kY-Wm8">
+                                <rect key="frame" x="310" y="99" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cheats">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnHandler:" destination="uPO-Gt-BOx" eventType="touchUpInside" id="ThB-4j-mt9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.35103624137046618" green="0.17137558190471569" blue="0.062720506314143276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="RTf-NG-3OG"/>
                     </view>
                     <connections>
+                        <outlet property="cheatBtn" destination="kdu-kY-Wm8" id="Gu4-VO-SW6"/>
                         <outlet property="dealBtn" destination="Xvd-fA-lm0" id="Uuz-1A-hBd"/>
                         <outlet property="doubleBtn" destination="tIg-FD-cYM" id="AYv-SG-gk0"/>
                         <outlet property="hitBtn" destination="b0X-yx-NKn" id="Lzn-nd-YjY"/>
@@ -129,6 +140,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aD6-bJ-Cf8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1341.5999999999999" y="53.523238380809602"/>
+        </scene>
+        <!--Cheats-->
+        <scene sceneID="h7o-dp-5bP">
+            <objects>
+                <viewController storyboardIdentifier="cheats" title="Cheats" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" id="fNa-Kq-S4g" customClass="CheatsViewController" customModule="Blackjack2DPrototype" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1vO-Gw-nIE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YXf-15-NYe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Cheats" id="Dtf-4g-HpT">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="2Pr-9m-F0N">
+                                            <connections>
+                                                <action selector="onDoneHandler:" destination="fNa-Kq-S4g" id="uEf-qt-1eK"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="TtH-iM-mpa"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F6j-gj-Gct" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
 </document>
