@@ -10,6 +10,7 @@
 		AF172CD2215E187200BB0F94 /* CheatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF172CD1215E187200BB0F94 /* CheatsViewController.swift */; };
 		AFC27758213567FC0008503E /* HandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC27757213567FC0008503E /* HandView.swift */; };
 		AFCC3FD5215E5C8A00569D4A /* combinations.json in Resources */ = {isa = PBXBuildFile; fileRef = AFCC3FD4215E5C8A00569D4A /* combinations.json */; };
+		AFCC3FD8215E64C200569D4A /* CheatDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCC3FD7215E64C200569D4A /* CheatDetailController.swift */; };
 		EA16B4862135C62500DEC213 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA16B4852135C62500DEC213 /* Assets.xcassets */; };
 		EA2203EE213EFC7F00294AD1 /* FlyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */; };
 		EA3AD33621485D2F0004C4FC /* DiscardCardsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3AD33521485D2F0004C4FC /* DiscardCardsAnimation.swift */; };
@@ -49,6 +50,7 @@
 		AF172CD1215E187200BB0F94 /* CheatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatsViewController.swift; sourceTree = "<group>"; };
 		AFC27757213567FC0008503E /* HandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandView.swift; sourceTree = "<group>"; };
 		AFCC3FD4215E5C8A00569D4A /* combinations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = combinations.json; sourceTree = "<group>"; };
+		AFCC3FD7215E64C200569D4A /* CheatDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatDetailController.swift; sourceTree = "<group>"; };
 		EA16B4852135C62500DEC213 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyAnimation.swift; sourceTree = "<group>"; };
 		EA3AD33521485D2F0004C4FC /* DiscardCardsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardCardsAnimation.swift; sourceTree = "<group>"; };
@@ -83,6 +85,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AFCC3FD6215E648A00569D4A /* cheats */ = {
+			isa = PBXGroup;
+			children = (
+				AFCC3FD4215E5C8A00569D4A /* combinations.json */,
+				AF172CD1215E187200BB0F94 /* CheatsViewController.swift */,
+				AFCC3FD7215E64C200569D4A /* CheatDetailController.swift */,
+			);
+			name = cheats;
+			sourceTree = "<group>";
+		};
 		EAC7C190205C9E5600A2CB9E = {
 			isa = PBXGroup;
 			children = (
@@ -103,7 +115,7 @@
 		EAC7C19B205C9E5600A2CB9E /* Blackjack2DPrototype */ = {
 			isa = PBXGroup;
 			children = (
-				AFCC3FD4215E5C8A00569D4A /* combinations.json */,
+				AFCC3FD6215E648A00569D4A /* cheats */,
 				EAEB0E13213C62EF0016760F /* actions */,
 				EAC7C19C205C9E5600A2CB9E /* AppDelegate.swift */,
 				EAC7C19E205C9E5600A2CB9E /* GameScene.sks */,
@@ -118,7 +130,6 @@
 				EAC7C1C4205CA51D00A2CB9E /* GameActionDelegate.swift */,
 				EA5AB25A205CC4DD004408A5 /* CardsViewDelegate.swift */,
 				AFC27757213567FC0008503E /* HandView.swift */,
-				AF172CD1215E187200BB0F94 /* CheatsViewController.swift */,
 			);
 			path = Blackjack2DPrototype;
 			sourceTree = "<group>";
@@ -221,6 +232,7 @@
 				EAC7C1A5205C9E5600A2CB9E /* GameViewController.swift in Sources */,
 				EAEB0E15213C63120016760F /* DealCardAnimation.swift in Sources */,
 				EAC7C19D205C9E5600A2CB9E /* AppDelegate.swift in Sources */,
+				AFCC3FD8215E64C200569D4A /* CheatDetailController.swift in Sources */,
 				EAEB0E12213C62D70016760F /* AsyncOperation.swift in Sources */,
 				EA2203EE213EFC7F00294AD1 /* FlyAnimation.swift in Sources */,
 				AF172CD2215E187200BB0F94 /* CheatsViewController.swift in Sources */,

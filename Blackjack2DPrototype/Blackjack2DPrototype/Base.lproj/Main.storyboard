@@ -19,16 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="J6H-qV-frh">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellIdentifier" id="J6H-qV-frh">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J6H-qV-frh" id="08b-oa-DkM">
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="j4K-5f-Dse" kind="push" identifier="showCell" id="eAf-zT-4cP"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -43,6 +40,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="j4K-5f-Dse" kind="show" identifier="showCheat" id="fDM-8c-TM0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JzY-1J-dXq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -199,16 +199,16 @@
             </objects>
             <point key="canvasLocation" x="596" y="26.53673163418291"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Cheat Detail Controller-->
         <scene sceneID="u8h-5b-Msy">
             <objects>
-                <tableViewController id="j4K-5f-Dse" sceneMemberID="viewController">
+                <tableViewController id="j4K-5f-Dse" customClass="CheatDetailController" customModule="Blackjack2DPrototype" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ia0-GS-zvd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="D9v-AQ-EVT">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellIdentifier" id="D9v-AQ-EVT">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D9v-AQ-EVT" id="gb7-MY-5OA">
@@ -222,7 +222,13 @@
                             <outlet property="delegate" destination="j4K-5f-Dse" id="qbV-84-jJb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="iuH-lz-a72"/>
+                    <navigationItem key="navigationItem" id="iuH-lz-a72">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="q0w-OM-Ip2">
+                            <connections>
+                                <action selector="doneHandler:" destination="j4K-5f-Dse" id="5gl-6B-WqX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZ3-az-nVB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

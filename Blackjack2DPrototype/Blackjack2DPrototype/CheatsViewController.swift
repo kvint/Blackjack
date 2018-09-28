@@ -9,6 +9,9 @@
 import UIKit
 
 class CheatsViewController: UITableViewController {
+    
+    var selectedCheat: [Cheat]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,16 +20,22 @@ class CheatsViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return globals.cheats.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
         cell.textLabel?.text = Array(globals.cheats.keys)[indexPath.item]
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //selectedCheat = Array(globals.cheats.values)[indexPath.item]
-        self.performSegue(withIdentifier: "showCell", sender: self)
+        self.selectedCheat = Array(globals.cheats.values)[indexPath.item]
+        self.performSegue(withIdentifier: "showCheat", sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showCheat" {
+            if let destination = segue.destination as? CheatDetailController {
+                destination.selectedCheat = self.selectedCheat
+            }
+        }
     }
 }
