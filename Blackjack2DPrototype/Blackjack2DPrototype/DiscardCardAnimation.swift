@@ -14,10 +14,18 @@ class DiscardCardAnimation: AsyncOperation {
     
     var card: CardNode
     var deck: SKNode
+    var time: Double!
+    var actionTime: Double!
     
-    required init(theCard: CardNode) {
+    required init(theCard: CardNode, time: Double = 0.3, completeAfter: Double? = nil) {
         self.card = theCard
         self.deck = globals.view.discardDeckNode
+        self.time = time
+        if completeAfter != nil {
+            self.actionTime = completeAfter
+        } else {
+            self.actionTime = self.time
+        }
         super.init()
     }
     func getScale(from: SKNode) -> (xScale: CGFloat, yScale: CGFloat){
@@ -34,8 +42,6 @@ class DiscardCardAnimation: AsyncOperation {
         
     }
     override func execute() {
-        
-        let time = 0.3
         
         let targetPos = globals.view.topNode.convert(self.deck.position, from: globals.view.topNode)
         let dscale = self.getScale(from: card)
@@ -58,14 +64,19 @@ class DiscardCardAnimation: AsyncOperation {
             self.card.flip()
         })])
         animationGroup.append(waitAndSwap)
-    
-        card.run(SKAction.sequence([SKAction.group(animationGroup), SKAction.run {
-            self.card.removeFromParent()
-//            self.card.move(toParent: self.deck)
-//            self.card.setScale(1)
-//            self.card.zRotation = 0
-//            self.card.position = CGPoint(x: 0, y:0)
+        
+        let completionAction = SKAction.run {
             self.isFinished = true
-        }]))
+        }
+        let anim = SKAction.sequence([SKAction.group(animationGroup), SKAction.run {
+            self.card.removeFromParent()
+        }])
+        
+        if self.time == self.actionTime {
+            card.run(SKAction.sequence([anim, completionAction]))
+        } else {
+            card.run(SKAction.sequence([SKAction.wait(forDuration: self.actionTime), completionAction]))
+            card.run(anim)
+        }
     }
 }

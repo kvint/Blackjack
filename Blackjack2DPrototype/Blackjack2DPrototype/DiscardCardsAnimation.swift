@@ -22,8 +22,14 @@ class DiscardCardsAnimation: AsyncOperation {
     }
     
     override func execute() {
-        for cardNode in self.handView.cards.cards.reversed() {
-            let op = DiscardCardAnimation(theCard: cardNode)
+        let cardNodes = self.handView.cards.cards.reversed()
+        for cardNode in cardNodes {
+            var op: DiscardCardAnimation!
+            if cardNode != cardNodes.last {
+                op = DiscardCardAnimation(theCard: cardNode, time: 0.3, completeAfter: 0.07)
+            } else {
+                op = DiscardCardAnimation(theCard: cardNode, time: 0.3)
+            }
             self.queue.addOperation(op)
         }
         self.queue.addOperation {
