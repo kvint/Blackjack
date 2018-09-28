@@ -11,10 +11,19 @@ import SpriteKit
 import GameplayKit
 import CardsBase
 
-var globals: (backend: Game, view: GameScene, ua: GameActionDelegate)!
-
 extension Notification.Name {
     static let openCheats = Notification.Name("OpenCheats")
+}
+struct Cheat: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case label
+//        case cheatingCards
+//        case dealerCheatCards
+    }
+    
+    let label: String
+//    let cheatingCards: [Dictionary<String, String>]?
+//    let dealerCheatCards: [Dictionary<String, String>]?
 }
 
 extension Card {
@@ -52,9 +61,12 @@ extension Card {
         }
     }
 }
+var globals: (backend: Game, view: GameScene, ua: GameActionDelegate, cheats: Dictionary<String, [Cheat]>)!
 
 class GameViewController: UIViewController {
 
+    private var cheats: Dictionary<String, [Cheat]>!
+    
     @IBAction func swipeLeft(_ sender: Any) {
         globals.ua.selectedHand = globals.ua.selectedHand - 1
     }
@@ -63,6 +75,16 @@ class GameViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let path = Bundle.main.path(forResource: "combinations", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                self.cheats = try JSONDecoder().decode(Dictionary<String, [Cheat]>.self, from: data)
+            } catch {
+                fatalError("Failed to parse cheats")
+            }
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(onCheatsOpenRequested(_:)), name: .openCheats, object: nil)
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -88,7 +110,7 @@ class GameViewController: UIViewController {
         }
     }
     func initTheGame(scene: GameScene) {
-        globals = (backend: Game(), view: scene, ua: GameActionDelegate())
+        globals = (backend: Game(), view: scene, ua: GameActionDelegate(), cheats: self.cheats)
         globals.backend.delegate = globals.ua
         globals.ua.cardsDelegate = scene
         self.addUIView();

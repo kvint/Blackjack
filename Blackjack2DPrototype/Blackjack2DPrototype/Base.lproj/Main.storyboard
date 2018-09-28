@@ -10,6 +10,38 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Cheats View Controller-->
+        <scene sceneID="Akt-tm-vDS">
+            <objects>
+                <tableViewController id="JB6-Ow-bya" customClass="CheatsViewController" customModule="Blackjack2DPrototype" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pLq-cE-RPX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="J6H-qV-frh">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J6H-qV-frh" id="08b-oa-DkM">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="j4K-5f-Dse" kind="push" identifier="showCell" id="eAf-zT-4cP"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="JB6-Ow-bya" id="pEa-dr-jIc"/>
+                            <outlet property="delegate" destination="JB6-Ow-bya" id="Vs7-3f-f3h"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="VN6-Na-0Vc"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JzY-1J-dXq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1535.2" y="26.53673163418291"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -38,7 +70,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1608.8" y="26.53673163418291"/>
+            <point key="canvasLocation" x="2548" y="26.53673163418291"/>
         </scene>
         <!--UI View Controller-->
         <scene sceneID="zUy-mJ-fpJ">
@@ -140,43 +172,54 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aD6-bJ-Cf8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2280.8000000000002" y="53.523238380809602"/>
+            <point key="canvasLocation" x="3220" y="53.523238380809602"/>
         </scene>
-        <!--Cheats View Controller-->
-        <scene sceneID="Nln-4X-jaG">
+        <!--Navigation Controller-->
+        <scene sceneID="GXD-Xf-C4e">
             <objects>
-                <viewController storyboardIdentifier="cheats" modalPresentationStyle="overCurrentContext" id="24q-8b-Hhj" customClass="CheatsViewController" customModule="Blackjack2DPrototype" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3yY-az-6bE">
+                <navigationController storyboardIdentifier="cheats" automaticallyAdjustsScrollViewInsets="NO" id="7hS-c5-13g" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RQB-OR-ULN">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JB6-Ow-bya" kind="relationship" relationship="rootViewController" id="3DE-aX-0T7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BSw-Fq-FFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="596" y="26.53673163418291"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="u8h-5b-Msy">
+            <objects>
+                <tableViewController id="j4K-5f-Dse" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ia0-GS-zvd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hhw-Cg-upl">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hNo-ai-di1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Cheats" id="XLS-0J-N30">
-                                        <barButtonItem key="rightBarButtonItem" title="Done" id="7Ku-zM-K09">
-                                            <connections>
-                                                <action selector="onDoneHandler:" destination="24q-8b-Hhj" id="kYM-6o-bma"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="yGc-Fw-bHM"/>
-                    </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sTx-D9-9eq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="D9v-AQ-EVT">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D9v-AQ-EVT" id="gb7-MY-5OA">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="j4K-5f-Dse" id="1nT-gk-oEU"/>
+                            <outlet property="delegate" destination="j4K-5f-Dse" id="qbV-84-jJb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="iuH-lz-a72"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PZ3-az-nVB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="669.60000000000002" y="26.53673163418291"/>
+            <point key="canvasLocation" x="2682" y="844"/>
         </scene>
     </scenes>
 </document>

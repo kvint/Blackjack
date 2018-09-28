@@ -1,0 +1,921 @@
+{
+  "BLACKJACK": [
+    {
+      "label": "BLACKJACK",
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "BJ (1st and 4th)",
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "10",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "10",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        }
+      ],
+      "dealerCheatCards": [
+        {
+          "rank": "7",
+          "suit": "C"
+        },
+        {
+          "rank": "10",
+          "suit": "C"
+        }
+      ]
+    },
+    {
+      "label": "VS 10",
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ],
+      "dealerCheatCards": [
+        {
+          "rank": "K",
+          "suit": "C"
+        },
+        {
+          "rank": "K",
+          "suit": "C"
+        }
+      ]
+    },
+    {
+      "label": "First hand + Dealer 2",
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ],
+      "dealerCheatCards": [
+        {
+          "rank": "2",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "Dealer 10 BJ",
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ],
+      "dealerCheatCards": [
+        {
+          "rank": "J",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "S"
+        }
+      ]
+    },
+    {
+      "label": "First hand",
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ]
+    }
+  ],
+  "DEALER": [
+    {
+      "label": "First Ace then BJ",
+      "dealerCheatCards": [
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "J",
+          "suit": "C"
+        }
+      ]
+    },
+    {
+      "label": "First Ace then no BJ",
+      "dealerCheatCards": [
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "2",
+          "suit": "C"
+        },
+        {
+          "rank": "4",
+          "suit": "S"
+        }
+      ]
+    },
+    {
+      "label": "First 10 then BJ",
+      "dealerCheatCards": [
+        {
+          "rank": "J",
+          "suit": "C"
+        },
+        {
+          "rank": "A",
+          "suit": "C"
+        }
+      ]
+    },
+    {
+      "label": "Bust",
+      "dealerCheatCards": [
+        {
+          "rank": "J",
+          "suit": "H"
+        },
+        {
+          "rank": "6",
+          "suit": "S"
+        },
+        {
+          "rank": "Q",
+          "suit": "S"
+        }
+      ]
+    }
+  ],
+  "DEALER vs BJ": [
+    {
+      "label": "Dealer First Ace then BJ",
+      "dealerCheatCards": [
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "J",
+          "suit": "C"
+        }
+      ],
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "Dealer First Ace then no BJ",
+      "dealerCheatCards": [
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "2",
+          "suit": "C"
+        },
+        {
+          "rank": "4",
+          "suit": "S"
+        }
+      ],
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "Dealer First 10 then BJ",
+      "dealerCheatCards": [
+        {
+          "rank": "J",
+          "suit": "C"
+        },
+        {
+          "rank": "A",
+          "suit": "C"
+        }
+      ],
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "Dealer First 10 then no BJ",
+      "dealerCheatCards": [
+        {
+          "rank": "J",
+          "suit": "C"
+        },
+        {
+          "rank": "2",
+          "suit": "C"
+        }
+      ],
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "Dealer First A then A",
+      "dealerCheatCards": [
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "A",
+          "suit": "S"
+        }
+      ],
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ]
+    }
+  ],
+  "SPLIT": [
+    {
+      "label": "Q + J",
+      "cheatingCards": [
+        {
+          "rank": "Q",
+          "suit": "S"
+        },
+        {
+          "rank": "J",
+          "suit": "S"
+        },
+        {
+          "rank": "Q",
+          "suit": "S"
+        },
+        {
+          "rank": "J",
+          "suit": "S"
+        },
+        {
+          "rank": "Q",
+          "suit": "S"
+        },
+        {
+          "rank": "J",
+          "suit": "S"
+        },
+        {
+          "rank": "Q",
+          "suit": "S"
+        },
+        {
+          "rank": "J",
+          "suit": "S"
+        },
+        {
+          "rank": "Q",
+          "suit": "S"
+        },
+        {
+          "rank": "J",
+          "suit": "S"
+        }
+      ]
+    },
+    {
+      "label": "Aces",
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "A",
+          "suit": "S"
+        },
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "A",
+          "suit": "S"
+        },
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "A",
+          "suit": "S"
+        },
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "A",
+          "suit": "S"
+        },
+        {
+          "rank": "A",
+          "suit": "C"
+        },
+        {
+          "rank": "A",
+          "suit": "S"
+        }
+      ]
+    },
+    {
+      "label": "Random",
+      "cheatingCards": [
+        {
+          "rank": "3",
+          "suit": "H"
+        },
+        {
+          "rank": "3",
+          "suit": "S"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "10",
+          "suit": "H"
+        },
+        {
+          "rank": "10",
+          "suit": "H"
+        }
+      ]
+    }
+  ],
+  "CHARLIE": [
+    {
+      "label": "VS 10",
+      "cheatingCards": [
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "S"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "3",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "3",
+          "suit": "H"
+        }
+      ],
+      "dealerCheatCards": [
+        {
+          "rank": "K",
+          "suit": "C"
+        },
+        {
+          "rank": "K",
+          "suit": "C"
+        }
+      ]
+    },
+    {
+      "label": "ALL hands",
+      "dealerCheatCards": [
+        {
+          "rank": "2",
+          "suit": "H"
+        }
+      ],
+      "cheatingCards": [
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "S"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "3",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "2",
+          "suit": "H"
+        },
+        {
+          "rank": "A",
+          "suit": "H"
+        },
+        {
+          "rank": "3",
+          "suit": "H"
+        }
+      ]
+    }
+  ],
+  "NEXT CARD": [
+    {
+      "label": "ACE",
+      "cheatingCards": [
+        {
+          "rank": "A",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "KING",
+      "cheatingCards": [
+        {
+          "rank": "K",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "QUEEN",
+      "cheatingCards": [
+        {
+          "rank": "Q",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "JACK",
+      "cheatingCards": [
+        {
+          "rank": "J",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "10",
+      "cheatingCards": [
+        {
+          "rank": "10",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "9",
+      "cheatingCards": [
+        {
+          "rank": "9",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "8",
+      "cheatingCards": [
+        {
+          "rank": "8",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "7",
+      "cheatingCards": [
+        {
+          "rank": "7",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "6",
+      "cheatingCards": [
+        {
+          "rank": "6",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "5",
+      "cheatingCards": [
+        {
+          "rank": "5",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "cheatingCards": [
+        {
+          "rank": "4",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "3",
+      "cheatingCards": [
+        {
+          "rank": "3",
+          "suit": "H"
+        }
+      ]
+    },
+    {
+      "label": "2",
+      "cheatingCards": [
+        {
+          "rank": "2",
+          "suit": "H"
+        }
+      ]
+    }
+  ]
+}

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF172CD2215E187200BB0F94 /* CheatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF172CD1215E187200BB0F94 /* CheatsViewController.swift */; };
 		AFC27758213567FC0008503E /* HandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC27757213567FC0008503E /* HandView.swift */; };
+		AFCC3FD5215E5C8A00569D4A /* combinations.json in Resources */ = {isa = PBXBuildFile; fileRef = AFCC3FD4215E5C8A00569D4A /* combinations.json */; };
 		EA16B4862135C62500DEC213 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA16B4852135C62500DEC213 /* Assets.xcassets */; };
 		EA2203EE213EFC7F00294AD1 /* FlyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */; };
 		EA3AD33621485D2F0004C4FC /* DiscardCardsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3AD33521485D2F0004C4FC /* DiscardCardsAnimation.swift */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		AF172CD1215E187200BB0F94 /* CheatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatsViewController.swift; sourceTree = "<group>"; };
 		AFC27757213567FC0008503E /* HandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandView.swift; sourceTree = "<group>"; };
+		AFCC3FD4215E5C8A00569D4A /* combinations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = combinations.json; sourceTree = "<group>"; };
 		EA16B4852135C62500DEC213 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyAnimation.swift; sourceTree = "<group>"; };
 		EA3AD33521485D2F0004C4FC /* DiscardCardsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardCardsAnimation.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		EAC7C19B205C9E5600A2CB9E /* Blackjack2DPrototype */ = {
 			isa = PBXGroup;
 			children = (
+				AFCC3FD4215E5C8A00569D4A /* combinations.json */,
 				EAEB0E13213C62EF0016760F /* actions */,
 				EAC7C19C205C9E5600A2CB9E /* AppDelegate.swift */,
 				EAC7C19E205C9E5600A2CB9E /* GameScene.sks */,
@@ -195,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAC7C1A8205C9E5600A2CB9E /* Main.storyboard in Resources */,
+				AFCC3FD5215E5C8A00569D4A /* combinations.json in Resources */,
 				EAC7C19F205C9E5600A2CB9E /* GameScene.sks in Resources */,
 				EAC7C1AD205C9E5600A2CB9E /* LaunchScreen.storyboard in Resources */,
 				EAC7C1A1205C9E5600A2CB9E /* Actions.sks in Resources */,
