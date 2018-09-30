@@ -50,6 +50,7 @@ extension Card {
         }
     }
 }
+
 var globals: (backend: Game, view: GameScene, ua: GameActionDelegate, cheats: Dictionary<String, [Cheat]>)!
 
 class GameViewController: UIViewController {

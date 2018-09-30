@@ -43,15 +43,17 @@ class CheatDetailController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let concreteCheat = self.selectedCheat[indexPath.item]
+        var cheatingCards: [Card] = []
+        var dealerCheatCards: [Card] = []
         if let cCards = concreteCheat.cheatingCards {
-            let cheatingCards = cCards.map { cheatCard in Card(fromCheat: cheatCard)}
+            cheatingCards = cCards.map { cheatCard in Card(fromCheat: cheatCard)}
             print(cheatingCards)
         }
         if let dCards = concreteCheat.dealerCheatCards {
-            let dealerCheatCards = dCards.map { cheatCard in Card(fromCheat: cheatCard)}
+            dealerCheatCards = dCards.map { cheatCard in Card(fromCheat: cheatCard)}
             print(dealerCheatCards)
         }
-        
+        globals.backend.applyCheat(cheatingCards, dealerCheatCards)
         self.dismiss(animated: true, completion: nil)
     }
     /*
