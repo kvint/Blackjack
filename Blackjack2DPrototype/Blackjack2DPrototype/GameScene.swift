@@ -83,6 +83,11 @@ class GameScene: SKScene, CardsDelegate {
         self.discard(hand: self.dealerNode)
         
     }
+    
+    func updated(hand: inout BJHand) {
+        self.getHandView(hand.id).updateScore()
+    }
+    
     func onPayout(hand: inout BJUserHand) {
         let handView = self.getHandView(hand.id)
         if hand.win > 0 {
@@ -142,15 +147,14 @@ class GameScene: SKScene, CardsDelegate {
         
         let deal = DealCardAnimation(theCard: card, to: handNode, time: 0.4, completeAfter: completeTime)
         
-        let completion = BlockOperation {
-            guard let handModel = globals.backend.model.getHand(id: id) else {
-                return
-            }
-            var hModel = handModel
-            handNode.updateScore(hand: &hModel)
-        }
-        completion.addDependency(deal)
+//        let completion = BlockOperation {
+//            handNode.updateScore()
+//        }
+//        completion.addDependency(deal)
         self.animationQueue.addOperation(deal)
+        self.animationQueue.addOperation(BlockOperation {
+            handNode.updateScore()
+        })
     }
     func dealCardToDealer(card: Card) -> Void {
         let completeTime = globals.backend.state == .Betting ? 0.2 : nil

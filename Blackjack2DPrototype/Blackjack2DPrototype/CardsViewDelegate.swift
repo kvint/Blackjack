@@ -20,4 +20,5 @@ protocol CardsDelegate: class {
     func revealDealerCard(_ card: Card) -> Void
     func onBust(atHand: inout BJUserHand) -> Void
     func onPayout(hand: inout BJUserHand) -> Void
+    func updated(hand: inout BJHand) -> Void
 }

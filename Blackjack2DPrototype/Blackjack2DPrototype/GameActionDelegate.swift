@@ -16,7 +16,7 @@ class GameActionDelegate: GameDelegate {
     }
     
     func updated(hand: inout BJHand) {
-        
+        self.cardsDelegate?.updated(hand: &hand)
     }
     
     func cardDealt(toHand: inout BJHand, card: Card) {
@@ -130,8 +130,7 @@ class GameActionDelegate: GameDelegate {
     
     func roundEnded() {
         print("==== round ended ====")
-        self.cardsDelegate?.endGame();
-        globals.backend.model.clear()
+        self.cardsDelegate?.endGame()
     }
     
 }

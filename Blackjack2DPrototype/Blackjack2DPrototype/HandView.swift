@@ -192,7 +192,11 @@ class HandView: SKNode {
     func updateBet(hand: inout BJUserHand) {
         self.chips.label.text = "\(hand.stake)";
     }
-    func updateScore(hand: inout BJUserHand) {
+    func updateScore() {
+        self.score.text = "?"
+        guard let hand = self.model else {
+            return
+        }
         let scr = hand.getScore()
         if let softScore = scr.soft {
             self.score.text = "\(scr.hard)/\(softScore)"
