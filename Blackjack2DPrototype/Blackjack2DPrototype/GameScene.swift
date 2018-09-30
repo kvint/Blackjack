@@ -94,7 +94,7 @@ class GameScene: SKScene, CardsDelegate {
             winningChipNodes.forEach { (chip) in
                 self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
             }
-        } else if hand.win == 0 {
+        } else if hand.win == hand.stake {
             // push
             handView.chips.children.forEach { (chip) in
                 self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
