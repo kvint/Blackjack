@@ -142,9 +142,47 @@ class ChipStack: SKNode {
     }
 }
 
+class ScoreLabel: SKNode {
+    
+    var label: SKLabelNode = SKLabelNode(text: "")
+    var shape: SKShapeNode = SKShapeNode()
+    
+    override init() {
+        super.init()
+        label.fontSize = 20
+        label.fontName = "Monaco"
+        //label.fontColor
+        
+        shape.path = UIBezierPath(roundedRect: CGRect(x:label.frame.origin.x - 15, y: label.frame.origin.y - 15, width: label.frame.size.width + 30, height: label.frame.size.height + 30), cornerRadius: 32).cgPath
+        //shape.position = CGPoint(x: frame.midX, y: frame.midY)
+        shape.fillColor = .darkGray
+        shape.strokeColor = .white
+        shape.lineWidth = 1
+        self.addChild(shape)
+        self.addChild(label)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    func updateScore(hand: BJUserHand) {
+        self.label.text = "?"
+        let scr = hand.getScore()
+        if let softScore = scr.soft {
+            self.label.text = "\(scr.hard)/\(softScore)"
+        } else {
+            self.label.text = "\(scr.hard)"
+        }
+        shape.path = UIBezierPath(roundedRect: CGRect(x:label.frame.origin.x - 10, y: label.frame.origin.y - 10, width: label.frame.size.width + 20, height: label.frame.size.height + 20), cornerRadius: 32).cgPath
+        //shape.position = CGPoint(x: frame.midX, y: frame.midY)
+    }
+    func clear() {
+        self.label.text = ""
+    }
+}
+
 class HandView: SKNode {
     
-    var score: SKLabelNode = SKLabelNode(text: "")
+    var score: ScoreLabel = ScoreLabel()
     var cards: CardStack = CardStack()
     var chips: ChipStack = ChipStack()
     var spotArea: SKShapeNode = SKShapeNode(circleOfRadius: 65)
@@ -160,6 +198,7 @@ class HandView: SKNode {
         set(value) {
             self._selected = value
             self.spotGlow.isHidden = !value
+            self.score.shape.fillColor = value ? .blue : .darkGray
         }
     }
     
@@ -172,8 +211,10 @@ class HandView: SKNode {
         spotGlow.alpha = 0
         
         self.chips.position.y = -125
-        score.fontSize = 25
-        score.position.y = 90
+        
+        score.position.x = -90
+        score.isHidden = true
+        
         cards.setScale(0.7)
         self.addChild(spotArea)
         self.addChild(spotGlow)
@@ -193,20 +234,16 @@ class HandView: SKNode {
         self.chips.label.text = "\(hand.stake)";
     }
     func updateScore() {
-        self.score.text = "?"
         guard let hand = self.model else {
             return
         }
-        let scr = hand.getScore()
-        if let softScore = scr.soft {
-            self.score.text = "\(scr.hard)/\(softScore)"
-        } else {
-            self.score.text = "\(scr.hard)"
-        }
+        self.score.isHidden = false
+        self.score.updateScore(hand: hand)
     }
     func clear() {
+        self.score.isHidden = true
         self.cards.clear()
         self.chips.clear()
-        self.score.text = ""
+        self.score.clear();
     }
 }
