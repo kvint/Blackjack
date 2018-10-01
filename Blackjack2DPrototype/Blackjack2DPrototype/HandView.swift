@@ -10,17 +10,30 @@ import UIKit
 import SpriteKit
 import CardsBase
 
+class TextureCache {
+    static private var cache: NSMutableDictionary = NSMutableDictionary()
+    
+    static func getTexture(_ name: String) -> SKTexture {
+        if let texture = cache.value(forKey: name) as? SKTexture {
+            return texture
+        }
+        let newTexture = SKTexture(imageNamed: name)
+        cache.setValue(newTexture, forKey: name)
+        return newTexture
+    }
+}
+
 class CardNode: SKNode
 {
     var cardVO: Card!
     var card: SKSpriteNode = SKSpriteNode()
     var faceTexture: SKTexture!
-    var shirtTexture: SKTexture = SKTexture(imageNamed: "shirt")
+    var shirtTexture: SKTexture = TextureCache.getTexture("shirt")
     
     required init(_ card: Card) {
         super.init()
         self.cardVO = card
-        self.faceTexture = SKTexture(imageNamed: card.imageNamed)
+        self.faceTexture = TextureCache.getTexture(card.imageNamed)
         
         let cropNode = SKCropNode()
         let textureSize = self.faceTexture.size()
@@ -166,11 +179,15 @@ class ScoreLabel: SKNode {
     }
     func updateScore(hand: BJUserHand) {
         self.label.text = "?"
-        let scr = hand.getScore()
-        if let softScore = scr.soft {
-            self.label.text = "\(scr.hard)/\(softScore)"
+        if hand.isDone {
+            self.label.text =  "\(hand.getFinalScore())"
         } else {
-            self.label.text = "\(scr.hard)"
+            let scr = hand.getScore()
+            if let softScore = scr.soft {
+                self.label.text = "\(scr.hard)/\(softScore)"
+            } else {
+                self.label.text = "\(scr.hard)"
+            }
         }
         shape.path = UIBezierPath(roundedRect: CGRect(x:label.frame.origin.x - 10, y: label.frame.origin.y - 10, width: label.frame.size.width + 20, height: label.frame.size.height + 20), cornerRadius: 32).cgPath
         //shape.position = CGPoint(x: frame.midX, y: frame.midY)

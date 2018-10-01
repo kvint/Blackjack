@@ -78,10 +78,13 @@ class GameScene: SKScene, CardsDelegate {
             }
         }
     }
+    func startGame() {
+        self.isUserInteractionEnabled = false
+    }
     func endGame() {
         self.eachHand { self.discard(hand: $0) }
         self.discard(hand: self.dealerNode)
-        
+        self.isUserInteractionEnabled = true
     }
     
     func updated(hand: inout BJHand) {
@@ -91,7 +94,7 @@ class GameScene: SKScene, CardsDelegate {
     func onPayout(hand: inout BJUserHand) {
         let handView = self.getHandView(hand.id)
         if hand.win > 0 {
-            let chip = SKSpriteNode(imageNamed: "chip")
+            let chip = SKSpriteNode(texture: TextureCache.getTexture("chip"))
             self.dealerChipsNode.addChild(chip)
             self.animationQueue.addOperation(FlyAnimation(node: chip, to: handView.chips))
             var winningChipNodes = handView.chips.children
@@ -147,10 +150,6 @@ class GameScene: SKScene, CardsDelegate {
         
         let deal = DealCardAnimation(theCard: card, to: handNode, time: 0.4, completeAfter: completeTime)
         
-//        let completion = BlockOperation {
-//            handNode.updateScore()
-//        }
-//        completion.addDependency(deal)
         self.animationQueue.addOperation(deal)
         self.animationQueue.addOperation(BlockOperation {
             handNode.updateScore()
@@ -189,38 +188,17 @@ class GameScene: SKScene, CardsDelegate {
     }
     func betOnHand(handId: String) {
         let handView = self.getHandView(handId)
-        let chip = SKSpriteNode(imageNamed: "chip")
+        let chip = SKSpriteNode(texture: TextureCache.getTexture("chip"))
         chip.setScale(0.8)
         chipsNode.addChild(chip)
 
         let animation = FlyAnimation(node: chip, to: handView.chips)
         animation.execute()
     }
-
-    func touchMoved(toPoint pos : CGPoint) {
-
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {        
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
+    }    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered

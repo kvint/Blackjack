@@ -126,6 +126,7 @@ class GameActionDelegate: GameDelegate {
     
     func roundStarted() {
         print("round started")
+        self.cardsDelegate?.startGame()
     }
     
     func roundEnded() {

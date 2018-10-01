@@ -57,12 +57,6 @@ class GameViewController: UIViewController {
 
     private var cheats: Dictionary<String, [Cheat]>!
     
-    @IBAction func swipeLeft(_ sender: Any) {
-        globals.ua.selectedHand = globals.ua.selectedHand - 1
-    }
-    @IBAction func swipeRight(_ sender: Any) {
-        globals.ua.selectedHand = globals.ua.selectedHand + 1
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,7 +68,7 @@ class GameViewController: UIViewController {
                 fatalError("Failed to parse cheats")
             }
         }
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(onCheatsOpenRequested(_:)), name: .openCheats, object: nil)
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -85,9 +79,9 @@ class GameViewController: UIViewController {
                 // Present the scene
                 view.presentScene(scene)
             }
-            
+
             view.ignoresSiblingOrder = false
-            
+
             view.showsFPS = true
             view.showsNodeCount = true
         }

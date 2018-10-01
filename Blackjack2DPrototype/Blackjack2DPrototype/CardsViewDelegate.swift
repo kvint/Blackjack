@@ -13,6 +13,7 @@ protocol CardsDelegate: class {
     
     func showHand(_ id: String) -> Void
     func endGame() -> Void
+    func startGame() -> Void
     func dealCard(_ id: String, _ card: Card) -> Void
     func dealCardToDealer(card: Card) -> Void
     func betOnHand(handId: String) -> Void
