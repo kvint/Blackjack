@@ -203,7 +203,6 @@ class HandView: SKNode {
     var cards: CardStack = CardStack()
     var chips: ChipStack = ChipStack()
     var spotArea: SKShapeNode = SKShapeNode(circleOfRadius: 65)
-    var spotGlow: SKShapeNode = SKShapeNode(circleOfRadius: 88)
     var model: BJUserHand?
     
     private var _selected: Bool = false
@@ -214,7 +213,6 @@ class HandView: SKNode {
         }
         set(value) {
             self._selected = value
-            self.spotGlow.isHidden = !value
             self.score.shape.fillColor = value ? .blue : .darkGray
         }
     }
@@ -224,8 +222,6 @@ class HandView: SKNode {
         spotArea.strokeColor = .yellow
         spotArea.glowWidth = 20
         spotArea.alpha = 0.2
-        spotGlow.fillColor = .yellow
-        spotGlow.alpha = 0
         
         self.chips.position.y = -125
         
@@ -234,17 +230,10 @@ class HandView: SKNode {
         
         cards.setScale(0.7)
         self.addChild(spotArea)
-        self.addChild(spotGlow)
         self.addChild(cards)
         self.addChild(score)
         self.addChild(chips)
         
-        let fadeIn = SKAction.fadeAlpha(to: 0.3, duration: 0.5)
-        fadeIn.timingMode = .easeOut
-        let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5)
-        fadeOut.timingMode = .easeIn
-        let pulse = SKAction.sequence([fadeIn, fadeOut])
-        spotGlow.run(SKAction.repeatForever(pulse))
         self.selected = false
     }
     func updateBet(hand: inout BJUserHand) {

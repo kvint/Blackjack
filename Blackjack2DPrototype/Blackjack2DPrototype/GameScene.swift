@@ -24,6 +24,7 @@ class GameScene: SKScene, CardsDelegate {
     var chipsNode: SKNode!
     var dealerChipsNode: SKNode!
     var topNode: SKNode!
+    var spotGlow: SKSpriteNode = SKSpriteNode(texture: TextureCache.getTexture("spot"))
     var handNodes: NSMutableDictionary = NSMutableDictionary()
     
     override func didMove(to view: SKView) {
@@ -48,6 +49,11 @@ class GameScene: SKScene, CardsDelegate {
         guard let dealerChipsNode = self.childNode(withName: "//dealerChipsNode") else {
             fatalError("dealerChipsNode node not found")
         }
+        
+        spotGlow.isHidden = true
+        spotGlow.alpha = 0.6
+        insertChild(spotGlow, at: 0)
+        
         self.topNode = topNode
         self.discardDeckNode = discardNode
         self.dealerNode = dealerNode as? HandView
@@ -80,11 +86,13 @@ class GameScene: SKScene, CardsDelegate {
     }
     func startGame() {
         self.isUserInteractionEnabled = false
+        spotGlow.isHidden = false
     }
     func endGame() {
         self.eachHand { self.discard(hand: $0) }
         self.discard(hand: self.dealerNode)
         self.isUserInteractionEnabled = true
+        spotGlow.isHidden = true
     }
     
     func updated(hand: inout BJHand) {
@@ -130,6 +138,10 @@ class GameScene: SKScene, CardsDelegate {
         
         self.activeHandNode = self.getHandView(hand.id)
         self.activeHandNode?.selected = true
+        
+        if let pos = self.activeHandNode?.position {
+            spotGlow.run(SKAction.move(to: pos, duration: 0.1))
+        }
     }
     func revealDealerCard(_ card: Card) {
         let op = RevealFirstCardAnimation(theCard: card, hand: self.dealerNode)

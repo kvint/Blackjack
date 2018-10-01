@@ -17,6 +17,7 @@
 		AF5D28E3205108AB0049608B /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5D28E2205108AB0049608B /* CameraController.swift */; };
 		AF7D40DA205293010013CC66 /* CardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7D40D7205293010013CC66 /* CardNode.swift */; };
 		AF7D40DD205297AC0013CC66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7D40DC205297AC0013CC66 /* Assets.xcassets */; };
+		AF818CE1216231D9004633E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF818CDF216231D9004633E3 /* Assets.xcassets */; };
 		AFCFB6F5205079E2006C9B74 /* CardsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCFB6EE205079C4006C9B74 /* CardsBase.framework */; };
 		AFCFB6F6205079E2006C9B74 /* CardsBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AFCFB6EE205079C4006C9B74 /* CardsBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFCFB6FC20507F24006C9B74 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCFB6FB20507F24006C9B74 /* CardsView.swift */; };
@@ -101,6 +102,7 @@
 		AF5D28E2205108AB0049608B /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		AF7D40D7205293010013CC66 /* CardNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNode.swift; sourceTree = "<group>"; };
 		AF7D40DC205297AC0013CC66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AF818CDF216231D9004633E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFCFB6E7205079C3006C9B74 /* CardsBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CardsBase.xcodeproj; path = CardsBase/CardsBase.xcodeproj; sourceTree = "<group>"; };
 		AFCFB6FB20507F24006C9B74 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		AFCFB79D2050A108006C9B74 /* UILayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILayerViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		AF4C2BDC203C01E0008A5FA9 = {
 			isa = PBXGroup;
 			children = (
+				AF818CDF216231D9004633E3 /* Assets.xcassets */,
 				EAC7C1B4205C9E5600A2CB9E /* Blackjack2DPrototype.xcodeproj */,
 				AFCFB6E7205079C3006C9B74 /* CardsBase.xcodeproj */,
 				AF4C2BE7203C01E0008A5FA9 /* Blackjack */,
@@ -360,6 +363,7 @@
 				AF4C2BF4203C01E0008A5FA9 /* Main.storyboard in Resources */,
 				AF4969632050EFF1007E10BA /* art.scnassets in Resources */,
 				AF4C2BF9203C01E0008A5FA9 /* LaunchScreen.storyboard in Resources */,
+				AF818CE1216231D9004633E3 /* Assets.xcassets in Resources */,
 				AF4C2BED203C01E0008A5FA9 /* Actions.sks in Resources */,
 				AF7D40DD205297AC0013CC66 /* Assets.xcassets in Resources */,
 			);
