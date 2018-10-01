@@ -185,9 +185,14 @@ class ScoreLabel: SKNode {
                 label.text = "\(scr.hard)"
             }
         }
+        // TODO: iOS bug for path on SKShapeNode
+        shape.removeFromParent()
+        let lastFillColor = shape.fillColor
+        shape = SKShapeNode()
+        shape.fillColor = lastFillColor
         let rect = CGRect(x:label.frame.origin.x - 10, y: label.frame.origin.y - 10, width: label.frame.size.width + 20, height: label.frame.size.height + 20)
-        path = UIBezierPath(roundedRect: rect, cornerRadius: 32).cgPath
-        shape.path = path
+        shape.path = UIBezierPath(roundedRect: rect, cornerRadius: 32).cgPath
+        insertChild(shape, at: 0)
     }
     func clear() {
         self.label.text = ""
