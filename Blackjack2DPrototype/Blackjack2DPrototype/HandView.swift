@@ -23,8 +23,7 @@ class TextureCache {
     }
 }
 
-class CardNode: SKNode
-{
+class CardNode: SKNode {
     var cardVO: Card!
     var card: SKSpriteNode = SKSpriteNode()
     var faceTexture: SKTexture!
@@ -235,7 +234,7 @@ class HandView: SKNode {
         self.selected = false
     }
     func updateBet(hand: inout BJUserHand) {
-        self.chips.label.text = "\(hand.stake)";
+        self.chips.label.text = "\(hand.stake)"
     }
     func updateScore() {
         guard let hand = self.model else {
@@ -248,6 +247,6 @@ class HandView: SKNode {
         score.isHidden = true
         cards.clear()
         chips.clear()
-        score.clear();
+        score.clear()
     }
 }
