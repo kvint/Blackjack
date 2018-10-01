@@ -159,15 +159,14 @@ class ScoreLabel: SKNode {
     
     var label: SKLabelNode = SKLabelNode(text: "")
     var shape: SKShapeNode = SKShapeNode()
+    var path: CGPath!
     
     override init() {
         super.init()
         label.fontSize = 20
         label.fontName = "Monaco"
         //label.fontColor
-        
-        shape.path = UIBezierPath(roundedRect: CGRect(x:label.frame.origin.x - 15, y: label.frame.origin.y - 15, width: label.frame.size.width + 30, height: label.frame.size.height + 30), cornerRadius: 32).cgPath
-        //shape.position = CGPoint(x: frame.midX, y: frame.midY)
+        shape.path = self.path
         shape.fillColor = .darkGray
         shape.strokeColor = .white
         shape.lineWidth = 1
@@ -189,8 +188,9 @@ class ScoreLabel: SKNode {
                 self.label.text = "\(scr.hard)"
             }
         }
-        shape.path = UIBezierPath(roundedRect: CGRect(x:label.frame.origin.x - 10, y: label.frame.origin.y - 10, width: label.frame.size.width + 20, height: label.frame.size.height + 20), cornerRadius: 32).cgPath
-        //shape.position = CGPoint(x: frame.midX, y: frame.midY)
+        let rect = CGRect(x:label.frame.origin.x - 10, y: label.frame.origin.y - 10, width: label.frame.size.width + 20, height: label.frame.size.height + 20)
+        self.path = UIBezierPath(roundedRect: rect, cornerRadius: 32).cgPath
+        shape.path = self.path
     }
     func clear() {
         self.label.text = ""

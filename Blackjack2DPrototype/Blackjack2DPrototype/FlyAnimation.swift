@@ -13,15 +13,22 @@ class FlyAnimation: AsyncOperation {
 
     var node: SKNode
     var toNode: SKNode
+    var time: Double!
+    var actionTime: Double!
 
-    required init(node: SKNode, to: SKNode) {
+    required init(node: SKNode, to: SKNode, time: Double = 0.3, completeAfter: Double? = nil) {
         self.node = node
         self.toNode = to
+        self.time = time
+        if completeAfter != nil {
+            self.actionTime = completeAfter
+        } else {
+            self.actionTime = self.time
+        }
         super.init()
     }
 
     override func execute() {
-        let time = 0.3
 
         if let nodeParent = self.node.parent {
             // convert
@@ -43,9 +50,18 @@ class FlyAnimation: AsyncOperation {
         scaleDown.timingMode = .easeIn
         let scaleAction = SKAction.sequence([scaleUp, scaleDown])
         
-        self.node.run(SKAction.group([moveToAction, rotateAction, scaleAction])) {
+        let anim = SKAction.sequence([SKAction.group([moveToAction, rotateAction, scaleAction]), SKAction.run {
             self.node.move(toParent: self.toNode)
+        }])
+
+        let completionAction = SKAction.run {
             self.isFinished = true
+        }
+        if self.time == self.actionTime {
+            self.node.run(SKAction.sequence([anim, completionAction]))
+        } else {
+            self.node.run(SKAction.sequence([SKAction.wait(forDuration: self.actionTime), completionAction]))
+            self.node.run(anim)
         }
     }
 }

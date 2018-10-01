@@ -58,23 +58,9 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="axm-Ho-AiW" appends="YES" id="MMw-D0-u1G"/>
-                            <outletCollection property="gestureRecognizers" destination="C4x-Vc-HDl" appends="YES" id="Jox-9X-lLN"/>
-                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="axm-Ho-AiW" userLabel="Swipe Left">
-                    <connections>
-                        <action selector="swipeLeft:" destination="BV1-FR-VrT" id="Dwt-pT-HtY"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="C4x-Vc-HDl">
-                    <connections>
-                        <action selector="swipeRight:" destination="BV1-FR-VrT" id="wIO-Pc-hp6"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2548" y="26.53673163418291"/>
         </scene>

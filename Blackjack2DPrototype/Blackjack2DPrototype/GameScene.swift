@@ -101,7 +101,7 @@ class GameScene: SKScene, CardsDelegate {
     
     func onPayout(hand: inout BJUserHand) {
         let handView = self.getHandView(hand.id)
-        if hand.win > 0 {
+        if hand.win > hand.stake {
             let chip = SKSpriteNode(texture: TextureCache.getTexture("chip"))
             self.dealerChipsNode.addChild(chip)
             self.animationQueue.addOperation(FlyAnimation(node: chip, to: handView.chips))
@@ -205,7 +205,7 @@ class GameScene: SKScene, CardsDelegate {
         let chip = SKSpriteNode(texture: TextureCache.getTexture("chip"))
         chip.setScale(0.8)
         chipsNode.addChild(chip)
-
+        
         let animation = FlyAnimation(node: chip, to: handView.chips)
         animation.execute()
     }
