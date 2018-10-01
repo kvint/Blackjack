@@ -156,9 +156,14 @@ class ChipStack: SKNode {
 
 class ScoreLabel: SKNode {
     
-    var label: SKLabelNode = SKLabelNode(text: "")
-    var shape: SKShapeNode = SKShapeNode()
-    var path: CGPath!
+    private var label: SKLabelNode = SKLabelNode(text: "")
+    private var shape: SKShapeNode = SKShapeNode()
+    private var path: CGPath!
+    private var _highlighted: Bool = false
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override init() {
         super.init()
@@ -167,12 +172,9 @@ class ScoreLabel: SKNode {
         shape.fillColor = .darkGray
         shape.strokeColor = .white
         shape.lineWidth = 1
-        addChild(shape)
         addChild(label)
     }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+    
     func updateScore(hand: BJUserHand) {
         label.text = "?"
         if hand.isDone {
@@ -186,16 +188,28 @@ class ScoreLabel: SKNode {
             }
         }
         // TODO: iOS bug for path on SKShapeNode
-        shape.removeFromParent()
-        let lastFillColor = shape.fillColor
-        shape = SKShapeNode()
-        shape.fillColor = lastFillColor
-        let rect = CGRect(x:label.frame.origin.x - 10, y: label.frame.origin.y - 10, width: label.frame.size.width + 20, height: label.frame.size.height + 20)
-        shape.path = UIBezierPath(roundedRect: rect, cornerRadius: 32).cgPath
-        insertChild(shape, at: 0)
+        if let _ = shape.parent {
+            let rect = CGRect(x:label.frame.origin.x - 10, y: label.frame.origin.y - 10, width: label.frame.size.width + 20, height: label.frame.size.height + 20)
+            shape.path = UIBezierPath(roundedRect: rect, cornerRadius: 32).cgPath
+            insertChild(shape, at: 0)
+            updateFillColor()
+        }
+    }
+    var highlighted: Bool {
+        get {
+            return _highlighted
+        }
+        set(value) {
+            _highlighted = value
+            updateFillColor()
+        }
+    }
+    private func updateFillColor() {
+        shape.fillColor = _highlighted ? .blue : .darkGray
     }
     func clear() {
         self.label.text = ""
+        // update shape
     }
 }
 
@@ -215,7 +229,7 @@ class HandView: SKNode {
         }
         set(value) {
             self._selected = value
-            self.score.shape.fillColor = value ? .blue : .darkGray
+            self.score.highlighted = value
         }
     }
     
