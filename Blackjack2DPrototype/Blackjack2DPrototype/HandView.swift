@@ -84,25 +84,25 @@ class Stack {
 //        if (self.allocated < 1) {
 //            self.allocate();
 //        }
-        self.count += 1;
-        self.allocated -= 1;
-        self.update();
+        count += 1;
+        allocated -= 1;
+        update();
     }
     func allocate() {
-        self.allocated += 1;
-        self.update();
+        allocated += 1;
+        update();
     }
     func pop() {
-        self.count -= 1;
-        self.update();
+        count -= 1;
+        update();
     }
     func reset() {
-        self.allocated = 0;
-        self.count = 0;
+        allocated = 0;
+        count = 0;
     }
     var length: Int {
         get {
-            return self.count + self.allocated;
+            return count + allocated;
         }
     }
     func update() {
@@ -126,16 +126,16 @@ class CardStack: SKNode {
     }
     
     func addNode(_ card: CardNode) {
-        self.addChild(card)
+        addChild(card)
         card.setScale(1)
-        self.stack.add()
-        self.cards.append(card)
+        stack.add()
+        cards.append(card)
     }
     
     func clear() {
-        self.cards = []
-        self.stack.reset()
-        self.removeAllChildren()
+        cards = []
+        stack.reset()
+        removeAllChildren()
     }
 }
 
@@ -145,13 +145,13 @@ class ChipStack: SKNode {
     override init() {
         super.init();
         label.fontSize = 35
-        self.addChild(label)
+        addChild(label)
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     func clear() {
-        self.label.text = ""
+        label.text = ""
     }
 }
 
@@ -165,32 +165,30 @@ class ScoreLabel: SKNode {
         super.init()
         label.fontSize = 20
         label.fontName = "Monaco"
-        //label.fontColor
-        shape.path = self.path
         shape.fillColor = .darkGray
         shape.strokeColor = .white
         shape.lineWidth = 1
-        self.addChild(shape)
-        self.addChild(label)
+        addChild(shape)
+        addChild(label)
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     func updateScore(hand: BJUserHand) {
-        self.label.text = "?"
+        label.text = "?"
         if hand.isDone {
-            self.label.text =  "\(hand.getFinalScore())"
+            label.text =  "\(hand.getFinalScore())"
         } else {
             let scr = hand.getScore()
             if let softScore = scr.soft {
-                self.label.text = "\(scr.hard)/\(softScore)"
+                label.text = "\(scr.hard)/\(softScore)"
             } else {
-                self.label.text = "\(scr.hard)"
+                label.text = "\(scr.hard)"
             }
         }
         let rect = CGRect(x:label.frame.origin.x - 10, y: label.frame.origin.y - 10, width: label.frame.size.width + 20, height: label.frame.size.height + 20)
-        self.path = UIBezierPath(roundedRect: rect, cornerRadius: 32).cgPath
-        shape.path = self.path
+        path = UIBezierPath(roundedRect: rect, cornerRadius: 32).cgPath
+        shape.path = path
     }
     func clear() {
         self.label.text = ""
@@ -223,16 +221,16 @@ class HandView: SKNode {
         spotArea.glowWidth = 20
         spotArea.alpha = 0.2
         
-        self.chips.position.y = -125
+        chips.position.y = -125
         
         score.position.x = -90
         score.isHidden = true
         
         cards.setScale(0.7)
-        self.addChild(spotArea)
-        self.addChild(cards)
-        self.addChild(score)
-        self.addChild(chips)
+        addChild(spotArea)
+        addChild(cards)
+        addChild(score)
+        addChild(chips)
         
         self.selected = false
     }
@@ -247,9 +245,9 @@ class HandView: SKNode {
         self.score.updateScore(hand: hand)
     }
     func clear() {
-        self.score.isHidden = true
-        self.cards.clear()
-        self.chips.clear()
-        self.score.clear();
+        score.isHidden = true
+        cards.clear()
+        chips.clear()
+        score.clear();
     }
 }
