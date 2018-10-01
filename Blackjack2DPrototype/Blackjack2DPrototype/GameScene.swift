@@ -140,7 +140,9 @@ class GameScene: SKScene, CardsDelegate {
         self.activeHandNode?.selected = true
         
         if let pos = self.activeHandNode?.position {
-            spotGlow.run(SKAction.move(to: pos, duration: 0.1))
+            let moveAction = SKAction.move(to: pos, duration: 0.2)
+            moveAction.timingMode = .easeInEaseOut
+            spotGlow.run(moveAction)
         }
     }
     func revealDealerCard(_ card: Card) {
