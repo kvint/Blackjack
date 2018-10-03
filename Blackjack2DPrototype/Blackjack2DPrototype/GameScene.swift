@@ -14,6 +14,9 @@ import CardsBase
 func getCardSprite(_ card: Card) -> SKNode {
     return CardNode(card)
 }
+
+fileprivate let CHIP_STAKE_RATIO: Double = 10
+
 class GameScene: SKScene, CardsDelegate {
     
     var animationQueue = OperationQueue()
@@ -22,10 +25,12 @@ class GameScene: SKScene, CardsDelegate {
     var deckNode: SKNode!
     var discardDeckNode: SKNode!
     var chipsNode: SKNode!
+    var bankLabel: SKLabelNode!
     var dealerChipsNode: SKNode!
     var topNode: SKNode!
     var spotGlow: SKSpriteNode = SKSpriteNode(texture: TextureCache.getTexture("spot"))
     var handNodes: NSMutableDictionary = NSMutableDictionary()
+    var viewBalance: Double?
     
     override func didMove(to view: SKView) {
         
@@ -49,12 +54,16 @@ class GameScene: SKScene, CardsDelegate {
         guard let dealerChipsNode = self.childNode(withName: "//dealerChipsNode") else {
             fatalError("dealerChipsNode node not found")
         }
+        guard let bankLabel = chipsNode.childNode(withName: "//label") as! SKLabelNode? else {
+            fatalError("bankLabel node not found")
+        }
         
         spotGlow.isHidden = true
-        spotGlow.alpha = 0.6
+        spotGlow.alpha = 0.5
         insertChild(spotGlow, at: 0)
         
         self.topNode = topNode
+        self.bankLabel = bankLabel
         self.discardDeckNode = discardNode
         self.dealerNode = dealerNode as? HandView
         self.deckNode = deckNode
@@ -95,6 +104,26 @@ class GameScene: SKScene, CardsDelegate {
         spotGlow.isHidden = true
     }
     
+    func updateViewBalance(withValue: Double) {
+        guard let current = self.viewBalance else {
+            return
+        }
+        self.viewBalance = current + withValue
+        updateBalance()
+    }
+    
+    func syncBalance() {
+        self.viewBalance = globals.backend.bank?.total
+        self.updateBalance()
+    }
+    func updateBalance() {
+        if let total = self.viewBalance {
+            globals.view.bankLabel.text = "\(total) $"
+        } else {
+            globals.view.bankLabel.text = "?"
+        }
+    }
+    
     func updated(hand: inout BJHand) {
         self.getHandView(hand.id).updateScore()
     }
@@ -109,16 +138,28 @@ class GameScene: SKScene, CardsDelegate {
             winningChipNodes.append(chip)
             winningChipNodes.forEach { (chip) in
                 self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
+                self.animationQueue.addOperation(BlockOperation {
+                    self.updateViewBalance(withValue: CHIP_STAKE_RATIO)
+                })
             }
         } else if hand.win == hand.stake {
             // push
             handView.chips.children.forEach { (chip) in
                 self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
+                self.animationQueue.addOperation(BlockOperation {
+                    self.updateViewBalance(withValue: CHIP_STAKE_RATIO)
+                })
             }
         } else {
             handView.chips.children.forEach { (chip) in
                 self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode))
+                self.animationQueue.addOperation(BlockOperation {
+                    self.updateViewBalance(withValue: -CHIP_STAKE_RATIO)
+                })
             }
+        }
+        self.animationQueue.addOperation {
+            self.syncBalance()
         }
         if hand.gotBusted() {
             discard(hand: handView)
@@ -180,13 +221,8 @@ class GameScene: SKScene, CardsDelegate {
         let touchedNodes = self.nodes(at: pos)
         touchedNodes.forEach { (node) in
             if let handModelID = (node as? HandView)?.model?.id {
-                
                 print("bet on hand -> \(handModelID)")
-                if globals.backend.state != .Betting {
-                    print("The game is playing")
-                } else {
-                    try? globals.backend.bet(handId: "\(handModelID)", stake: 10)
-                }
+                try? globals.backend.bet(handId: "\(handModelID)", stake: CHIP_STAKE_RATIO)
             }
         }
         
@@ -206,8 +242,11 @@ class GameScene: SKScene, CardsDelegate {
         chip.setScale(0.8)
         chipsNode.addChild(chip)
         
-        let animation = FlyAnimation(node: chip, to: handView.chips)
-        animation.execute()
+        let localQ = OperationQueue()
+        localQ.addOperation(FlyAnimation(node: chip, to: handView.chips))
+        localQ.addOperation {
+            self.syncBalance()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {        

@@ -50,12 +50,29 @@ extension Card {
         }
     }
 }
+class UserBank: Bank {
+    
+    private var currentAmount: Double = 0
+    
+    func take(amount: Double) throws {
+        currentAmount -= amount
+    }
+    func put(amount: Double) {
+        currentAmount += amount
+    }
+    var total: Double {
+        get {
+            return self.currentAmount
+        }
+    }
+}
 
 var globals: (backend: Game, view: GameScene, ua: GameActionDelegate, cheats: Dictionary<String, [Cheat]>)!
 
 class GameViewController: UIViewController {
 
     private var cheats: Dictionary<String, [Cheat]>!
+    private var bank: UserBank = UserBank()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +112,7 @@ class GameViewController: UIViewController {
     }
     func initTheGame(scene: GameScene) {
         globals = (backend: Game(), view: scene, ua: GameActionDelegate(), cheats: self.cheats)
+        globals.backend.bank = bank
         globals.backend.delegate = globals.ua
         globals.ua.cardsDelegate = scene
         self.addUIView();

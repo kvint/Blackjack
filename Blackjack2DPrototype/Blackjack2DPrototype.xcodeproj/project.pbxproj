@@ -119,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				AFCC3FD6215E648A00569D4A /* cheats */,
-				EAEB0E13213C62EF0016760F /* actions */,
+				EAEB0E13213C62EF0016760F /* animations */,
 				EAC7C19C205C9E5600A2CB9E /* AppDelegate.swift */,
 				EAC7C19E205C9E5600A2CB9E /* GameScene.sks */,
 				EA16B4852135C62500DEC213 /* Assets.xcassets */,
@@ -137,7 +137,7 @@
 			path = Blackjack2DPrototype;
 			sourceTree = "<group>";
 		};
-		EAEB0E13213C62EF0016760F /* actions */ = {
+		EAEB0E13213C62EF0016760F /* animations */ = {
 			isa = PBXGroup;
 			children = (
 				EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */,
@@ -147,7 +147,7 @@
 				EA2203ED213EFC7F00294AD1 /* FlyAnimation.swift */,
 				EA3AD33521485D2F0004C4FC /* DiscardCardsAnimation.swift */,
 			);
-			name = actions;
+			name = animations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
