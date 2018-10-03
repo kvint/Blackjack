@@ -78,6 +78,8 @@ class DealCardAnimation: AsyncOperation {
             self.hand.cards.addNode(cardNode)
             let pos = self.hand.cards.convert(cardNode.position, from: globals.view.topNode)
             cardNode.position = pos
+        }, SKAction.run {
+            self.hand.updateScore()
         }])
     
         let completionAction = SKAction.run {
