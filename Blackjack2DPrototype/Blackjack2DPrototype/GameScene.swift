@@ -83,6 +83,7 @@ class GameScene: SKScene, CardsDelegate {
                 }
             }
         }
+        self.syncBalance()
     }
     func eachHand(_ closure :(_: HandView) -> Void) {
         globals.backend.model.hands.forEach {
@@ -117,11 +118,22 @@ class GameScene: SKScene, CardsDelegate {
         self.updateBalance()
     }
     func updateBalance() {
-        if let total = self.viewBalance {
-            globals.view.bankLabel.text = "\(total) $"
-        } else {
-            globals.view.bankLabel.text = "?"
+        let label = globals.view.bankLabel!
+        
+        guard let total = self.viewBalance else {
+            label.text = "?"
+            label.fontColor = .white
+            return
         }
+        
+        if total != 0 {
+            label.fontColor = total > 0 ? UIColor.green : UIColor.red
+        } else {
+            label.fontColor = .white
+        }
+        
+        let prefix = total > 0 ? "+" : "-"
+        label.text = "\(prefix)\(total) $"
     }
     
     func updated(hand: inout BJHand) {
