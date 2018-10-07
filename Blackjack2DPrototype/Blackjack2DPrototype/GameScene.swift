@@ -187,6 +187,7 @@ class GameScene: SKScene, CardsDelegate {
     func didHandChange(_ hand: inout BJHand) {
         if let ah = self.activeHandNode {
             ah.selected = false
+            ah.updateScore()
         }
         
         self.activeHandNode = self.getHandView(hand.id)
