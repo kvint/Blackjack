@@ -59,7 +59,7 @@ class GameScene: SKScene, CardsDelegate {
         }
         
         spotGlow.isHidden = true
-        spotGlow.alpha = 0.5
+        spotGlow.alpha = 0.3
         insertChild(spotGlow, at: 0)
         
         self.topNode = topNode
@@ -96,6 +96,10 @@ class GameScene: SKScene, CardsDelegate {
     }
     func startGame() {
         self.isUserInteractionEnabled = false
+
+        if let activeHandId = globals.backend.model.activeHand?.id {
+            spotGlow.position = self.getHandView(activeHandId).position
+        }
         spotGlow.isHidden = false
     }
     func endGame() {
@@ -185,19 +189,8 @@ class GameScene: SKScene, CardsDelegate {
         self.animationQueue.addOperation(op)
     }
     func didHandChange(_ hand: inout BJHand) {
-        if let ah = self.activeHandNode {
-            ah.selected = false
-            ah.updateScore()
-        }
-        
-        self.activeHandNode = self.getHandView(hand.id)
-        self.activeHandNode?.selected = true
-        
-        if let pos = self.activeHandNode?.position {
-            let moveAction = SKAction.move(to: pos, duration: 0.2)
-            moveAction.timingMode = .easeInEaseOut
-            spotGlow.run(moveAction)
-        }
+        let op = SelectHandAnimation(hand: hand)
+        self.animationQueue.addOperation(op)
     }
     func revealDealerCard(_ card: Card) {
         let op = RevealFirstCardAnimation(theCard: card, hand: self.dealerNode)
