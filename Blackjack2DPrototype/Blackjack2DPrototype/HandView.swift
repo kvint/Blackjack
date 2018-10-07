@@ -175,12 +175,12 @@ class ScoreLabel: SKNode {
         addChild(label)
     }
     
-    func updateScore(hand: BJUserHand) {
+    func updateScore(forCards cards: [Card], isDone: Bool = false) {
         label.text = "?"
-        if hand.isDone {
-            label.text =  "\(hand.getFinalScore())"
+        if isDone {
+            label.text =  "\(Card.getFinalScore(cards: cards))"
         } else {
-            let scr = hand.getScore()
+            let scr = Card.getScore(cards: cards)
             if let softScore = scr.soft {
                 label.text = "\(scr.hard)/\(softScore)"
             } else {
@@ -259,8 +259,9 @@ class HandView: SKNode {
         guard let hand = self.model else {
             return
         }
+        
         self.score.isHidden = false
-        self.score.updateScore(hand: hand)
+        self.score.updateScore(forCards: self.cards.cards.map { node in node.cardVO }, isDone: hand.isDone)
     }
     func clear() {
         score.isHidden = true
