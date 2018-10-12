@@ -31,6 +31,7 @@
 		EAEB0E15213C63120016760F /* DealCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E14213C63120016760F /* DealCardAnimation.swift */; };
 		EAEB0E19213DBDE20016760F /* DiscardCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */; };
 		EAEB0E1B213DDB260016760F /* RevealCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEB0E1A213DDB260016760F /* RevealCardAnimation.swift */; };
+		EAF50FA2216A6B3500CC6D6A /* SelectHandAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF50FA1216A6B3500CC6D6A /* SelectHandAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -73,6 +74,7 @@
 		EAEB0E14213C63120016760F /* DealCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealCardAnimation.swift; sourceTree = "<group>"; };
 		EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscardCardAnimation.swift; sourceTree = "<group>"; };
 		EAEB0E1A213DDB260016760F /* RevealCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealCardAnimation.swift; sourceTree = "<group>"; };
+		EAF50FA1216A6B3500CC6D6A /* SelectHandAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHandAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				EAEB0E18213DBDE20016760F /* DiscardCardAnimation.swift */,
+				EAF50FA1216A6B3500CC6D6A /* SelectHandAnimation.swift */,
 				EAEB0E11213C62D70016760F /* AsyncOperation.swift */,
 				EAEB0E14213C63120016760F /* DealCardAnimation.swift */,
 				EAEB0E1A213DDB260016760F /* RevealCardAnimation.swift */,
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFC27758213567FC0008503E /* HandView.swift in Sources */,
+				EAF50FA2216A6B3500CC6D6A /* SelectHandAnimation.swift in Sources */,
 				EAC7C1C5205CA51D00A2CB9E /* GameActionDelegate.swift in Sources */,
 				EAC7C1C1205C9F5400A2CB9E /* UIGameViewController.swift in Sources */,
 				EAEB0E19213DBDE20016760F /* DiscardCardAnimation.swift in Sources */,

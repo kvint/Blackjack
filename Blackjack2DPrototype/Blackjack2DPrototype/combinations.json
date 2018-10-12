@@ -1,4 +1,19 @@
 {
+    "1": [
+        {
+            "label": "1",
+            "cheatingCards": [
+                {
+                    "rank": "A",
+                    "suit": "H"
+                },
+                {
+                    "rank": "2",
+                    "suit": "H"
+                }
+            ]
+        }
+    ],
   "BLACKJACK": [
     {
       "label": "BLACKJACK",
