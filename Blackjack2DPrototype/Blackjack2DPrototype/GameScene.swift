@@ -198,9 +198,6 @@ class GameScene: SKScene, CardsDelegate {
         self.animationQueue.addOperation(op)
         self.addHandScoreUpdateOperation(handNode: self.dealerNode)
     }
-    func showHand(_ id: String) {
-        print("Show hand \(id)")
-    }
     
     func dealCard(_ id: String, _ card: Card) {
         print("Deal card to hand \(id) -> \(card)")
@@ -234,7 +231,6 @@ class GameScene: SKScene, CardsDelegate {
     }
     
     func touchDown(atPoint pos : CGPoint) {
-        
         let touchedNodes = self.nodes(at: pos)
         touchedNodes.forEach { (node) in
             if let handModelID = (node as? HandView)?.model?.id {
@@ -253,6 +249,7 @@ class GameScene: SKScene, CardsDelegate {
         }
         return hand
     }
+    
     func betOnHand(handId: String) {
         let handView = self.getHandView(handId)
         let chip = SKSpriteNode(texture: TextureCache.getTexture("chip"))

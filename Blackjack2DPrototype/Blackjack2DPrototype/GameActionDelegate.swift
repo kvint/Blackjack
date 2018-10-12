@@ -10,6 +10,10 @@ import Foundation
 import CardsBase
 
 class GameActionDelegate: GameDelegate {
+    
+    public weak var cardsDelegate: CardsDelegate? = nil
+    public weak var uiDelegate: UIGameViewController? = nil
+    
     func focusChanged(to: inout BJHand) {
         print("didHandChange to \(to.id)")
         self.cardsDelegate?.didHandChange(&to)
@@ -42,39 +46,6 @@ class GameActionDelegate: GameDelegate {
             self.cardsDelegate?.onPayout(hand: &hand)
         }
         self.uiDelegate?.displayActions()
-    }
-    
-
-    public weak var cardsDelegate: CardsDelegate? = nil
-    public weak var uiDelegate: UIGameViewController? = nil
-
-    private var _selectedHand: Int = 0;
-    
-    var selectedHand: Int {
-        get {
-            return _selectedHand;
-        }
-        set (index) {
-            guard index >= 0 && index < 5 else {
-                return;
-            }
-            _selectedHand = index
-            
-            let hand = globals.backend.model.getHand(id: String(_selectedHand))
-            if hand != nil {
-                cardsDelegate?.showHand(hand!.id)
-            }
-            print("Show hand \(_selectedHand)")
-        }
-    }
-    
-    func bet(stake: Double) {
-        do {
-            try globals.backend.bet(index: _selectedHand, stake: stake)
-            print("bet \(String(describing: globals.backend.model.getHand(id: String(_selectedHand))?.stake)) to \(_selectedHand)")
-        } catch {
-            print("Failed to place a bet")
-        }
     }
 
     func deal() {

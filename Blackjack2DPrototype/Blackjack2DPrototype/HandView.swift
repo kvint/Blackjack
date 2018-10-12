@@ -167,7 +167,7 @@ class ScoreLabel: SKNode {
     
     override init() {
         super.init()
-        label.fontSize = 20
+        label.fontSize = 24
         label.fontName = "Monaco"
         shape.fillColor = .darkGray
         shape.strokeColor = .white
@@ -259,7 +259,6 @@ class HandView: SKNode {
         guard let hand = self.model else {
             return
         }
-        
         self.score.isHidden = false
         self.score.updateScore(forCards: self.cards.cards.map { node in node.cardVO }, isDone: hand.isDone)
     }
