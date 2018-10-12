@@ -83,6 +83,7 @@ class GameScene: SKScene, CardsDelegate {
                 }
             }
         }
+        self.dealerNode.model = globals.backend.model.dealer
         self.syncBalance()
     }
     func eachHand(_ closure :(_: HandView) -> Void) {
@@ -201,6 +202,7 @@ class GameScene: SKScene, CardsDelegate {
     func revealDealerCard(_ card: Card) {
         let op = RevealFirstCardAnimation(theCard: card, hand: self.dealerNode)
         self.animationQueue.addOperation(op)
+        self.addHandScoreUpdateOperation(handNode: self.dealerNode)
     }
     func showHand(_ id: String) {
         print("Show hand \(id)")
@@ -218,7 +220,9 @@ class GameScene: SKScene, CardsDelegate {
         let deal = DealCardAnimation(theCard: card, to: handNode, time: 0.4, completeAfter: completeTime)
         
         self.animationQueue.addOperation(deal)
-
+        self.addHandScoreUpdateOperation(handNode: handNode)
+    }
+    func addHandScoreUpdateOperation(handNode: HandView) {
         guard let cards = handNode.model?.cards else {
             return;
         }
@@ -232,6 +236,7 @@ class GameScene: SKScene, CardsDelegate {
         let completeTime = globals.backend.state == .Betting ? 0.2 : nil
         let op = DealCardAnimation(theCard: card, to: self.dealerNode, time: 0.4, completeAfter: completeTime)
         self.animationQueue.addOperation(op)
+        self.addHandScoreUpdateOperation(handNode: self.dealerNode)
     }
     
     func touchDown(atPoint pos : CGPoint) {

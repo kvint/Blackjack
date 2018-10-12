@@ -175,7 +175,7 @@ class ScoreLabel: SKNode {
         addChild(label)
     }
     
-    func updateScore(hand: BJUserHand) {
+    func updateScore(hand: BJHand) {
         label.text = "?"
         if hand.isDone {
             label.text =  "\(hand.getFinalScore())"
@@ -219,7 +219,7 @@ class HandView: SKNode {
     var cards: CardStack = CardStack()
     var chips: ChipStack = ChipStack()
     var spotArea: SKShapeNode = SKShapeNode(circleOfRadius: 65)
-    var model: BJUserHand?
+    var model: BJHand?
     
     private var _selected: Bool = false
     
