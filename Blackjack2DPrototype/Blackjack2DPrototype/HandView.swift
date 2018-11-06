@@ -220,6 +220,7 @@ class HandView: SKNode {
     var chips: ChipStack = ChipStack()
     var spotArea: SKShapeNode = SKShapeNode(circleOfRadius: 65)
     var model: BJHand?
+    var payedOut: Bool = false
     
     private var _selected: Bool = false
     
@@ -263,6 +264,7 @@ class HandView: SKNode {
         self.score.updateScore(forCards: self.cards.cards.map { node in node.cardVO }, isDone: hand.isDone)
     }
     func clear() {
+        payedOut = false
         score.isHidden = true
         cards.clear()
         chips.clear()

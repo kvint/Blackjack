@@ -32,9 +32,6 @@ class DiscardCardsAnimation: AsyncOperation {
             }
             self.queue.addOperation(op)
         }
-        self.queue.addOperation {
-            self.handView.clear();
-        }
         
         self.queue.addOperation {
             self.isFinished = true

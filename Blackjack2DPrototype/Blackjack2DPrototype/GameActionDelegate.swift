@@ -77,12 +77,12 @@ class GameActionDelegate: GameDelegate {
         }
     }
     func split() {
-        print("Split")
-        do {
-            try globals.backend.split()
-        } catch {
-            print("Split failed")
-        }
+//        print("Split")
+//        do {
+//            try globals.backend.split()
+//        } catch {
+//            print("Split failed")
+//        }
     }
     func insurance() {
         do {
