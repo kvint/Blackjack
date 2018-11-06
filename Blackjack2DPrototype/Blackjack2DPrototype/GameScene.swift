@@ -151,7 +151,6 @@ class GameScene: SKScene, CardsDelegate {
             let time = 0.3
             let completeTime = 0.1
             let handView = self.getHandView(localHand.id)
-            print("onPayout: handView.chips.children", handView.chips.children.count)
             if localHand.win > localHand.stake {
                 let chip = SKSpriteNode(texture: TextureCache.getTexture("chip"))
                 self.dealerChipsNode.addChild(chip)
@@ -206,7 +205,6 @@ class GameScene: SKScene, CardsDelegate {
     }
     
     func dealCard(_ id: String, _ card: Card) {
-        print("Deal card to hand \(id) -> \(card)")
         
         let handNode = self.getHandView(id)
         var completeTime: Double? = nil
