@@ -146,40 +146,46 @@ class GameScene: SKScene, CardsDelegate {
     }
     
     func onPayout(hand: inout BJUserHand) {
-        let handView = self.getHandView(hand.id)
-        if hand.win > hand.stake {
-            let chip = SKSpriteNode(texture: TextureCache.getTexture("chip"))
-            self.dealerChipsNode.addChild(chip)
-            self.animationQueue.addOperation(FlyAnimation(node: chip, to: handView.chips))
-            var winningChipNodes = handView.chips.children
-            winningChipNodes.append(chip)
-            winningChipNodes.forEach { (chip) in
-                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
-                self.animationQueue.addOperation(BlockOperation {
-                    self.updateViewBalance(withValue: CHIP_STAKE_RATIO)
-                })
-            }
-        } else if hand.win == hand.stake {
-            // push
-            handView.chips.children.forEach { (chip) in
-                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode))
-                self.animationQueue.addOperation(BlockOperation {
-                    self.updateViewBalance(withValue: CHIP_STAKE_RATIO)
-                })
-            }
-        } else {
-            handView.chips.children.forEach { (chip) in
-                self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode))
-                self.animationQueue.addOperation(BlockOperation {
-                    self.updateViewBalance(withValue: -CHIP_STAKE_RATIO)
-                })
-            }
-        }
+        let localHand = hand
         self.animationQueue.addOperation {
-            self.syncBalance()
-        }
-        if hand.gotBusted() {
-            discard(hand: handView)
+            let time = 0.3
+            let completeTime = 0.1
+            let handView = self.getHandView(localHand.id)
+            print("onPayout: handView.chips.children", handView.chips.children.count)
+            if localHand.win > localHand.stake {
+                let chip = SKSpriteNode(texture: TextureCache.getTexture("chip"))
+                self.dealerChipsNode.addChild(chip)
+                self.animationQueue.addOperation(FlyAnimation(node: chip, to: handView.chips, time: time, completeAfter: completeTime))
+                var winningChipNodes = handView.chips.children
+                winningChipNodes.append(chip)
+                winningChipNodes.forEach { (chip) in
+                    self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode, time: time, completeAfter: completeTime))
+                    self.animationQueue.addOperation(BlockOperation {
+                        self.updateViewBalance(withValue: CHIP_STAKE_RATIO)
+                    })
+                }
+            } else if localHand.win == localHand.stake {
+                // push
+                handView.chips.children.forEach { (chip) in
+                    self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.chipsNode, time: time, completeAfter: completeTime))
+                    self.animationQueue.addOperation(BlockOperation {
+                        self.updateViewBalance(withValue: CHIP_STAKE_RATIO)
+                    })
+                }
+            } else {
+                handView.chips.children.forEach { (chip) in
+                    self.animationQueue.addOperation(FlyAnimation(node: chip, to: self.dealerChipsNode, time: time, completeAfter: completeTime))
+                    self.animationQueue.addOperation(BlockOperation {
+                        self.updateViewBalance(withValue: -CHIP_STAKE_RATIO)
+                    })
+                }
+            }
+            self.animationQueue.addOperation {
+                self.syncBalance()
+            }
+            if localHand.gotBusted() {
+                self.discard(hand: handView)
+            }
         }
     }
     func onBust(atHand: inout BJUserHand) {
@@ -250,15 +256,17 @@ class GameScene: SKScene, CardsDelegate {
         return hand
     }
     
-    func betOnHand(handId: String) {
+    func betOnHand(handId: String, regularBet: Bool) {
         let handView = self.getHandView(handId)
         let chip = SKSpriteNode(texture: TextureCache.getTexture("chip"))
         chip.setScale(0.8)
         chipsNode.addChild(chip)
         
-        let localQ = OperationQueue()
-        localQ.addOperation(FlyAnimation(node: chip, to: handView.chips))
-        localQ.addOperation {
+        let queue: OperationQueue = regularBet ? OperationQueue() : self.animationQueue
+        
+        queue.addOperation(FlyAnimation(node: chip, to: handView.chips))
+        queue.addOperation {
+            print("handView.chips.children", handView.chips.children.count)
             self.syncBalance()
         }
     }

@@ -34,7 +34,7 @@ class GameActionDelegate: GameDelegate {
     }
     
     func onBet(onHand: inout BJUserHand, regularBet: Bool) {
-        self.cardsDelegate?.betOnHand(handId: onHand.id)
+        self.cardsDelegate?.betOnHand(handId: onHand.id, regularBet: regularBet)
         self.uiDelegate?.displayActions()
     }
     
