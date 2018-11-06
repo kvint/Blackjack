@@ -50,12 +50,12 @@ class GameActionDelegate: GameDelegate {
 
     func deal() {
         print("Deal")
-        try! globals.backend.deal()
+        try! globals.core.deal()
     }
     func double() {
         print("Double")
         do {
-            try globals.backend.double();
+            try globals.core.double();
         } catch {
             print("Double failed")
         }
@@ -63,7 +63,7 @@ class GameActionDelegate: GameDelegate {
     func hit() {
         print("Hit")
         do {
-            try globals.backend.hit()
+            try globals.core.hit()
         } catch {
             print("Hit failed")
         }
@@ -71,7 +71,7 @@ class GameActionDelegate: GameDelegate {
     func stand() {
         print("Stand")
         do {
-            try globals.backend.stand()
+            try globals.core.stand()
         } catch {
             print("Stand failed")
         }
@@ -86,7 +86,7 @@ class GameActionDelegate: GameDelegate {
     }
     func insurance() {
         do {
-            try globals.backend.insurance()
+            try globals.core.insurance()
         } catch {
             print("Insurance failed")
         }

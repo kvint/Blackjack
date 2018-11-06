@@ -53,7 +53,7 @@ class CheatDetailController: UITableViewController {
             dealerCheatCards = dCards.map { cheatCard in Card(fromCheat: cheatCard)}
             print(dealerCheatCards)
         }
-        globals.backend.applyCheat(cheatingCards, dealerCheatCards)
+        globals.core.applyCheat(cheatingCards, dealerCheatCards)
         self.dismiss(animated: true, completion: nil)
     }
     /*

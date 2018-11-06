@@ -52,7 +52,7 @@ class UIGameViewController: UIViewController {
     }
     
     func displayActions() {
-        let actions = globals.backend.getActions();
+        let actions = globals.core.getActions();
         
         do {
             doubleBtn.isHidden = true

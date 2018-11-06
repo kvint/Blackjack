@@ -73,9 +73,9 @@ class GameScene: SKScene, CardsDelegate {
         self.enumerateChildNodes(withName: ".//hand") { (node, _) in
             if let handId = node.userData?["hand_id"] {
                 let handStr = "\(handId)"
-                var model: BJUserHand? = globals.backend.model.getHand(id: handStr)
+                var model: BJUserHand? = globals.core.model.getHand(id: handStr)
                 if model == nil {
-                    model = globals.backend.model.createHand(id: handStr)
+                    model = globals.core.model.createHand(id: handStr)
                 }
                 if let handView = node as? HandView {
                     handView.model = model
@@ -83,12 +83,12 @@ class GameScene: SKScene, CardsDelegate {
                 }
             }
         }
-        self.dealerNode.model = globals.backend.model.dealer
+        self.dealerNode.model = globals.core.model.dealer
         self.syncBalance()
     }
 
     func eachHand(_ closure: (_: HandView) -> Void) {
-        globals.backend.model.hands.forEach {
+        globals.core.model.hands.forEach {
             if let handId = $0?.id {
                 if let handView = self.handNodes[handId] as? HandView {
                     closure(handView)
@@ -100,7 +100,7 @@ class GameScene: SKScene, CardsDelegate {
     func startGame() {
         self.isUserInteractionEnabled = false
 
-        if let activeHandId = globals.backend.model.activeHand?.id {
+        if let activeHandId = globals.core.model.activeHand?.id {
             spotGlow.position = self.getHandView(activeHandId).position
         }
         spotGlow.isHidden = false
@@ -131,7 +131,7 @@ class GameScene: SKScene, CardsDelegate {
     }
 
     func syncBalance() {
-        self.viewBalance = globals.backend.bank?.total
+        self.viewBalance = globals.core.bank?.total
         self.updateBalance()
     }
 
@@ -226,7 +226,7 @@ class GameScene: SKScene, CardsDelegate {
 
         let handNode = self.getHandView(id)
         var completeTime: Double? = nil
-        if globals.backend.state == .Betting {
+        if globals.core.state == .Betting {
             completeTime = 0.1
         }
 
@@ -248,7 +248,7 @@ class GameScene: SKScene, CardsDelegate {
     }
 
     func dealCardToDealer(card: Card) -> Void {
-        let completeTime = globals.backend.state == .Betting ? 0.2 : nil
+        let completeTime = globals.core.state == .Betting ? 0.2 : nil
         let op = DealCardAnimation(theCard: card, to: self.dealerNode, time: 0.4, completeAfter: completeTime)
         self.animationQueue.addOperation(op)
         self.addHandScoreUpdateOperation(handNode: self.dealerNode)
@@ -259,7 +259,7 @@ class GameScene: SKScene, CardsDelegate {
         touchedNodes.forEach { (node) in
             if let handModelID = (node as? HandView)?.model?.id {
                 print("bet on hand -> \(handModelID)")
-                try? globals.backend.bet(handId: "\(handModelID)", stake: CHIP_STAKE_RATIO)
+                try? globals.core.bet(handId: "\(handModelID)", stake: CHIP_STAKE_RATIO)
             }
         }
 
@@ -285,7 +285,6 @@ class GameScene: SKScene, CardsDelegate {
 
         queue.addOperation(FlyAnimation(node: chip, to: handView.chips))
         queue.addOperation {
-            print("handView.chips.children", handView.chips.children.count)
             self.syncBalance()
         }
     }

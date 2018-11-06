@@ -67,7 +67,7 @@ class UserBank: Bank {
     }
 }
 
-var globals: (backend: Game, view: GameScene, ua: GameActionDelegate, cheats: Dictionary<String, [Cheat]>)!
+var globals: (core: Game, view: GameScene, ua: GameActionDelegate, cheats: Dictionary<String, [Cheat]>)!
 
 class GameViewController: UIViewController {
 
@@ -111,9 +111,9 @@ class GameViewController: UIViewController {
         }
     }
     func initTheGame(scene: GameScene) {
-        globals = (backend: Game(), view: scene, ua: GameActionDelegate(), cheats: self.cheats)
-        globals.backend.bank = bank
-        globals.backend.delegate = globals.ua
+        globals = (core: Game(), view: scene, ua: GameActionDelegate(), cheats: self.cheats)
+        globals.core.bank = bank
+        globals.core.delegate = globals.ua
         globals.ua.cardsDelegate = scene
         self.addUIView();
     }
